@@ -1,0 +1,40 @@
+.field--typeTextarea {
+    .field__content {
+        align-items: flex-start;
+    }
+
+    .field__input {
+        padding: ($defaultUnit * 2.5) ($defaultUnit * 1.5) $defaultUnit;
+        overflow-y: scroll;
+    }
+
+    .field__label {
+        display: inline-block;
+        width: auto;
+    }
+
+    .field__bar {
+        &:before,
+        &:after {
+            height: 0;
+        }
+    }
+
+    .field__affix {
+        padding-top: $defaultUnit;
+    }
+
+    &.valid,
+    &.error {
+        .field__input {
+            margin-bottom: 1px;
+        }
+
+        .field__bar {
+            &:before,
+            &:after {
+                height: 0 !important;
+            }
+        }
+    }
+}

@@ -1,0 +1,213 @@
+@keyframes shrink-to-hide {
+    15% { transform: scale(1.2); }
+    30% { transform: scale(1); }
+    45% { transform: scale(0.8); }
+    60% { transform: scale(0.6); }
+    75% { transform: scale(0.4); }
+    90% { transform: scale(0.2); }
+    100% { transform: scale(0); }
+}
+
+@keyframes grow-to-show {
+    0% { transform: scale(0); }
+    15% { transform: scale(0.2); }
+    30% { transform: scale(0.4); }
+    45% { transform: scale(0.6); }
+    60% { transform: scale(0.8); }
+    75% { transform: scale(1); }
+    90% { transform: scale(1.2); }
+    100% { transform: scale(1); }
+}
+
+@keyframes button-hover {
+    0% {
+        border-top-color: $success;
+        border-right-color: $white;
+        border-bottom-color: $white;
+        border-left-color: $white;
+    }
+    20% {
+        border-top-color: $success;
+        border-right-color: $white;
+        border-bottom-color: $white;
+        border-left-color: $white;
+    }
+    40% {
+        border-top-color: $success;
+        border-right-color: $white;
+        border-bottom-color: $white;
+        border-left-color: $white;
+        background: transparent;
+    }
+    60% {
+        border-top-color: $success;
+        border-right-color: $success;
+        border-bottom-color: $success;
+        border-left-color: $success;
+        background: $success;
+    }
+    80% {
+        border-top-color: $success;
+        border-right-color: $success;
+        border-bottom-color: $success;
+        border-left-color: $success;
+        background: $success;
+    }
+    100% {
+        border-top-color: $success;
+        border-right-color: $success;
+        border-bottom-color: $success;
+        border-left-color: $success;
+        background: $success;
+    }
+}
+
+@keyframes validity-animation-valid {
+    0% {
+        border-top-color: $success;
+        border-right-color: $white;
+        border-bottom-color: $white;
+        border-left-color: $white;
+        transform: rotate(0) scale(1);
+    }
+    20% {
+        border-top-color: $success;
+        border-right-color: $white;
+        border-bottom-color: $white;
+        border-left-color: $white;
+    }
+    40% {
+        border-top-color: $success;
+        border-right-color: $white;
+        border-bottom-color: $white;
+        border-left-color: $white;
+        background: transparent;
+        transform: rotate(360deg) scale(1);
+    }
+    60% {
+        border-top-color: $success;
+        border-right-color: $success;
+        border-bottom-color: $success;
+        border-left-color: $success;
+        background: $success;
+        transform: rotate(360deg) scale(1.2);
+    }
+    80% {
+        border-top-color: $success;
+        border-right-color: $success;
+        border-bottom-color: $success;
+        border-left-color: $success;
+        background: $success;
+    }
+    100% {
+        border-top-color: $success;
+        border-right-color: $success;
+        border-bottom-color: $success;
+        border-left-color: $success;
+        background: $success;
+        transform: rotate(360deg) scale(1);
+    }
+}
+
+@keyframes validity-animation-error {
+    0% {
+        border-top-color: $danger;
+        border-right-color: $white;
+        border-bottom-color: $white;
+        border-left-color: $white;
+        transform: rotate(0) scale(1);
+    }
+    20% {
+        border-top-color: $danger;
+        border-right-color: $white;
+        border-bottom-color: $white;
+        border-left-color: $white;
+    }
+    40% {
+        border-top-color: $danger;
+        border-right-color: $white;
+        border-bottom-color: $white;
+        border-left-color: $white;
+        background: transparent;
+        transform: rotate(-360deg) scale(1);
+    }
+    60% {
+        border-top-color: $danger;
+        border-right-color: $danger;
+        border-bottom-color: $danger;
+        border-left-color: $danger;
+        background: $danger;
+        transform: rotate(-360deg) scale(1.2);
+    }
+    80% {
+        border-top-color: $danger;
+        border-right-color: $danger;
+        border-bottom-color: $danger;
+        border-left-color: $danger;
+        background: $danger;
+    }
+    100% {
+        border-top-color: $danger;
+        border-right-color: $danger;
+        border-bottom-color: $danger;
+        border-left-color: $danger;
+        background: $danger;
+        transform: rotate(-360deg) scale(1);
+    }
+}
+
+@keyframes validity-symbol-animation {
+    0% { opacity: 0; }
+    20% { opacity: 0; }
+    40% { opacity: 0; }
+    60% { opacity: 1; }
+    80% { opacity: 1; }
+    100% { opacity: 1; }
+}
+
+.hide-it {
+    animation: shrink-to-hide 0.2s normal forwards ease;
+}
+
+.show-it {
+    animation: grow-to-show 0.2s normal forwards ease;
+}
+
+@-webkit-keyframes sk-stretchdelay {
+    0%, 40%, 100% { -webkit-transform: scaleY(0.4) }
+    20% { -webkit-transform: scaleY(1.0) }
+}
+
+@keyframes sk-stretchdelay {
+    0%, 40%, 100% {
+        transform: scaleY(0.4);
+        -webkit-transform: scaleY(0.4);
+    } 20% {
+        transform: scaleY(1.0);
+        -webkit-transform: scaleY(1.0);
+    }
+}
+
+@keyframes rotate {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(225deg); }
+}
+  
+@keyframes opacity {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+}
+
+@keyframes scaleup {
+    0% { transform: scale(1); }
+    80% { transform: scale(12); }
+    100% { transform: scale(10); }
+}
+
+@keyframes scalepulse {
+    0% { transform: scale(10); }
+    25% { transform: scale(12); }
+    50% { transform: scale(10); }
+    75% { transform: scale(11); }
+    100% { transform: scale(10); }
+}

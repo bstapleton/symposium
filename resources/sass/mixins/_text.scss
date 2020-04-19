@@ -1,0 +1,155 @@
+@mixin text-scale($breakpoint: false) {
+    @if $breakpoint {
+        @each $scale, $multiplier in $scales {
+            .#{$breakpoint}\:text-scale\:#{$scale} {
+                font-size: calc(#{$defaultFontSize} * #{$multiplier});
+            }
+        }
+    }
+    @else
+    {
+        @each $scale, $multiplier in $scales {
+            .text-scale\:#{$scale} {
+                font-size: calc(#{$defaultFontSize} * #{$multiplier});
+            }
+        }
+    }
+}
+
+@mixin text-color($breakpoint: false) {
+    @if $breakpoint {
+        @each $color, $value in $colors {
+            .#{$breakpoint}\:text-color\:#{$color} {
+                color: $value;
+            }
+        }
+    }
+    @else
+    {
+        @each $color, $value in $colors {
+            .text-color\:#{$color} {
+                color: $value;
+            }
+        }
+    }
+}
+
+$cases: "upper", "lower";
+
+@mixin text-case {
+    @each $case in $cases {
+        .text-case\:#{$case} {
+            text-transform: #{$case}case;
+        }
+    }
+}
+
+@mixin text-align($breakpoint: false) {
+    @if $breakpoint {
+        @each $alignment in $alignments {
+            .#{$breakpoint}\:text-align\:#{$alignment} {
+                text-align: #{$alignment};
+            }
+        }
+    }
+    @else {
+        @each $alignment in $alignments {
+            .text-align\:#{$alignment} {
+                text-align: #{$alignment};
+            }
+        }
+    }
+}
+
+@mixin text-weight($breakpoint: false) {
+    @if $breakpoint {
+        @each $weight in $textWeights {
+            @if $weight == 300 {
+                .#{$breakpoint}\:text-weight\:light {
+                    font-family: $brand-default-font-light, $webSafe;
+                    font-weight: lighter;
+                }
+            } @else if $weight == 400 {
+                .#{$breakpoint}\:text-weight\:normal {
+                    font-family: $brand-default-font-medium, $webSafe;
+                    font-weight: normal;
+                }
+            } @else {
+                .#{$breakpoint}\:text-weight\:bold {
+                    font-family: $brand-default-font-bold, $webSafe;
+                    font-weight: bold;
+                }
+            }
+        }
+    }
+    @else {
+        @each $weight in $textWeights {
+            @if $weight == 300 {
+                .text-weight\:light {
+                    font-family: $brand-default-font-light, $webSafe;
+                    font-weight: lighter;
+                }
+            } @else if $weight == 400 {
+                .text-weight\:normal {
+                    font-family: $brand-default-font-medium, $webSafe;
+                    font-weight: normal;
+                }
+            } @else {
+                .text-weight\:bold {
+                    font-family: $brand-default-font-bold, $webSafe;
+                    font-weight: bold;
+                }
+            }
+        }
+    }
+}
+
+@mixin text-style {
+    @each $style in $textStyles {
+        .text-style\:#{$style} {
+            font-style: #{$style};
+        }
+    }
+}
+
+@mixin line-height($breakpoint: false) {
+    .line-height\:default {
+        line-height: $line-height-base;
+    }
+
+    @if $breakpoint {
+        .#{$breakpoint}\:line-height\:default {
+            line-height: $line-height-base;
+        }
+
+        @for $i from 1 through 2 {
+            .#{$breakpoint}\:line-height\:#{$i} {
+                line-height: $i;
+            }
+        }
+    }
+    @else {
+        @for $i from 1 through 2 {
+            .line-height\:#{$i} {
+                line-height: $i;
+            }
+        }
+    }
+}
+
+@mixin letter-spacing($breakpoint: false) {
+    @if $breakpoint {
+        @each $spacer, $amount in $spacers {
+            .#{$breakpoint}\:letter-spacing\:#{$spacer} {
+                letter-spacing: $amount;
+            }
+        }
+    }
+    @else {
+        @each $spacer, $amount in $spacers {
+            .letter-spacing\:#{$spacer} {
+                letter-spacing: $amount;
+            }
+        }
+    }
+}

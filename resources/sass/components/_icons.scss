@@ -1,0 +1,101 @@
+//.icon {
+//    width: $defaultUnit * 4.5;
+//    height: $defaultUnit * 4.5;
+//    fill: $grey-900;
+//
+//    .background {
+//        fill: lighten($grey-900, 10%);
+//    }
+//
+//    .counter {
+//        display: none;
+//        fill: $danger;
+//    }
+//}
+
+.icon--withCounter {
+    .counter {
+        display: initial;
+        fill: $danger;
+    }
+}
+
+.icon--symbolOnly {
+    .outline {
+        display: none;
+    }
+}
+
+.icon--success {
+    fill: $success;
+}
+
+.icon--neutral {
+    fill: $info;
+}
+
+.icon--warning {
+    fill: $warning;
+}
+
+.icon--danger {
+    fill: $danger;
+}
+
+.icon--faded {
+    fill: #ccc;
+}
+
+.icon--smaller {
+    width: $defaultUnit * 3;
+    height: $defaultUnit * 3;
+
+    svg {
+        width: $defaultUnit * 3;
+        height: $defaultUnit * 3;
+    }
+}
+
+.icon--smallest {
+    width: $defaultUnit * 2;
+    height: $defaultUnit * 2;
+
+    svg {
+        width: $defaultUnit * 2;
+        height: $defaultUnit * 2;
+    }
+}
+
+.fa {
+    height: $defaultUnit * 4;
+    width: $defaultUnit * 4;
+    display: inline-block;
+
+    &.fa-arrow-left,
+    &.fa-arrow-right {
+        background-size: $defaultUnit * 4;
+    }
+
+    &.fa-arrow-left {
+        background: url('/images/icon-left.svg') center center no-repeat;
+    }
+
+    &.fa-arrow-right {
+        background: url('/images/icon-right.svg') center center no-repeat;
+    }
+}
+
+.fa-angle-double-right,
+.fa-angle-double-left {
+    width: 50px;
+    height: 50px;
+}
+
+.fa-angle-double-right {
+    background: url('/images/icon-arrow-right-double.svg') center center no-repeat;
+    
+}
+
+.fa-angle-double-left {
+    background: url('/images/icon-arrow-left-double.svg') center center no-repeat;
+}

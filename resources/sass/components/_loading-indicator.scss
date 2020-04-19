@@ -1,0 +1,72 @@
+$defaultTimer: -1.2s;
+
+$timer2: $defaultTimer + .1;
+$timer3: $defaultTimer + .2s;
+$timer4: $defaultTimer + .3s;
+$timer5: $defaultTimer + .4s;
+$blocks: ( block2: $timer2, block3: $timer3, block4: $timer4, block5: $timer5 );
+
+.loadingIndicator {
+    text-align: center;
+    font-size: 10px;
+
+    > div {
+        background-color: $primary;
+        width: $defaultUnit;
+        -webkit-animation: sk-stretchdelay 1.2s infinite ease-in-out;
+        animation: sk-stretchdelay 1.2s infinite ease-in-out;
+
+        &:not(:last-child) {
+            margin-right: 3px;
+        }
+    }
+
+    @each $block, $timer in $blocks {
+        .#{$block} {
+            -webkit-animation-delay: $timer;
+            animation-delay: $timer;
+        }
+    }
+}
+
+.loadingIndicator--large {
+    display: flex;
+    width: 100px;
+    height: 100px;
+    align-items: center;
+    margin: 0;
+
+    > div {
+        width: $defaultUnit * 2;
+        height: 100px;
+
+        &:not(:last-child) {
+            margin-right: 4px;
+        }
+    }
+}
+
+.loadingIndicator--small {
+    margin: ($defaultUnit * 0.75) 0 0;
+    position: absolute;
+    right: ($defaultUnit * 1.25);
+    width: $defaultUnit * 3.5;
+    height: $defaultUnit * 3;
+
+    > div {
+        width: $defaultUnit * 0.5;
+        height: 100%;
+
+        &:not(:last-child) {
+            margin-right: 2px;
+        }
+    }
+}
+
+.processing__entry.valid .field__validationIndicator {
+    flex: 0 0 ($defaultUnit * 3);
+
+    @include sm-up() {
+        flex: 0 0 ($defaultUnit * 4.5);
+    }
+}

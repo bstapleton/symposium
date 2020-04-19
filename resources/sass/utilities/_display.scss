@@ -1,0 +1,45 @@
+.hidden {
+    display: none;
+}
+
+.display\:block {
+    display: block;
+}
+
+.display\:inline {
+    display: inline;
+}
+
+.display\:inline-block {
+    display: inline-block;
+}
+
+@include xs() {
+    .visible--xs {
+        display: initial;
+    }
+}
+
+@include sm() {
+    .visible--sm {
+        display: initial;
+    }
+}
+
+@include md() {
+    .visible--md {
+        display: initial;
+    }
+}
+
+@include lg() {
+    .visible--lg {
+        display: initial;
+    }
+}
+
+@include xl() {
+    .visible--xl {
+        display: initial;
+    }
+}

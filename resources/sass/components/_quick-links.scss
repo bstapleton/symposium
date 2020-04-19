@@ -1,0 +1,20 @@
+.quickLinks {
+    list-style: none;
+    padding: 0;
+    margin: 7px 0;
+    float: right;
+    align-items: center;
+}
+
+.quickLinks__item {
+    background: none;
+
+    &:not(:first-child) {
+        margin-right: 1rem;
+    }
+
+    .icon svg {
+        width: $defaultUnit * 5;
+        height: $defaultUnit * 5;
+    }
+}

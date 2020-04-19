@@ -1,0 +1,106 @@
+@import '../variables.scss';
+
+.activityMessages__icon svg {
+    .outline,
+    .symbol {
+        fill: #aaa;
+    }
+}
+
+.activityMessages__pulse {
+    opacity: 0;
+}
+
+.activityMessages__pulse--active {
+    animation: opacity 0.1s 1 forwards, scalepulse 1s 1 forwards;
+    fill: $success;
+}
+
+.activityMessages__counterGroup {
+    text-align: center;
+    line-height: 16px;
+
+    text {
+        font: bold 30px sans-serif;
+    }
+}
+
+.activityMessages__flyout {
+    position: absolute;
+    float: right;
+    right: 7px;
+    top: $defaultUnit * 6;
+    z-index: $layer2;
+}
+
+.activityMessages__tab {
+    background: #eee;
+    position: absolute;
+    top: -44px;
+    right: 8px;
+    border-radius: ($defaultUnit * 0.5) ($defaultUnit * 0.5) 0 0;
+    padding: $defaultUnit;
+    padding-top: $defaultUnit + 1;
+    z-index: $layer3;
+
+    .activityMessages__icon:hover {
+        cursor: pointer;
+    }
+}
+
+.activityMessages__content {
+    @include shadow-4dp();
+    background: #eee;
+    border-radius: $defaultUnit * 0.5;
+    padding: $defaultUnit;
+    max-height: 310px;
+    overflow-y: auto;
+    width: 500px;
+    position: relative;
+    top: $defaultUnit;
+    right: 6px;
+    z-index: $layer2;
+}
+
+.activityMessage {
+    opacity: 0;
+    fill: $success;
+    color: #fff;
+
+    &:not(:last-child) {
+        margin-bottom: $defaultUnit;
+    }
+
+    &:hover {
+        background: #eee;
+
+        a {
+            border-left: 3px solid $primary;
+            padding-left: $defaultUnit;
+        }
+    }
+
+    a {
+        background: #fff;
+        border: 1px solid $primary;
+        border-radius: ($defaultUnit * 0.5) - 1;
+        color: $primary;
+        display: block;
+        padding: ($defaultUnit * 0.5) $defaultUnit ($defaultUnit * 0.5) ($defaultUnit - 3);
+        transition: 0.1s all;
+    }
+}
+
+.activityMessage--active {
+    animation: opacity 0.2s 1 1s forwards, scaleup 0.5s 1 1s forwards;
+}
+
+.activityMessage__new {
+    opacity: 0;
+    transform-origin: 45.5% 45.5%;
+    fill: $success;
+}
+
+.activityMessage__new--active {
+    animation: rotate 1s 1 forwards, opacity 2s 1 forwards;
+}

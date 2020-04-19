@@ -1,0 +1,144 @@
+:root {
+    font-family: $brand-default-font, $webSafe;
+    font-size: $defaultFontSize;
+}
+
+body {
+    font-family: $brand-default-font, $webSafe;
+    font-size: $defaultFontSize;
+}
+
+p,
+h1,
+h2,
+h3,
+th,
+td {
+    color: $grey-900;
+}
+
+h1,
+h2,
+h3,
+h4 {
+    font-family: $brand-default-font-medium;
+    font-weight: 300;
+    color: $primary;
+
+    .supplemental {
+        font-size: 0.9rem;
+        display: block;
+        padding: 0.3rem 0.5rem 0 0;
+        float: left;
+
+        &.hidden {
+            display: none;
+        }
+    }
+
+    &.section-header {
+        margin: ($defaultUnit * 3) 0 ($defaultUnit * 4);
+    }
+
+    &.block-heading {
+        border: none;
+        padding: $defaultUnit;
+        font-size: $defaultUnit * 2;
+        text-transform: uppercase;
+        font-weight: 300;
+        margin: 0;
+        display: inline-block;
+        background-color: $primary;
+        color: invert($grey-900);
+    }
+}
+
+h1.page-title {
+    color: $primary;
+    font-family: $brand-default-font-light;
+    font-weight: 200;
+    text-transform: uppercase;
+    letter-spacing: $defaultUnit * 0.75;
+    font-size: 1.6rem;
+
+    @include sm-up() {
+        font-size: 2rem;
+    }
+}
+
+h2.page-title {
+    color: $primary;
+    margin-bottom: 1.4rem;
+
+    @include md-up() {
+        margin-bottom: 1.5rem;
+    }
+}
+
+h2 {
+    font-size: 1.4rem;
+
+    @include md-up() {
+        margin-bottom: 1.6rem;
+    }
+}
+
+h3 {
+    font-size: 1.3rem;
+
+    @include md-up() {
+        margin-bottom: 1.4rem;
+    }
+}
+
+h4 {
+    font-size: 1.2rem;
+
+    @include md-up() {
+        margin-bottom: 1.3rem;
+    }
+}
+
+h5 {
+    font-size: 1rem;
+
+    @include md-up() {
+        margin-bottom: 1.1rem;
+    }
+}
+
+p.note {
+    font-size: 0.8rem;
+}
+
+a {
+    color: $primary;
+
+    .icon svg {
+        fill: $primary;
+    }
+
+    &:hover {
+        color: $grey-900;
+
+        .icon svg {
+            fill: $grey-900;
+        }
+    }
+}
+
+strong {
+    color: $primary;
+}
+
+article {
+    margin-bottom: 2rem;
+}
+
+.clear {
+    clear: both;
+}
+
+.wrapper {
+    max-width: $defaultUnit * 160;
+}

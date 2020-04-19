@@ -1,0 +1,6 @@
+// Fixes interference from padding and borders within the box model for sizing
+@mixin boxSizing {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}

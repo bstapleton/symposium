@@ -1,0 +1,95 @@
+.definition--horizontal {
+    margin: 0 0 $defaultUnit * 3;
+
+    :nth-child(odd) {
+        border-radius: 3px 0 0 3px;
+    }
+
+    :nth-child(even) {
+        border-radius: 3px;
+    }
+
+    &:only-child {
+        margin-bottom: 0;
+    }
+
+    .definition__term,
+    .definition__description {
+        background: scale-color($grey-200, $lightness: 95%);
+        color: $grey-900;
+        padding: 0.5rem;
+        width: 50%;
+
+        span {
+            display: block;
+            padding: 0.3rem 0.5rem;
+
+            &.inline {
+                display: inline;
+            }
+        }
+    }
+
+    .definition__term {
+        @include clear(both);
+        font-weight: bold;
+        float: left;
+
+        &:last-child {
+            margin: 0;
+        }
+    }
+
+    .definition__description {
+        text-align: right;
+        margin-bottom: 0.3rem;
+        margin-left: 50%;
+    }
+
+    :nth-last-child(2),
+    :last-child {
+        margin: 0;
+    }
+}
+
+.definition--row {
+    margin-top: 0;
+    @include clear(both);
+
+    :nth-child(3n + 1) {
+        margin: 0;
+    }
+
+    .definition__term,
+    .definition__description {
+        width: calc(25% - 0.075rem);
+        float: left;
+        margin: 0;
+    }
+
+    .description__description {
+        margin-right: 0.3rem;
+    }
+}
+
+.definition--horizontal--4060 {
+    .definition__term {
+        width: 40%;
+    }
+
+    .definition__description {
+        width: 60%;
+        margin-left: 40%;
+    }
+}
+
+.definition--horizontal--7030 {
+    .definition__term {
+        width: 70%;
+    }
+
+    .definition__description {
+        width: 30%;
+        margin-left: 70%;
+    }
+}

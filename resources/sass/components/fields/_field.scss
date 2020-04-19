@@ -1,0 +1,519 @@
+@mixin hiddenInput {
+    width: 0;
+    height: 0;
+    padding: 0;
+    border: none;
+    position: absolute;
+}
+
+$maxWidth: 500px;
+
+.field {
+    position: relative;
+    margin: 0 0 ($defaultUnit * 2.5) 0;
+    padding: ($defaultUnit * 1.5) 0 0;
+    max-width: $maxWidth + ($defaultUnit * 12);
+
+    &:hover {
+        &.field--typeSelect .pseudo-select,
+        textarea,
+        select,
+        
+        .field__input {
+            &.disabled,
+            &:disabled,
+            &[contenteditable]:read-only {
+                color: #aaa;
+                border-bottom: 2px solid #aaa;
+                cursor: not-allowed;
+            }
+        }
+
+        .field__helper {
+            color: #666;
+            border-left-width: $defaultUnit;
+            padding-left: $defaultUnit;
+        }
+    }
+
+    &.required {
+        .field__label::after {
+            content: " *";
+        }
+
+        .valid-feedback::before {
+            content: "* Required. ";
+        }
+
+        &.error {
+            .valid-feedback::before {
+                content: "* Error: ";
+                font-weight: bold;
+                color: $danger;
+            }
+        }
+    }
+
+    &.declaration {
+        max-width: 738px;
+    }
+
+    &.upload .icon {
+        top: $defaultUnit * 7;
+    }
+
+    .field__helper {
+        display: block;
+        color: #777;
+        border-left: ($defaultUnit * 0.5) solid $primary;
+        padding-left: $defaultUnit * 1.5;
+        transition: 0.1s all ease-in-out;
+
+        &.hidden {
+            display: none;
+        }
+
+        &.hovered {
+            color: #666;
+            border-left-width: $defaultUnit;
+            padding-left: $defaultUnit;
+        }
+
+        &.warning {
+            color: $warning;
+        }
+    }
+
+    .warning-message {
+        display: none;
+    }
+
+    .message {
+        margin-left: 0;
+    }
+
+    &.error,
+    &.warning,
+    &.valid {
+        .warning-message {
+            display: none;
+        }
+
+        .completion-indicator {
+            display: block;
+        }
+    }
+
+    &.error {
+        .field__label {
+            color: $danger !important;
+
+            &.error {
+                display: none !important;
+            }
+        }
+
+        .icon.error {
+            display: block;
+        }
+
+        .field-validation-error {
+            display: inline;
+            color: $danger;
+        }
+    }
+
+    &.warning {
+        .field__label {
+            color: $warning !important;
+
+            &.error {
+                display: none !important;
+            }
+        }
+
+        .icon.warning {
+            display: block;
+
+            svg {
+                fill: $warning;
+            }
+        }
+
+        .warning-message {
+            display: block;
+            color: $warning;
+        }
+    }
+
+    &.valid {
+        .field_label {
+            color: $success;
+
+            &.error {
+                display: none !important;
+            }
+        }
+
+        .icon.valid {
+            display: block;
+        }
+
+        .field__helper {
+            border-left-color: $success;
+        }
+
+        textarea {
+            margin-bottom: -6px;
+        }
+    }
+
+    .input-group,
+    .login-group {
+        display: flex;
+        align-items: center;
+        margin-bottom: $defaultUnit * 2;
+
+        .input {
+            flex: 1 1 auto;
+        }
+
+        .input-group-append {
+            flex: 0 0 ($defaultUnit * 3);
+        }
+
+        .input-group-prepend {
+            flex: 0 0 ($defaultUnit * 5);
+        }
+    }
+
+    label {
+        &:not(.field__label) {
+            display: none !important;
+        }
+    }
+}
+
+.field,
+.field:hover {
+    &.field--typeCurrency,
+    &.field--typeEmail,
+    &.field--typeNumber,
+    &.field--typePassword,
+    &.field--typeSelect,
+    &.field--typeText,
+    &.field--typeTextarea,
+    &.field--typeCalendar {
+        &.error {
+            .field__pseudoSelector,
+            textarea,
+            select,
+            .field__input {
+                border-color: $danger;
+            }
+        }
+
+        textarea,
+        select,
+        .field__input,
+        .field__pseudoSelector {
+            font-size: initial;
+            border-radius: 5px;
+            border: 1px solid #999;
+            background-color: $grey-100;
+            padding-bottom: $defaultUnit * 2;
+    
+            &:hover,
+            &.valid:hover,
+            &.error:hover {
+                border: 1px solid #333;
+            }
+    
+            &:focus {
+                background-color: $grey-100;
+            }
+
+            &.valid {
+                border-color: $success;
+            }
+        }
+
+        .field__input:focus,
+        .field__input:active,
+        .field__input:not([type=range]):focus,
+        .field__input:not([type=range]):active {
+            border: 2px solid $primary;
+            padding-left: (($defaultUnit * 1.5) - 1);
+
+            &:hover {
+                border: 2px solid $primary;
+            }
+        }
+    }
+
+    &.field--typeButtonChoice {
+        &.error,
+        &.valid {
+            .field__input {
+                padding: 0;
+                border: none;
+            }
+        }
+
+        .field__input {
+            padding: 0;
+            border: none;
+
+            &:hover,
+            &:focus,
+            &:active {
+                padding: 0;
+                border: none;
+            }
+        }
+    }
+
+    &.field--typeSelect {
+        .field__input {
+            border: none;
+            padding: 0;
+        }
+    }
+
+    &.error.field--typeButtonChoice .field__input {
+        border: none;
+    }
+
+    &:first-child {
+        margin-top: 0;
+    }
+}
+
+.field__label {
+    border-radius: 5px 5px 0 0;
+    transition: top 0.2s ease, font-size 0.2s ease, color 0.2s ease;
+    cursor: text;
+    color: #777;
+    font-weight: normal;
+    display: inline-block;
+    width: initial;
+    font-size: initial;
+
+    &:not(.field__label--fixed) {
+        position: absolute;
+        top: $defaultUnit * 3.75;
+        left: $defaultUnit * 6;
+    }
+
+    &.field__label--fixed {
+        color: $grey-900;
+
+        &.complete {
+            font-size: initial;
+        }
+    }
+
+    @include sm-up() {
+        margin-left: $defaultUnit;
+        padding: 0 ($defaultUnit * 0.5);
+    }
+
+    &.disabled {
+        color: #aaa;
+
+        &:hover {
+            cursor: not-allowed;
+        }
+    }
+
+    &.active,
+    &.complete {
+        font-size: $defaultUnit * 1.5;
+        top: $defaultUnit * 0.5;
+        padding: 0;
+        margin-left: 0;
+        background-color: $grey-100;
+
+        @include sm-up() {
+            padding: 0 ($defaultUnit * 0.5);
+            margin-left: $defaultUnit;
+        }
+    }
+
+    &.active {
+        color: $primary;
+    }
+}
+
+.field__content {
+    display: flex;
+    align-items: center;
+    margin-bottom: $defaultUnit * 0.5;
+}
+
+.field__prefix {
+    flex: 0 0 ($defaultUnit * 4);
+    height: $defaultUnit * 3;
+
+    @include sm-up() {
+        flex: 0 0 ($defaultUnit * 6);
+        padding-left: ($defaultUnit * 0.75);
+        height: $defaultUnit * 4.5;
+    }
+}
+
+.field__main {
+    flex: 1 1 100%;
+}
+
+.field__affix {
+    flex: 0 0 ($defaultUnit * 4);
+    padding-left: $defaultUnit;
+    height: $defaultUnit * 3;
+
+    @include sm-up() {
+        flex: 0 0 ($defaultUnit * 6);
+        padding-left: ($defaultUnit * 0.75);
+        height: $defaultUnit * 4.5;
+    }
+}
+
+.field__icon,
+.field__icon > svg {
+    width: $defaultUnit * 3;
+    height: $defaultUnit * 3;
+
+    @include sm-up() {
+        width: $defaultUnit * 4.5;
+        height: $defaultUnit * 4.5;
+    }
+}
+
+.field .field__helper,
+.field-validation-error,
+.warning-message,
+.valid-feedback {
+    max-width: $maxWidth;
+    margin: 0 ($defaultUnit * 4) 0;
+    font-size: $defaultUnit * 1.75;
+
+    @include sm-up() {
+        margin: 0 ($defaultUnit * 6) 0;
+        font-size: $defaultUnit * 1.5;
+    }
+}
+
+.field--typeText {
+    background-color: transparent;
+}
+
+.field--typeEmail {
+
+}
+
+.field--typePassword {
+
+}
+
+.field--typeNumber {
+
+}
+
+.field--typeButtonChoice {
+
+}
+
+.field--typeSelect .field__pseudoSelector,
+.field__input {
+    cursor: text;
+    height: $defaultUnit * 7;
+
+    &:disabled,
+    &.disabled,
+    &[contenteditable]:read-only {
+        color: #aaa;
+        background-color: $white;
+        border-bottom: 2px solid #aaa;
+
+        &:hover {
+            color: #aaa;
+            background-color: $white;
+            border-bottom: 2px solid $primary;
+            cursor: not-allowed;
+        }
+    }
+
+    &:focus,
+    &:focus:hover {
+        border: 2px solid $primary;
+    }
+}
+
+.field__input {
+    background-color: transparent;
+    border: none;
+    border-bottom: 2px solid $primary;
+    border-radius: 0;
+    padding: ($defaultUnit * 2) ($defaultUnit * 1.5) 0;
+    outline: 0;
+    width: 100%;
+    max-width: $maxWidth;
+    box-shadow: none;
+    height: $defaultUnit * 7.5;
+
+    &:hover {
+        border-bottom: 2px solid $primary;
+    }
+}
+
+.field__obfuscatedInput {
+    position: absolute;
+    width: 0;
+    height: 0;
+    padding: 0;
+    border: none;
+    top: $defaultUnit * 9;
+    left: $defaultUnit * 4;
+
+    @include sm-up() {
+        left: $defaultUnit * 6;
+    }
+}
+
+.field__pseudoSelector {
+    background: $white url('/images/select-down.svg') right ($defaultUnit * 3.5) no-repeat;
+    background-size: ($defaultUnit * 2) ($defaultUnit);
+    padding-top: $defaultUnit * 2;
+
+    &.disabled {
+        border-bottom-width: 1px;
+        cursor: not-allowed;
+    }
+
+    @include xs() {
+        background-position: 95% ($defaultUnit * 3);
+    }
+
+    @include sm-up() {
+        background-position: 462px ($defaultUnit * 3);
+    }
+}
+
+.actions {
+    padding: ($defaultUnit * 3) ($defaultUnit * 4) $defaultUnit;
+
+    @include xs() {
+        .button:nth-child(1),
+        .button:nth-child(2) {
+            width: calc(50% - (#{$defaultUnit} * 1.5));
+        }
+
+        .button:only-child {
+            width: 100%;
+        }
+    }
+
+    @include sm-up() {
+        padding: ($defaultUnit * 3) ($defaultUnit * 6) ($defaultUnit * 3);
+    }
+}

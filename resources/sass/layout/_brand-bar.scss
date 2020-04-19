@@ -1,0 +1,27 @@
+.brandBar {
+    display: none;
+
+    @include md() {
+        .container {
+            max-width: 100%;
+        }
+    }
+
+    @include md-up() {
+        @include clear(both);
+        background-color: $white;
+        display: block;
+        color: $grey-900;
+        padding: ($defaultUnit * 4) 0;
+        min-height: 50px;
+
+        .container {
+            position: relative;
+        }
+
+        .logo {
+            float: left;
+            height: 65px;
+        }
+    }
+}

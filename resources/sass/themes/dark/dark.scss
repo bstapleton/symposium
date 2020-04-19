@@ -1,0 +1,36 @@
+$primary: #84c446;
+$secondary: #84c446;
+$tertiary: #84c446;
+
+@import '../../variables';
+@import '../../mixins/box-sizing';
+@import '../../mixins/flex';
+@import '../../mixins/font';
+@import '../../mixins/gradient';
+@import '../../mixins/grid';
+@import '../../mixins/shadow';
+@import '../../mixins/string';
+@import '../../mixins/margin';
+@import '../../mixins/padding';
+@import '../../mixins/border';
+@import '../../mixins/animation';
+@import '../../mixins/background';
+@import '../../mixins/text';
+@import '../../mixins/opacity';
+
+@import '../../main';
+
+body {
+    background-color: $white;
+    color: $grey-900;
+}
+
+.site-header {
+    li a {
+        color: $grey-900;
+
+        &:hover {
+            background-color: $primary;
+        }
+    }
+}

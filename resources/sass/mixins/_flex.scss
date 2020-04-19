@@ -1,0 +1,66 @@
+@mixin flex {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: -ms-flex;
+    display: flex;
+}
+
+@mixin flex-container($breakpoint: false) {
+    @if $breakpoint {
+        .#{$breakpoint}\:flex-container {
+            @include flex;
+        }
+    }
+    @else {
+        .flex-container {
+            @include flex;
+        }
+    }
+}
+
+@mixin flex-direction($breakpoint: false) {
+    @if $breakpoint {
+        @each $direction in $flexDirections {
+            .#{$breakpoint}\:flex-#{$direction} {
+                flex-direction: #{$direction};
+            }
+        }
+    }
+    @else {
+        @each $direction in $flexDirections {
+            .flex-#{$direction} {
+                flex-direction: #{$direction};
+            }
+        }
+    }
+}
+
+@mixin flex-grow {
+    .flex-grow {
+        flex: 1 1 auto;
+    }
+}
+
+@mixin flex-shrink {
+    .flex-shrink {
+        flex: 0 1 auto;
+    }
+}
+
+@mixin flex-basis($breakpoint: false) {
+    @if $breakpoint {
+        @for $i from 1 through 9 {
+            .#{$breakpoint}\:flex-basis\:#{$i * 10} {
+                flex-basis: #{$i * 10};
+            }
+        }
+    }
+    @else {
+        @for $i from 1 through 9 {
+            .flex-basis\:#{$i * 10} {
+                flex-basis: $i * 10%;
+            }
+        }
+    }
+}

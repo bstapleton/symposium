@@ -1,0 +1,137 @@
+.field--typeCheckbox {
+    &.field--typeCheckbox--fullWidth {
+        max-width: 100%;
+    }
+
+    .field__label {
+        width: calc(100% - (#{$defaultUnit} * 6));
+        padding-top: $defaultUnit * 0.5;
+        margin-bottom: $defaultUnit;
+        position: initial;
+        color: $grey-900;
+    }
+
+    .field__label--narrow {
+        flex: 100%;
+
+        @include sm-up() {
+            order: 0;
+            flex: calc(100% - (#{$defaultUnit} * 15.5));
+        }
+    }
+
+    .field__content {
+        align-items: flex-start;
+    }
+
+    .field__main {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: flex-start;
+    }
+}
+
+.field__checkbox {
+    width: $defaultUnit * 4;
+    height: $defaultUnit * 4;
+    flex: 0 0 ($defaultUnit * 4);
+    margin-right: $defaultUnit;
+
+    &:not(.disabled) {
+        &:hover {
+            cursor: pointer;
+        }
+
+        ~ .field__label:hover {
+            cursor: pointer;
+        }
+    }
+
+    &.disabled:hover {
+        cursor: not-allowed;
+    }
+
+    .checkbox > .symbol {
+        fill: transparent;
+    }
+
+    .outline,
+    .symbol {
+        &.success {
+            fill: $success;
+        }
+    }
+}
+
+.field__checkbox--wide {
+    width: 100%;
+    height: auto;
+    flex: 1 0 100%;
+    border: 2px solid $grey-200;
+    border-radius: $defaultUnit;
+
+    @include xs() {
+        order: 1;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+
+        > div {
+            &:not(.flex) {
+                margin: 0 auto;
+            }
+
+            &.flex {
+                flex: 100%;
+                align-self: flex-start;
+                margin-left: 8px;
+            }
+        }
+    }
+
+    @include sm-up() {
+        width: $defaultUnit * 14.5;
+        flex: 0 0 ($defaultUnit * 14.5);
+
+        > div {
+            &.flex {
+                margin-left: 8px;
+            }
+        }
+    }
+
+    &:hover {
+        border-color: $primary;
+    }
+
+    .symbol-only,
+    .symbol-only svg {
+        float: left;
+        width: $defaultUnit * 7;
+        height: $defaultUnit * 7;
+
+        &:not(:first-child) {
+            border-left: 2px dashed $grey-200;
+        }
+    }
+
+    .checkbox {
+        width: $defaultUnit * 4;
+        height: $defaultUnit * 4;
+
+        .outline {
+            fill: $grey-900;
+        }
+    
+        .symbol {
+            fill: transparent;
+        }
+
+        .outline,
+        .symbol {
+            &.success {
+                fill: $success;
+            }
+        }
+    }
+}

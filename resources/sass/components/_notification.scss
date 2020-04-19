@@ -1,0 +1,124 @@
+.notification {
+    border-radius: 4px;
+    width: 100%;
+    padding: $defaultUnit;
+    color: $grey-900;
+    line-height: $defaultUnit * 3;
+    font-size: $defaultUnit * 1.75;
+    position: relative;
+    background: $grey-100;
+    border: 1px solid #ccc;
+
+    &:not(:only-child) {
+        margin-bottom: $defaultUnit * 2;
+    }
+
+    &:last-child {
+        margin-bottom: $defaultUnit * 3;
+    }
+
+    &:not(.hidden) {
+        display: flex;
+        align-items: center;
+    }
+
+    a {
+        text-decoration: underline;
+    }
+
+    > p {
+        flex-grow: 1;
+        color: $grey-900;
+        margin: 0;
+    }
+}
+
+.notification__actions {
+    align-self: flex-end;
+}
+
+.notification__button {
+    margin-bottom: 0;
+    text-shadow: none;
+}
+
+.notification__icon {
+    height: $defaultUnit * 3;
+    margin-right: $defaultUnit;
+
+    > svg {
+        height: $defaultUnit * 3;
+    }
+}
+
+.notification--dismissible {
+    padding-right: $defaultUnit * 4;
+}
+
+.notification__dismiss {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: $defaultUnit $defaultUnit 0;;
+    color: inherit;
+    background: none;
+    border: none;
+
+    &:hover {
+        cursor: pointer;
+    }
+
+    svg .symbol {
+        fill: #fff;
+    }
+}
+
+.notification--success,
+.notification--info,
+.notification--caution,
+.notification--warning,
+.notification--danger,
+.notification--error {
+    color: white;
+
+    .notification__icon > svg {
+        fill: white;
+    }
+
+    strong,
+    a {
+        color: white;
+    }
+}
+
+.notification--success {
+    @include lightDiagonalGradient($success, 5%);
+    border: 1px solid darken($success, 10%);
+}
+
+.notification--caution,
+.notification--warning {
+    @include lightDiagonalGradient($warning, 5%);
+    border: 1px solid darken($warning, 10%);
+}
+
+.notification--info {
+    @include lightDiagonalGradient($primary, 5%);
+    border: 1px solid darken($primary, 10%);
+}
+
+.notification--danger,
+.notification--error {
+    @include lightDiagonalGradient($danger, 5%);
+    border: 1px solid darken($danger, 10%);
+}
+
+.notification--dark {
+    background: darken($grey-100, 5%);
+    border: 1px solid #ccc;
+    margin-top: $defaultUnit;
+
+    > p {
+        color: $grey-900;
+    }
+}

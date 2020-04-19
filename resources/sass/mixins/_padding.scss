@@ -1,0 +1,101 @@
+@mixin padding($breakpoint: false) {
+    @if $breakpoint {
+        @each $dimension in $dimensions {
+            @if $dimension == 'all' {
+                .#{$breakpoint}\:padding\:none {
+                    padding: 0;
+                }
+            }
+            @else {
+                .#{$breakpoint}\:padding\:#{$dimension}\:none {
+                    padding-#{$dimension}: 0;
+                }
+            }
+
+            @if $dimension == 'all' {
+                .#{$breakpoint}\:padding\:quarter {
+                    padding: calc(#{$defaultUnit} * 0.25);
+                }
+            }
+            @else {
+                .#{$breakpoint}\:padding\:#{$dimension}\:quarter {
+                    padding-#{$dimension}: calc(#{$defaultUnit} * 0.25);
+                }
+            }
+
+            @if $dimension == 'all' {
+                .#{$breakpoint}\:padding\:half {
+                    padding: calc(#{$defaultUnit} * 0.5);
+                }
+            }
+            @else {
+                .#{$breakpoint}\:padding\:#{$dimension}\:half {
+                    padding-#{$dimension}: calc(#{$defaultUnit} * 0.5);
+                }
+            }
+
+            @for $i from 1 through 8 {
+                @if $dimension == 'all' {
+                    .#{$breakpoint}\:padding\:#{$i}x {
+                        padding: calc(#{$defaultUnit} * #{$i});
+                    }
+                }
+                @else {
+                    .#{$breakpoint}\:padding\:#{$dimension}\:#{$i}x {
+                        padding-#{$dimension}: calc(#{$defaultUnit} * #{$i});
+                    }
+                }
+
+            }
+        }
+    }
+    @else {
+        @each $dimension in $dimensions {
+            @if $dimension == 'all' {
+                .padding\:none {
+                    padding: 0;
+                }
+            }
+            @else {
+                .padding\:#{$dimension}\:none {
+                    padding-#{$dimension}: 0;
+                }
+            }
+
+            @if $dimension == 'all' {
+                .padding\:quarter {
+                    padding: calc(#{$defaultUnit} * 0.25);
+                }
+            }
+            @else {
+                .padding\:#{$dimension}\:quarter {
+                    padding-#{$dimension}: calc(#{$defaultUnit} * 0.25);
+                }
+            }
+
+            @if $dimension == 'all' {
+                .padding\:half {
+                    padding: calc(#{$defaultUnit} * 0.5);
+                }
+            }
+            @else {
+                .padding\:#{$dimension}\:half {
+                    padding-#{$dimension}: calc(#{$defaultUnit} * 0.5);
+                }
+            }
+
+            @for $i from 1 through 8 {
+                @if $dimension == 'all' {
+                    .padding\:#{$i}x {
+                        padding: calc(#{$defaultUnit} * #{$i});
+                    }
+                }
+                @else {
+                    .padding\:#{$dimension}\:#{$i}x {
+                        padding-#{$dimension}: calc(#{$defaultUnit} * #{$i});
+                    }
+                }
+            }
+        }
+    }
+}

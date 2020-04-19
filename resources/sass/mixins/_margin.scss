@@ -1,0 +1,104 @@
+@mixin margin($breakpoint: false) {
+    @if $breakpoint {
+        @each $dimension in $dimensions {
+            @if $dimension == 'all' {
+                .#{$breakpoint}\:margin\:none {
+                    margin: 0;
+                }
+            }
+            @else {
+                .#{$breakpoint}\:margin\:#{$dimension}\:none {
+                    margin-#{$dimension}: 0;
+                }
+            }
+
+            @if $dimension == 'all' {
+                .#{$breakpoint}\:margin\:quarter {
+                    margin: calc(#{$defaultUnit} * 0.25);
+                }
+            }
+            @else {
+                .#{$breakpoint}\:margin\:#{$dimension}\:quarter {
+                    margin-#{$dimension}: calc(#{$defaultUnit} * 0.25);
+                }
+            }
+
+            @if $dimension == 'all' {
+                .#{$breakpoint}\:margin\:half {
+                    margin: calc(#{$defaultUnit} * 0.5);
+                }
+            }
+            @else {
+                .#{$breakpoint}\:margin\:#{$dimension}\:half {
+                    margin-#{$dimension}: calc(#{$defaultUnit} * 0.5);
+                }
+            }
+
+            @for $i from 1 through 8 {
+                @if $dimension == 'all' {
+                    .#{$breakpoint}\:margin\:#{$i}x {
+                        margin: calc(#{$defaultUnit} * #{$i});
+                    }
+                }
+                @else {
+                    .#{$breakpoint}\:margin\:#{$dimension}\:#{$i}x {
+                        margin-#{$dimension}: calc(#{$defaultUnit} * #{$i});
+                    }
+                }
+            }
+        }
+    }
+    @else {
+        @each $dimension in $dimensions {
+            @if $dimension == 'all' {
+                .margin\:none {
+                    margin: 0;
+                }
+            }
+            @else {
+                .margin\:#{$dimension}\:none {
+                    margin-#{$dimension}: 0;
+                }
+            }
+
+            @if $dimension == 'all' {
+                .margin\:quarter {
+                    margin: calc(#{$defaultUnit} * 0.25);
+                }
+            }
+            @else {
+                .margin\:#{$dimension}\:quarter {
+                    margin-#{$dimension}: calc(#{$defaultUnit} * 0.25);
+                }
+            }
+
+            @if $dimension == 'all' {
+                .margin\:half {
+                    margin: calc(#{$defaultUnit} * 0.5);
+                }
+            }
+            @else {
+                .margin\:#{$dimension}\:half {
+                    margin-#{$dimension}: calc(#{$defaultUnit} * 0.5);
+                }
+            }
+
+            @for $i from 1 through 8 {
+                @if $dimension == 'all' {
+                    .margin\:#{$i}x {
+                        margin: calc(#{$defaultUnit} * #{$i});
+                    }
+                }
+                @else {
+                    .margin\:#{$dimension}\:#{$i}x {
+                        margin-#{$dimension}: calc(#{$defaultUnit} * #{$i});
+                    }
+                }
+            }
+        }
+
+        .margin-center {
+            margin: 0 auto;
+        }
+    }
+}

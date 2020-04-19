@@ -1,0 +1,77 @@
+
+.progressContainer {
+    display: flex;
+    padding-bottom: $defaultUnit * 2;
+
+    svg {
+        margin: 0 auto $defaultUnit;
+        display: block;
+    }
+
+    circle {
+        stroke-dashoffset: 0;
+        transition: stroke-dashoffset 1s ease-in-out;
+        stroke: #666;
+        stroke-width: $defaultUnit * 0.5;
+    }
+}
+
+.progress {
+    flex: 1 1 auto;
+    display: block;
+    margin: 0 ($defaultUnit * 2);
+    border-radius: 100%;
+    position: relative;
+
+    &:first-child {
+        margin-left: 0;
+    }
+
+    &:last-child {
+        margin-right: 0;
+    }
+}
+
+.progress--notApplicable {
+    circle {
+        stroke: #bbb;
+    }
+}
+
+.progressIcon {
+    fill: #bbb;
+    height: 40px;
+    width: 40px;
+}
+
+.progressIcon--completed {
+    fill: $success;
+    transition: 0.2s all ease;
+}
+
+.progress__title,
+.progress__status {
+    color: #666;
+    display: block;
+    text-align: center;
+}
+
+.progress__title {
+    font-family: BlissLight;
+    text-transform: uppercase;
+    color: $primary;
+}
+
+.progress__status {
+    font-size: $defaultUnit * 1.5;
+}
+
+.progress__description {
+    font-style: italic;
+}
+
+.progress__completion {
+    transform: rotate(-90deg);
+    stroke-dashoffset: -282.74px;
+    stroke: $primary;
+}

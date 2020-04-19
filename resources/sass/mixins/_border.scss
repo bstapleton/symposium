@@ -1,0 +1,120 @@
+@mixin border-radius($breakpoint: false) {
+    @if $breakpoint {
+        @each $scale, $multiplier in $scales {
+            .#{$breakpoint}\:border-radius\:#{$scale} {
+                border-radius: calc(#{$defaultUnit} * #{$multiplier});
+            }
+        }
+    }
+    @else {
+        @each $scale, $multiplier in $scales {
+            .border-radius\:#{$scale} {
+                border-radius: calc(#{$defaultUnit} * #{$multiplier});
+            }
+        }
+    }
+}
+
+@mixin border-color($breakpoint: false) {
+    @if $breakpoint {
+        @each $dimension in $dimensions {
+            @each $color, $value in $colors {
+                @if $dimension == "all" {
+                    .#{$breakpoint}\:border-color\:#{$color} {
+                        border-color: $value;
+                    }
+                }
+                @else {
+                    .#{$breakpoint}\:border-color\:#{$dimension}\:#{$color} {
+                        border-#{$dimension}-color: $value;
+                    }
+                }
+            }
+        }
+    }
+    @else {
+        @each $dimension in $dimensions {
+            @each $color, $value in $colors {
+                @if $dimension == "all" {
+                    .border-color\:#{$color} {
+                        border-color: $value;
+                    }
+                } @else {
+                    .border-color\:#{$dimension}\:#{$color} {
+                        border-#{$dimension}-color: $value;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@mixin border-width($breakpoint: false) {
+    @if $breakpoint {
+        @each $dimension in $dimensions {
+            @for $i from 1 through 8 {
+                @if $dimension == "all" {
+                    .#{$breakpoint}\:border-width\:#{$i}px {
+                        border-width: #{$i}px;
+                    }
+                }
+                @else {
+                    .#{$breakpoint}\:border-width\:#{$dimension}\:#{$i}px {
+                        border-#{$dimension}-width: #{$i}px;
+                    }
+                }
+            }
+        }
+    }
+    @else {
+        @each $dimension in $dimensions {
+            @for $i from 1 through 8 {
+                @if ($dimension == "all") {
+                    .border-width\:#{$i}px {
+                        border-width: #{$i}px;
+                    }
+                }
+                @else {
+                    .border-width\:#{$dimension}\:#{$i}px {
+                        border-#{$dimension}-width: #{$i}px;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@mixin border-style($breakpoint: false) {
+    @if $breakpoint {
+        @each $dimension in $dimensions {
+            @each $style in $borderStyles {
+                @if $dimension == "all" {
+                    .#{$breakpoint}\:border-style\:#{$style} {
+                        border-style: #{$style};
+                    }
+                }
+                @else {
+                    .#{$breakpoint}\:border-style\:#{$dimension}\:#{$style} {
+                        border-#{$dimension}-style: #{$style};
+                    }
+                }
+            }
+        }
+    }
+    @else {
+        @each $dimension in $dimensions {
+            @each $style in $borderStyles {
+                @if ($dimension == "all") {
+                    .border-style\:#{$style} {
+                        border-style: #{$style};
+                    }
+                }
+                @else {
+                    .border-style\:#{$dimension}\:#{$style} {
+                        border-#{$dimension}-style: #{$style};
+                    }
+                }
+            }
+        }
+    }
+}

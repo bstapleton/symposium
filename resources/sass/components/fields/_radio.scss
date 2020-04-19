@@ -1,0 +1,89 @@
+.field--typeRadio {
+    .field__label {
+        margin: 0 0 $defaultUnit;
+        padding: 0;
+        font-size: initial;
+    }
+
+    .field__affix {
+        align-self: flex-start;
+    }
+}
+
+.radio__option {
+    display: flex;
+    align-items: center;
+    padding: 0 $defaultUnit;
+    min-height: $defaultUnit * 6;
+    border-radius: $defaultUnit * 0.5;
+    border: 2px solid transparent;
+    transition: all 0.1s ease-in-out;
+
+    &:not(:last-child) {
+        margin-bottom: $defaultUnit * 0.5;
+    }
+
+    @include sm-up() {
+        &:not(:last-child) {
+            margin-bottom: 0;
+        }
+    }
+
+    > div {
+        flex: 1 1 100%;
+    }
+
+    span,
+    svg {
+        transition: 0.1s all ease-in-out;
+    }
+
+    svg {
+        width: $defaultUnit * 4;
+        height: $defaultUnit * 4;
+        margin-right: $defaultUnit * 1.5;
+    }
+
+    .outline {
+        fill: $grey-900;
+    }
+
+    .symbol {
+        fill: transparent;
+    }
+
+    &:last-child {
+        svg {
+            margin-bottom: 0;
+        }
+    }
+
+    &:hover {
+        cursor: pointer;
+        background: $white;
+        border-color: $grey-200;
+
+        span {
+            padding-left: $defaultUnit * 0.5;
+        }
+
+        .outline {
+            fill: $primary;
+        }
+
+        .symbol {
+            fill: $grey-200;
+        }
+    }
+
+    &.enabled {
+        .outline,
+        .symbol {
+            fill: $success;
+        }
+
+        span {
+            color: $success;
+        }
+    }
+}

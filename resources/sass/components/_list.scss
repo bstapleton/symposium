@@ -1,0 +1,76 @@
+@mixin noListStyle() {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+@mixin orderedList() {
+    @each $style in $orderedListItemStyles {
+        .list--#{$style} {
+            .list__item {
+                list-style-type: #{$style};
+            }
+        }
+    }
+}
+
+.list--unordered {
+    @include noListStyle();
+
+    &:only-child {
+        margin-bottom: 0;
+    }
+
+    .list--unordered {
+        margin-left: $defaultUnit * 2;
+    }
+}
+
+.list--ordered {
+    padding-left: $defaultUnit * 3;
+
+    &:only-child {
+        margin-bottom: 0;
+    }
+}
+
+.list--inline {
+    @include noListStyle();
+    @include flex();
+}
+
+.list--unstyled {
+    @include noListStyle();
+}
+
+.list__item {
+    color: $grey-900;
+    line-height: $defaultUnit * 3;
+}
+
+.list__item--inline {
+    padding: 0;
+}
+
+.list__item--withBullet {
+    @include flex();
+}
+
+.list__item__bullet {
+    margin: ($defaultUnit * 0.5) $defaultUnit 0 0;
+    width: $defaultUnit * 2;
+    height: $defaultUnit * 2;
+    display: block;
+    fill: $grey-900;
+}
+
+.list__link {
+    padding: $defaultUnit;
+
+    &:hover,
+    &.current {
+        border-left: ($defaultUnit * 0.5) solid $primary;
+        padding-left: $defaultUnit * 0.5;
+        transition: 0.1s border ease-in-out;
+    }
+}

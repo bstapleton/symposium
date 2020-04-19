@@ -1,0 +1,31 @@
+.u-focusShadow {
+    @include active-shadow();
+}
+
+.u-shadow2dp {
+    @include shadow-2dp();
+}
+
+.u-shadow3dp {
+    @include shadow-3dp();
+}
+
+.u-shadow4dp {
+    @include shadow-4dp();
+}
+
+.u-shadow6dp {
+    @include shadow-6dp();
+}
+
+.u-shadow8dp {
+    @include shadow-8dp();
+}
+
+.u-shadow16dp {
+    @include shadow-16dp();
+}
+
+.u-shadow24dp {
+    @include shadow-24dp();
+}

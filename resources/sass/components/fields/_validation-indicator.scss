@@ -1,0 +1,60 @@
+.field__validationIndicator {
+    $negativeMargin: 0 - ($defaultUnit * 6);
+    transition: all 0.2s ease;
+    display: block;
+    border-radius: 50%;
+    width: $defaultUnit * 3;
+    height: $defaultUnit * 3;
+    background: transparent;
+    border: ($defaultUnit * 0.25) solid transparent;
+
+    @include sm-up() {
+        width: $defaultUnit * 4.5;
+        height: $defaultUnit * 4.5;
+    }
+
+    &:after {
+        transition: all 0.2s ease;
+        position: absolute;
+        content: "";
+        width: $defaultUnit * 3;
+        height: $defaultUnit * 3;
+        background-size: $defaultUnit * 3;
+        background-repeat: no-repeat;
+        background-position: center;
+        opacity: 0;
+        top: -2px;
+        left: -1px;
+        
+        @include sm-up() {
+            width: $defaultUnit * 4;
+            height: $defaultUnit * 4;
+            background-size: $defaultUnit * 4.5;
+            top: 0;
+            left: 0;
+        }
+	}
+}
+
+.valid .field__validationIndicator,
+.error .field__validationIndicator {
+    &:after {
+        animation: validity-symbol-animation 0.5s ease-out alternate both;
+    }
+}
+
+.valid .field__validationIndicator {
+    animation: validity-animation-valid 0.5s ease-out alternate both;
+
+    &:after {
+        background-image: url('/images/symbol-tick.svg');
+    }
+}
+
+.error .field__validationIndicator {
+    animation: validity-animation-error 0.5s ease-out alternate both;
+
+    &:after {
+        background-image: url('/images/symbol-error.svg');
+    }
+}

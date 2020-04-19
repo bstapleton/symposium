@@ -1,0 +1,29 @@
+.field--typeSingleSelection {
+    .field__input {
+        @include hiddenInput();
+    }
+}
+
+.field--typeButtonChoice,
+.field--typeRadio {
+    .field__label {
+        color: $grey-900;
+        padding-left: 0;
+        position: initial;
+        top: auto;
+        left: auto;
+    }
+}
+
+.field--typeButtonChoice {
+    .field__label {
+        margin: 0 0 $defaultUnit;
+        padding: 0;
+    }
+
+    .button {
+        @include xs() {
+            width: calc(50% - (#{$defaultUnit} * 0.75));
+        }
+    }
+}

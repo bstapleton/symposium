@@ -1,0 +1,49 @@
+// Vertical linear gradient: handles both hard-stop and smooth gradients
+@mixin verticalLinearGradient($firstColour, $secondColour, $firstStart, $secondStart, $firstStop: null, $secondStop: null) {
+    background: mix($firstColour, $secondColour, 50%);
+    @if ($firstStop) and ($secondStop) {
+        background: -webkit-linear-gradient(top, $firstColour $firstStart, $firstColour $firstStop, $secondColour $secondStart, $secondColour $secondStop);
+        background: -moz-linear-gradient(top, $firstColour $firstStart, $firstColour $firstStop, $secondColour $secondStart, $secondColour $secondStop);
+        background: -o-linear-gradient(top, $firstColour $firstStart, $firstColour $firstStop, $secondColour $secondStart, $secondColour $secondStop);
+        background: linear-gradient(to bottom, $firstColour $firstStart, $firstColour $firstStop, $secondColour $secondStart, $secondColour $secondStop);
+    } @else {
+        background: -webkit-linear-gradient(top, $firstColour $firstStart, $secondColour $secondStart);
+        background: -moz-linear-gradient(top, $firstColour $firstStart, $secondColour $secondStart);
+        background: -o-linear-gradient(top, $firstColour $firstStart, $secondColour $secondStart);
+        background: linear-gradient(to bottom, $firstColour $firstStart, $secondColour $secondStart);
+    }
+}
+
+@mixin radial-gradient($from, $to) {
+    background: -moz-radial-gradient(center, circle cover, $from 0%, $to 100%);
+    background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%, $from), color-stop(100%, $to));
+    background: -webkit-radial-gradient(center, circle cover, $from 0%, $to 100%);
+    background: -o-radial-gradient(center, circle cover, $from 0%, $to 100%);
+    background: -ms-radial-gradient(center, circle cover, $from 0%, $to 100%);
+    background: radial-gradient(center, circle cover, $from 0%, $to 100%);
+    background-color: $from;
+}
+
+@mixin darkDiagonalGradient($colour: $primary, $percentage: 10%) {
+    background: $colour; /* Old browsers */
+    background: -moz-linear-gradient(45deg, darken($colour, $percentage) 0%, $colour 50%, darken($colour, $percentage) 100%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(45deg, darken($colour, $percentage) 0%,$colour 50%,darken($colour, $percentage) 100%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(-30deg, darken($colour, $percentage) 0%,$colour 50%,darken($colour, $percentage) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='$colour', endColorstr='$colour',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+}
+
+@mixin lightDiagonalGradient($colour: $primary, $percentage: 30%) {
+    background: $colour; /* Old browsers */
+    background: -moz-linear-gradient(-30deg, $colour 30%, lighten($colour, $percentage) 100%, $colour 100%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(-30deg, $colour 30%, lighten($colour, $percentage) 100%, $colour 100%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(-30deg, lighten($colour, $percentage) 30%, $colour 100%, lighten($colour, $percentage) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='$colour', endColorstr='$colour',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+}
+
+@mixin reverseLightDiagonalGradient($colour: $primary, $percentage: 30%) {
+    background: $colour; /* Old browsers */
+    background: -moz-linear-gradient(45deg, lighten($colour, $percentage) 0%, $colour 50%, lighten($colour, $percentage) 100%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(45deg, lighten($colour, $percentage) 0%,$colour 50%,lighten($colour, $percentage) 100%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(45deg, lighten($colour, $percentage) 0%,$colour 50%,lighten($colour, $percentage) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='$colour', endColorstr='$colour',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+}

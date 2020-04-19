@@ -1,0 +1,73 @@
+.mobileMenu {
+    @include md-up() {
+        display: none;
+    }
+
+    z-index: $layer1;
+    position: fixed;
+    top: 42px;
+    margin-left: -#{$menuWidth};
+    height: calc(100% - 42px);
+    width: $menuWidth;
+    background: $grey-100;
+    border-right: 1px solid $grey-200;
+}
+
+.mobileMenu__list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    border-top: 1px solid $grey-200;
+    border-bottom: 1px solid scale-color($grey-200, $lightness: 95%);
+
+    &:first-child {
+        border-top: none;
+    }
+
+    &:last-child {
+        border-bottom: none;
+        position: fixed;
+        bottom: 0;
+        width: $menuWidth;
+
+        .mobileMenu__item:last-child {
+            border-bottom: none;
+        }
+    }
+}
+
+.mobileMenu__item {
+    border-top: 1px solid scale-color($grey-200, $lightness: 95%);
+    border-bottom: 1px solid $grey-200;
+    padding: 0.2rem 0;
+
+    &:not(:first-child) {
+        &.mobileMenu__item--header {
+            padding-top: 1rem;
+        }
+    }
+}
+
+.mobileMenu__item--header {
+    color: $grey-900;
+    text-transform: uppercase;
+    text-shadow: 1px 1px rgba($grey-200, 0.4);
+    padding: 0.3rem 0.5rem;
+    font-size: 0.8rem;
+}
+
+.mobileMenu__heading {
+    margin-bottom: 0;
+    padding-left: 0.5rem;
+}
+
+.mobileMenu__link {
+    display: block;
+    padding: 0.3rem 0.5rem 0.3rem 1.2rem;
+    
+    svg {
+        float: right;
+        width: $defaultUnit * 3;
+        height: $defaultUnit * 3;
+    }
+}

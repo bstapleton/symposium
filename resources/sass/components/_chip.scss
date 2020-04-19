@@ -1,0 +1,96 @@
+// List of chip
+.chips {
+    display: flex;
+    height: 32px;
+    align-items: center;
+}
+
+// Description for the list
+.chips__descriptor {
+    margin-right: $defaultUnit;
+    padding-top: $defaultUnit * 0.5;
+}
+
+// Individual chip element
+.chip {
+    display: inline-flex;
+    align-items: center;
+    line-height: 1;
+    background: darken($grey-100, 5%);
+    height: $defaultUnit * 6;
+    padding: $defaultUnit ($defaultUnit * 1.5);
+    border-radius: $defaultUnit * 3;
+    transition: all 0.2s ease-in-out;
+    margin: ($defaultUnit * 0.5) $defaultUnit 0 0;
+    color: $primary;
+
+    &:not(:last-child) {
+        margin-right: $defaultUnit;
+    }
+
+    &:hover {
+        box-shadow: 0 0 0 2px $primary;
+        transition: all 0.2s ease-in-out;
+        cursor: pointer;
+    }
+}
+
+.chip--hidden {
+    display: none;
+}
+
+.chip--withTag {
+    padding: 0 ($defaultUnit * 1.5) 0 0;
+}
+
+.chip--withIcon {
+    padding-right: 0;
+}
+
+// Chip tag (displays inside the chip, on the left)
+.chip__tag {
+    display: inline-flex;
+    border-radius: $defaultUnit * 3;
+    width: $defaultUnit * 6;
+    height: $defaultUnit * 6;
+    margin-right: $defaultUnit;
+    background: darken($grey-100, 10%);
+    align-items: center;
+    justify-content: center;
+    color: $white;
+    font-weight: bold;
+    text-shadow: 1px 1px rgba($grey-900, 0.5);
+}
+
+.chip__tag--success {
+    background: $success;
+}
+
+.chip__tag--warning {
+    background: $warning;
+}
+
+.chip__tag--danger {
+    background: $danger;
+}
+
+.chip__tag--info {
+    background: $info;
+}
+
+// Textual content for the chip
+.chip__content {
+    display: inline-block;
+}
+
+// Chip icon (displays inside the chip, on the right)
+.chip__icon {
+    margin: 0 $defaultUnit;
+    border-radius: 50%;
+}
+
+// Chip image, the actual icon itself
+.chip__image {
+    width: $defaultUnit * 4;
+    height: $defaultUnit * 4;
+}

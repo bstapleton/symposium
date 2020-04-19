@@ -1,0 +1,9 @@
+.field--typeCurrency {
+    .field__prefix {
+        flex: 0 0 ($defaultUnit * 4);
+
+        @include sm-up() {
+            flex: 0 0 ($defaultUnit * 6);
+        }
+    }
+}

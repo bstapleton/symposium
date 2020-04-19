@@ -1,0 +1,57 @@
+.flexGrid {
+    @include flex();
+}
+
+.flexGrid__cell {
+    flex-basis: 0;
+}
+
+.flexGrid__cell--1 {
+    max-width: calc(100% / 12);
+}
+
+.flexGrid__cell--2 {
+    max-width: calc(100% / 6);
+}
+
+.flexGrid__cell--3 {
+    max-width: calc(100% / 4);
+}
+
+.flexGrid__cell--4 {
+    max-width: calc(100% / 3);
+}
+
+.flexGrid__cell--5 {
+    max-width: calc(calc(100% / 2) - calc(100% / 12));
+}
+
+.flexGrid__cell--6 {
+    @include md-up() {
+        max-width: calc(100% / 2);
+    }
+}
+
+.flexGrid__cell--7 {
+    max-width: calc(calc(100% / 2) + calc(100% / 12));
+}
+
+.flexGrid__cell--8 {
+    max-width: calc(calc(100% / 3) * 2);
+}
+
+.flexGrid__cell--9 {
+    max-width: calc(calc(100% / 4) * 3);
+}
+
+.flexGrid__cell--10 {
+    max-width: calc(calc(100% / 12) * 10);
+}
+
+.flexGrid__cell--11 {
+    max-width: calc(calc(100% / 12) * 11);
+}
+
+.flexGrid__cell--12 {
+    max-width: calc(calc(100% / 12) * 12);
+}

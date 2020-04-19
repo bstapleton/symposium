@@ -1,0 +1,111 @@
+/**
+ * Grid
+ */
+
+@mixin xs {
+    @media (max-width: calc($breakpoint-sm - 1)) {
+        @content;
+    }
+}
+
+@mixin sm {
+    @media (min-width: $breakpoint-sm) and (max-width: calc($breakpoint-md - 1)) {
+        @content;
+    }
+}
+
+@mixin md {
+    @media (min-width: $breakpoint-md) and (max-width: calc($breakpoint-lg - 1)) {
+        @content;
+    }
+}
+
+@mixin lg {
+    @media (min-width: $breakpoint-lg) and (max-width: calc($breakpoint-xl - 1)) {
+        @content;
+    }
+}
+
+@mixin xl {
+    @media (min-width: $breakpoint-xl) {
+        @content;
+    }
+}
+
+@mixin sm-up {
+   @media (min-width: $breakpoint-sm) {
+       @content;
+   }
+}
+
+@mixin md-up {
+   @media (min-width: $breakpoint-md) {
+       @content;
+   }
+}
+
+@mixin lg-up {
+   @media (min-width: $breakpoint-lg) {
+       @content;
+   }
+}
+
+@mixin xl-up {
+   @media (min-width: $breakpoint-xl) {
+       @content;
+   }
+}
+
+@mixin sm-down {
+   @media (max-width: calc($breakpoint-md - 1)) {
+       @content;
+   }
+}
+
+@mixin md-down {
+   @media (max-width: calc($breakpoint-lg - 1)) {
+       @content;
+   }
+}
+
+@mixin lg-down {
+    @media (max-width: calc($breakpoint-xl - 1)) {
+        @content;
+    }
+}
+
+@mixin hidden-xs {
+   @media (max-width: calc($breakpoint-sm - 1)) {
+       display: none;
+   }
+}
+
+@mixin hidden-sm-down {
+   @media (max-width: calc($breakpoint-md - 1)) {
+       display: none;
+   }
+}
+
+@mixin hidden-md-down {
+   @media (max-width: calc($breakpoint-lg - 1)) {
+       display: none;
+   }
+}
+
+@mixin hidden-md-up {
+   @media (min-width: $breakpoint-md) {
+       display: none;
+   }
+}
+
+@mixin hidden-lg-up {
+   @media (min-width: $breakpoint-lg) {
+       display: none;
+   }
+}
+
+@mixin hidden-xl {
+   @media (min-width: $breakpoint-xl) {
+       display: none;
+   }
+}

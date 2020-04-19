@@ -1,0 +1,13 @@
+.login__header {
+    margin: ($defaultUnit * 6);
+    padding-bottom: $defaultUnit * 6;
+}
+
+.login__welcome {
+    text-align: center;
+    margin: 0;
+}
+
+.login__body {
+    padding-top: $defaultUnit * 5;
+}

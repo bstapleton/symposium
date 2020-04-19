@@ -1,0 +1,47 @@
+.loadingLayout {
+    display: flex;
+    flex-direction: column;
+    height: calc(100vh - 15rem);
+    z-index: $layer5;
+    transition: 0.2s all ease;
+    position: relative;
+    top: 15rem;
+    margin: 0 auto;
+    align-items: center;
+    padding: 0 ($defaultUnit * 3);
+
+    &.hidden {
+        display: none;
+    }
+
+    &.processing {
+        p,
+        .processing__entry {
+            color: $grey-900;
+
+            @include sm-up() {
+                font-size: 1.5rem;
+            }
+        }
+
+        .processing__entry {
+            transition: 0.2s all ease;
+            display: flex;
+            margin-bottom: $defaultUnit;
+        }
+
+        .processing__text {
+            margin-right: $defaultUnit * 3;
+
+            @include sm-up() {
+                flex: 1 0 auto;
+            }
+        }
+    }
+
+    p {
+        text-align: center;
+        color: #fff;
+        font-size: 16px;
+    }
+}

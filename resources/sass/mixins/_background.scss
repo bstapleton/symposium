@@ -1,0 +1,17 @@
+@mixin bg {
+    @each $name, $color in $colors {
+        .bg\:#{$name} {
+            background-color: $color;
+        }
+
+        .bg\:light-#{$name} {
+            background-color: scale-color($color, $lightness: 30%);
+        }
+    }
+
+    @each $scale, $color in $greys {
+        .bg\:grey-#{$scale} {
+            background-color: $color;
+        }
+    }
+}

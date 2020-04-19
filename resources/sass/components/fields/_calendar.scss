@@ -1,0 +1,95 @@
+.field--typeCalendar {
+    margin-bottom: 0;
+}
+
+.caleran-popup,
+.caleran-container {
+    background: #fff;
+    border: 1px solid $grey-200;
+    border-radius: $defaultUnit;
+
+    .caleran-ys-year,
+    .caleran-ys-year-prev,
+    .caleran-ys-year-next,
+    .caleran-ys-month {
+        transition: ease-in-out 0.1s background-color;
+    }
+
+    .caleran-header[style='display: none;'] + .caleran-calendars {
+        .caleran-ys-year-prev,
+        .caleran-ms-month:first-child {
+            border-radius: calc(#{$defaultUnit} + 1px) 0 0 0;
+        }
+
+        .caleran-ys-year:nth-child(5),
+        .caleran-ms-month:nth-child(4) {
+            border-radius: 0 calc(#{$defaultUnit} + 1px) 0 0;
+        }
+    }
+
+    .caleran-ys-year:nth-child(11),
+    .caleran-ms-month:nth-child(9) {
+        border-radius: 0 0 0 calc(#{$defaultUnit} + 1px);
+    }
+
+    .caleran-ys-year-next,
+    .caleran-ms-month:last-child {
+        border-radius: 0 0 calc(#{$defaultUnit} + 1px) 0;
+    }
+}
+
+.caleran-popup {
+    @include shadow-4dp();
+}
+
+.caleran-box-arrow-top {
+    top: -6px;
+}
+
+.caleran-box-arrow-bottom {
+    bottom: -6px;
+}
+
+.caleran-container .caleran-input .caleran-calendars .caleran-year-selector .caleran-ys-year-prev:hover,
+.caleran-container-mobile .caleran-input .caleran-calendars .caleran-year-selector .caleran-ys-year-prev:hover,
+.caleran-container .caleran-input .caleran-calendars .caleran-year-selector .caleran-ys-year-next:hover,
+.caleran-container-mobile .caleran-input .caleran-calendars .caleran-year-selector .caleran-ys-year-next:hover {
+    background: #fff;
+}
+
+.caleran-container-mobile .caleran-input {
+    border-radius: $defaultUnit $defaultUnit 0 0;
+
+    .caleran-calendars .caleran-month-selector .caleran-ms-month,
+    .caleran-calendars .caleran-year-selector .caleran-ms-month {
+        height: 33.3%;
+    }
+
+    .caleran-footer {
+        background: darken($grey-100, 5%);
+
+        .caleran-cancel,
+        .caleran-apply {
+            border-radius: 0;
+            text-transform: uppercase;
+        }
+
+        button.caleran-apply {
+            margin-left: 0;
+        }
+
+        button.caleran-cancel {
+            background-color: $white;
+            color: $primary;
+            float: right;
+            margin-left: 7px;
+        }
+    }
+}
+
+.caleran-container .caleran-input .caleran-calendars .caleran-calendar .caleran-days-container .caleran-weekend,
+.caleran-container-mobile .caleran-input .caleran-calendars .caleran-calendar .caleran-days-container .caleran-weekend {
+    &.caleran-disabled {
+        color: #ccc;
+    }
+}

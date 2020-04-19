@@ -1,0 +1,34 @@
+.breadcrumbs {
+    clear: both;
+    list-style: none;
+    margin-bottom: 1.5rem;
+    padding: 0;
+}
+
+.breadcrumb {
+    float: left;
+    background: none;
+
+    &:not(:last-child) {
+        padding-right: 0.3rem;
+
+        &:after {
+            content: ">";
+            padding-left: 0.3rem;
+        }
+    }
+
+    &:last-child {
+        padding-left: 0.5rem;
+    }
+
+    &:first-child {
+        .breadcrumb__link {
+            padding: 0.2rem 0.5rem 0.2rem 0;
+        }
+    }
+}
+
+.breadcrumb__link {
+    padding: 0.2rem 0.5rem;
+}

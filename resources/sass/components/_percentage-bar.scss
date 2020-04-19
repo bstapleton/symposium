@@ -1,0 +1,15 @@
+.percentage__bar {
+    height: $defaultUnit * 4;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    background: $grey-100;
+
+    .percentage__complete {
+        width: 0;
+        height: $defaultUnit * 4;
+        background-color: $success;
+        transition: 0.3s all ease;
+    }
+}

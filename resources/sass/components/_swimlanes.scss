@@ -1,0 +1,85 @@
+.lanes {
+    @include flex();
+    margin: 0 auto;
+    padding: 0 ($defaultUnit * 1.5);
+    justify-content: center;
+
+    @include xl() {
+        width: 100%;
+        max-width: 1600px;
+    }
+}
+
+.lane__wrapper {
+    padding: 0 15px;
+    flex: 1 1 auto;
+    margin-bottom: $defaultUnit * 3;
+
+    &:first-child {
+        padding-left: 0;
+    }
+
+    &:last-child {
+        padding-right: 0;
+    }
+
+    @include md() {
+        flex: 1 1 50%;
+
+        &:only-child {
+            max-width: 75%;
+            margin: 0 auto;
+        }
+    }
+
+    @include lg-up() {
+        max-width: 30%;
+        &:only-child {
+            margin: 0 auto;
+        }
+    }
+
+    @include lg() {
+        flex: 1 1 33.3333%;
+
+        &.even-total {
+            flex: 1 1 50%;
+        }
+    }
+
+    @include xl() {
+        flex: 1 1 20%;
+        max-width: 20%;
+    }
+}
+
+.lane__content {
+    @include shadow-2dp();
+    transition: box-shadow 0.2s ease-in-out;
+
+    &:hover {
+        @include shadow-3dp();
+    }
+}
+
+.lane__header {
+    @include lightDiagonalGradient($primary, 10%);
+}
+
+.lane__title {
+    color: #fff;
+}
+
+.lane__count {
+    color: white !important;
+}
+
+.lane__content,
+.lane__footer {
+    background: $white;
+}
+
+.lane__content {
+    @include flex();
+    background-color: $grey-100;
+}

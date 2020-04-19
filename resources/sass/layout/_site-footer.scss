@@ -1,0 +1,11 @@
+.siteFooter {
+    @include clear(both);
+    padding: ($defaultUnit * 2) 0 0;
+    background-color: $white;
+    width: 100%;
+    font-size: $defaultUnit * 1.25;
+
+    p {
+        margin-bottom: $defaultUnit;
+    }
+}

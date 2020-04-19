@@ -1,0 +1,5 @@
+.sidebar {
+    @include md-up() {
+        width: $sidebarWidth;
+    }
+}

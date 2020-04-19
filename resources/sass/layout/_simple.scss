@@ -1,0 +1,140 @@
+.simple {
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+
+    @include sm-up() {
+        padding: ($defaultUnit * 2) 0 0;
+    }
+
+    @include lg-up() {
+        padding: ($defaultUnit * 4) 0 0;
+    }
+
+    > header,
+    .panel {
+        width: 100%;
+        max-width: $defaultUnit * 76.5;
+        padding: ($defaultUnit * 2) $defaultUnit;
+
+        @include lg-up() {
+            max-width: $defaultUnit * 82.5;
+            padding: $defaultUnit * 4;
+        }
+    }
+
+    strong {
+        color: $grey-900;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4 {
+        color: $grey-900;
+    }
+
+    main {
+        flex: 1 0 auto;
+    }
+
+    .panel {
+        background-color: $grey-100;
+        margin: 0 auto;
+
+        &:not(:first-child) {
+            border-top: 1px solid scale-color($grey-200, $lightness: 95%);
+        }
+        
+        &:not(:last-child) {
+            border-bottom: 1px solid $grey-200;
+        }
+
+        @include sm-up() {
+            @include shadow-2dp();
+            border-radius: $defaultUnit;
+            margin: 0 auto ($defaultUnit * 4);
+
+            &:not(:first-child) {
+                border-top: none;
+            }
+
+            &:not(:last-child) {
+                border-bottom: none;
+            }
+        }
+
+        .sub-section-header {
+            margin-top: $defaultUnit * 3;
+        }
+
+        a {
+            &:not(.button) {
+                font-weight: bold;
+                text-decoration: underline;
+                color: $grey-900;
+                font-family: BlissBold;
+            }
+
+            &.retry-search {
+                color: $white;
+            }
+        }
+    }
+
+    .panel--cta {
+        max-width: $defaultUnit * 100;
+        border: 3px solid $primary;
+
+        @include lg-up() {
+            max-width: $defaultUnit * 100;
+        }
+    }
+}
+
+.simple__siteHeader {
+    @include sm-up() {
+        margin: 0 auto $defaultUnit;
+    }
+
+    img {
+        margin: 0 auto;
+        display: block;
+        width: 120px;
+
+        @include sm-up() {
+            width: 200px;
+        }
+    }
+}
+
+.panel__heading {
+    padding: 0 ($defaultUnit * 4);
+    font-family: BlissLight;
+    font-weight: 200;
+    font-size: $defaultUnit * 2.5;
+    line-height: $defaultUnit * 3.5;
+    text-transform: uppercase;
+
+    @include sm-up() {
+        padding: 0 ($defaultUnit * 6);
+        font-size: $defaultUnit * 3;
+        letter-spacing: $defaultUnit * 0.5;
+        line-height: $defaultUnit * 4.5;
+    }
+}
+
+.panel__content {
+    padding: 0 ($defaultUnit * 4);
+
+    @include xs() {
+        video {
+            max-width: 100%;
+        }
+    }
+
+    @include sm-up() {
+        padding: 0 ($defaultUnit * 6);
+    }
+}

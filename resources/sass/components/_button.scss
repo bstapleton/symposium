@@ -1,0 +1,91 @@
+$buttonHeight: $defaultUnit * 6;
+$buttonMinWidth: $defaultUnit * 8;
+
+@mixin button {
+    @each $color, $value in $themeColors {
+        &--#{$color} {
+            color: $white;
+            position: relative;
+            background-color: $value;
+            transition: 0.2s box-shadow ease-out, 0.1s background-color ease-in;
+
+            &:hover,
+            &:active,
+            &.enabled {
+                @if (lightness($value) > 50) {
+                    background-color: scale-color($value, $lightness: -20%);
+                }
+                @else {
+                    background-color: scale-color($value, $lightness: 20%);
+                }
+            }
+
+            &:hover {
+                color: $white;
+            }
+
+            &:active,
+            &.enabled {
+                box-shadow: 0 0 0 5px $value;
+            }
+        }
+    }
+}
+
+.button {
+    @include boxSizing;
+    @include button;
+    display: inline-flex;
+    height: $buttonHeight;
+    line-height: $buttonHeight;
+    min-width: $buttonMinWidth;
+    padding: 0 ($buttonMinWidth - $buttonHeight);
+    text-decoration: none;
+    text-align: center;
+    text-transform: uppercase;
+    border-radius: $buttonHeight / 2;
+    align-items: center;
+
+    &:hover,
+    &:active,
+    &.enabled {
+        text-decoration: none;
+    }
+
+    &:not(:first-child) {
+        &.pull-right {
+            margin: ($defaultUnit * 2) 0 ($defaultUnit * 2) ($defaultUnit * 2);
+        }
+    }
+
+    &:not(:last-child) {
+        &:not(.pull-right) {
+            margin: ($defaultUnit * 2) ($defaultUnit * 2) ($defaultUnit * 2) 0;
+        }
+    }
+}
+
+.button--withIcon {
+    .button__text {
+        padding-left: ($buttonHeight * 0.75) + $defaultUnit;
+    }
+}
+
+.button__icon {
+    position: absolute;
+    width: $buttonHeight * 0.75;
+    height: $buttonHeight * 0.75;
+    fill: $white;
+}
+
+.button--disabled {
+    border: 1px solid #ccc;
+    color: #333;
+    background-color: #ccc;
+
+    &:hover {
+        background: #ccc;
+        cursor: not-allowed;
+        text-decoration: none;
+    }
+}

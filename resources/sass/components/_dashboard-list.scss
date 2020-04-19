@@ -1,0 +1,72 @@
+.dashboardList {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.dashboardList__item {
+    @include clear(both);
+    border-top: 1px solid $primary;
+    font-size: 0.8rem;
+    background-color: $grey-100;
+
+    .button {
+        float: right;
+        margin-top: 6px;
+    }
+
+    &.complete,
+    > .reference {
+        padding: $defaultUnit $defaultUnit ($defaultUnit * 0.5) ($defaultUnit * 0.5);
+    }
+
+    &:hover {
+        a.reference {
+            color: $primary;
+            padding-left: $defaultUnit;
+            border-left: ($defaultUnit * 0.5) solid $primary;
+        }
+    }
+
+    > .reference {
+        display: block;
+        border-left: ($defaultUnit * 0.5) solid transparent;
+        transition: 0.1s all ease-in-out;
+
+        .id {
+            font-weight: 700;
+        }
+    }
+
+    > a.reference {
+        &:hover {
+            .id {
+                text-decoration: none;
+            }
+        }
+    }
+
+    > .reference svg {
+        float: right;
+        margin-top: $defaultUnit * 0.5;
+    }
+
+    a {
+        overflow: hidden;
+    }
+}
+
+.dashboardList__actions {
+    float: right;
+    height: 42px;
+
+    .button:not(:last-child) {
+        margin-bottom: $defaultUnit * 0.75;
+    }
+
+    img {
+        right: 10px;
+        height: $defaultUnit * 1.5;
+        position: absolute;
+    }
+}

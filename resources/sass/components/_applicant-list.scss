@@ -1,0 +1,219 @@
+.applicantList {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    height: 100%;
+
+    .chip {
+        transition: none;
+        position: absolute;
+        top: $defaultUnit * 2.5;
+        height: $defaultUnit * 4;
+        color: transparent;
+        background: transparent;
+        z-index: $layer2;
+        right: 0;
+
+        &:hover {
+            cursor: default;
+            box-shadow: none;
+        }
+    }
+
+    .indicator {
+        position: absolute;
+        width: $defaultUnit;
+        height: $defaultUnit;
+        left: -($defaultUnit * 3);
+        top: $defaultUnit * 3.5;
+        border-radius: 50%;
+        transition: all 0.1s ease-in-out;
+    }
+}
+
+.applicantList__item {
+    text-align: center;
+    position: relative;
+    height: $defaultUnit * 10;
+    padding-left: 0;
+    background: none;
+}
+
+.applicantList__item--divider {
+    height: initial;
+    padding: ($defaultUnit * 0.5) 0;
+
+    span {
+        display: inline-block;
+        margin: 0 auto;
+        width: $defaultUnit * 6;
+        border-bottom: 1px solid $grey-200;
+    }
+}
+
+.applicantList__property {
+    margin: ($defaultUnit * 2) ($defaultUnit * 3) $defaultUnit;
+    height: $defaultUnit * 6;
+
+    .icon-wrapper {
+        position: absolute;
+        border: 3px solid $white;
+        border-radius: 50%;
+        width: $defaultUnit * 6;
+        height: $defaultUnit * 6;
+        color: $white;
+        background: $primary;
+        z-index: $layer3;
+
+        svg {
+            margin-top: $defaultUnit * 0.5;
+            fill: #fff;
+        }
+
+        .outline {
+            fill: transparent;
+        }
+    }
+
+    .chip {
+        color: $grey-900;
+        background: darken($grey-100, 5%);
+        padding-left: $defaultUnit * 4;
+        top: 0;
+        width: 244px;
+        right: auto;
+        height: $defaultUnit * 5;
+        border-radius: 0 ($defaultUnit * 2.5) ($defaultUnit * 2.5) 0;
+    }
+}
+
+.applicantList__applicant {
+    margin: 0 $defaultUnit;
+    line-height: $defaultUnit * 5.25;
+
+    a {
+        display: block;
+        position: absolute;
+        padding: $defaultUnit;
+        margin: $defaultUnit;
+        border-radius: 50%;
+        z-index: $layer3;
+
+        .initials {
+            display: block;
+            text-transform: uppercase;
+            border-radius: 50%;
+            width: $defaultUnit * 6;
+            height: $defaultUnit * 6;
+            background: $primary !important;
+            color: white;
+            border: 3px solid #eee;
+
+            &.success {
+                border-color: #fff;
+            }
+
+            &.neutral {
+                border-color: $info;
+            }
+
+            &.warning {
+                border-color: $warning;
+            }
+
+            &.danger {
+                border-color: $danger;
+            }
+        }
+
+        &:hover {
+            text-decoration: none;
+
+            .indicator {
+                display: block;
+                background: $primary;
+                border: ($defaultUnit / 4) solid lighten($primary, 10%);
+                left: -($defaultUnit);
+                transition: all 0.2s ease-in-out;
+
+                &.success {
+                    background: $success;
+                    border-color: lighten($success, 10%);
+                }
+
+                &.neutral {
+                    background: $info;
+                    border-color: lighten($info, 10%);
+                }
+
+                &.warning {
+                    background: $warning;
+                    border-color: lighten($warning, 10%);
+                }
+
+                &.danger {
+                    background: $danger;
+                    border-color: lighten($danger, 10%);
+                }
+            }
+
+            ~.chip {
+                color: $grey-900;
+                background: darken($grey-100, 5%);
+                left: $defaultUnit * 4;
+                padding-left: $defaultUnit * 5;
+                white-space: nowrap;
+                right: auto;
+                transition: all 0.1s ease-in-out;
+            }
+        }
+    }
+
+    &.current {
+        a {
+            .indicator {
+                display: block;
+                background: $primary;
+                border: ($defaultUnit / 4) solid lighten($primary, 10%);
+                left: -($defaultUnit);
+            }
+
+            .initials {
+                background: $white;
+                border-color: white;
+            }
+        }
+    }
+}
+
+.applicantList__actions {
+    position: absolute;
+    bottom: 0;
+    padding: 0 $defaultUnit $defaultUnit;
+    height: auto;
+
+    svg {
+        height: 30px;
+        width: 30px;
+        fill: #eee;
+        
+    }
+
+    .control {
+        display: inline-block;
+
+        &:first-child {
+            margin-right: $defaultUnit;
+        }
+
+        &:hover {
+            svg {
+                fill: #fff;
+                
+            }
+        }
+    }
+}

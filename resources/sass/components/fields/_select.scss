@@ -1,0 +1,120 @@
+.field--typeSelect {
+    .field__label {
+        cursor: pointer;
+
+        &.disabled,
+        &.disabled:hover {
+            cursor: not-allowed;
+        }
+
+        &:hover {
+            cursor: pointer;
+        }
+    }
+
+    .field__main {
+        cursor: pointer;
+    }
+
+    .field__input {
+        @include hiddenInput();
+        padding: 0;
+        border: none;
+    }
+
+    .field__pseudoSelector {
+        padding: ($defaultUnit * 1.5) ($defaultUnit * 6) 0 ($defaultUnit * 1.5);
+        cursor: pointer;
+        line-height: 2;
+        border-bottom: 2px solid $primary;
+        overflow: hidden;
+
+        &.disabled {
+            &:hover {
+                border: 1px solid #999;
+            }
+        }
+    }
+
+    .selectionList {
+        position: absolute;
+        max-height: $defaultUnit * 40;
+        min-width: calc(100% - (#{$defaultUnit} * 8));
+        overflow-y: scroll;
+        top: $defaultUnit * 4;
+        z-index: $layer5;
+        @include shadow-4dp();
+
+        @include xs() {
+            max-width: calc(100% - (#{$defaultUnit} * 8));
+        }
+
+        @include sm-up() {
+            min-width: $maxWidth;
+        }
+
+        li {
+            background-color: #fff;
+            background-image: none;
+            padding: $defaultUnit ($defaultUnit * 2);
+            cursor: pointer;
+            overflow: hidden;
+            height: $defaultUnit * 6;
+            line-height: $defaultUnit * 4;
+            transition: 0.1s all ease;
+            border-bottom: 1px solid $grey-100;
+            display: flex;
+
+            @include xs() {
+                height: $defaultUnit * 8;
+            }
+
+            .address-text {
+                flex: 1 0 auto;
+                align-content: center;
+
+                @include xs() {
+                    flex: 1 1 auto;
+                }
+
+                .text {
+                    @include xs() {
+                        display: inline-block;
+                    }
+                }
+            }
+
+            .address-icon {
+                display: block;
+                position: initial;
+                flex: 0 0 40px;
+            }
+
+            &.address-formatted,
+            &.address-item {
+                padding: $defaultUnit;
+                line-height: 100%;
+            }
+
+            &.address-item {
+                @include xs() {
+                    padding-right: 0;
+                }
+            }
+
+            &:last-child {
+                border-bottom: none;
+            }
+
+            &:hover {
+                background-color: #eee;
+                border-left: ($defaultUnit * 0.5) solid $primary;
+            }
+
+            &:active,
+            &:focus {
+                background-color: #ddd;
+            }
+        }
+    }
+}

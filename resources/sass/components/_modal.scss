@@ -1,0 +1,99 @@
+.modal {
+    @include shadow-24dp();
+    border-radius: 6px 6px 5px 5px;
+    z-index: $layer5;
+    width: 280px;
+    margin: 0 auto;
+    position: fixed;
+    left: calc(50% - 140px);
+    top: 13vh;
+    background: $grey-100;
+
+    @include xs() {
+        width: 90%;
+        left: 5%;
+    }
+
+    @include sm-up() {
+        width: 644px;
+        left: calc(50% - 322px);
+        height: fit-content;
+    }
+}
+
+.modal__header {
+    border-radius: $defaultUnit;
+    border-bottom: 1px solid $grey-200;
+    @include lightDiagonalGradient($primary, 10%);
+}
+
+.modal__heading {
+    border: none;
+    margin-bottom: 0;
+    padding: $defaultUnit * 2;
+    font-family: BlissLight;
+    color: #fff;
+}
+
+.modal__content {
+    padding: ($defaultUnit * 2) ($defaultUnit * 3) ($defaultUnit * 3);
+    max-height: 65vh;
+    overflow-y: auto;
+
+    .notification {
+        &:only-child {
+            margin-bottom: 0;
+        }
+    }
+}
+
+.modal__actions {
+    @include clear(both);
+    border-radius: 0 0 $defaultUnit $defaultUnit;
+    border-top: 1px solid $grey-200;
+    padding: ($defaultUnit * 1.5) ($defaultUnit * 3);
+}
+
+.modal__button--right {
+    &:not(:first-child) {
+        margin: 0 0 ($defaultUnit * 1.5) ($defaultUnit * 1.5);
+
+        @include md-up() {
+            margin: $defaultUnit 0 $defaultUnit $defaultUnit;
+        }
+    }
+
+    &:first-child {
+        margin: 0 0 ($defaultUnit * 1.5) ($defaultUnit * 1.5);
+
+        @include md-up() {
+            margin: $defaultUnit 0 $defaultUnit $defaultUnit;
+        }
+    }
+}
+
+.modal--wide {
+    @include sm-up() {
+        width: 90%;
+        left: 5%; 
+    }
+}
+
+.modal--important {
+    .modal__header {
+        border-left: 2px solid $danger;
+        border-top: 2px solid $danger;
+        border-right: 2px solid $danger;
+    }
+
+    .modal__content {
+        border-left: 2px solid $danger;
+        border-right: 2px solid $danger;
+    }
+
+    .modal__actions {
+        border-left: 2px solid $danger;
+        border-bottom: 2px solid $danger;
+        border-right: 2px solid $danger;
+    }
+}
