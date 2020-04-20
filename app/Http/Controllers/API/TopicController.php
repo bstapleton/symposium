@@ -14,11 +14,12 @@ class TopicController extends BaseController
     /**
      * Gets all topics.
      *
+     * @param null $sectionId if provided gets all topics associated to the given section.
      * @return string JSON array.
      */
-    public function index()
+    public function index($sectionId = null)
     {
-        return Topic::all()->toJson();
+        return $sectionId ? Topic::where('section_id', $sectionId)->toJson() : Topic::all()->toJson();
     }
 
     /**
@@ -30,6 +31,19 @@ class TopicController extends BaseController
     public function get($id)
     {
         return Topic::where('id', $id)->first()->toJson();
+    }
+
+    /**
+     * Gets the section to which the topic belongs.
+     *
+     * @param $id Topic identifier.
+     * @return mixed
+     */
+    public function section($id)
+    {
+        $topic = Topic::where('id', $id)->first();
+
+        return $topic ? $topic->section()->toJson() : null;
     }
 
     /**

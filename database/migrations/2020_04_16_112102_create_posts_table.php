@@ -16,7 +16,7 @@ class CreatePostsTable extends Migration
         Schema::create('posts', function (Blueprint $table) {
             $table->id();
             $table->integer('author_id');
-            $table->integer('parent_id')->nullable(); // If it's a reply to a post
+            $table->integer('parent_post_id')->nullable(); // If it's a reply to a post
             $table->integer('topic_id')->nullable();
             $table->integer('downvotes')->default(0);
             $table->integer('upvotes')->default(0);

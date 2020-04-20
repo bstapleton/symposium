@@ -19,7 +19,7 @@ class CreateSectionsTable extends Migration
             $table->string('slug')->unique();
             $table->string('icon_url')->nullable();
             $table->longText('description')->nullable();
-            $table->integer('parent_id')->nullable();
+            $table->integer('parent_section_id')->nullable();
             $table->integer('topic_count')->default(0);
             $table->integer('reply_count')->default(0);
             $table->timestamps();

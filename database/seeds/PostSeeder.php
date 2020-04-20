@@ -16,21 +16,21 @@ class PostSeeder extends Seeder
             [
                 'id' => 1,
                 'author_id' => 1,
-                'parent_id' => null,
+                'parent_post_id' => null,
                 'content' => 'this is some content for the topic',
                 'topic_id' => 1,
             ],
             [
                 'id' => 2,
                 'author_id' => 1,
-                'parent_id' => 1,
+                'parent_post_id' => 1,
                 'content' => 'i totally agree',
                 'topic_id' => 1,
             ],
             [
                 'id' => 3,
                 'author_id' => 1,
-                'parent_id' => 2,
+                'parent_post_id' => 2,
                 'content' => 'nah fam, you an idiot',
                 'topic_id' => 1,
             ]

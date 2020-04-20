@@ -26,7 +26,7 @@ class Section extends Model
      */
     public function subsections()
     {
-        return $this->hasMany('App\Section', 'parent_id', 'id')->get();
+        return $this->hasMany('App\Section', 'parent_section_id', 'id')->get();
     }
 
     /**
@@ -37,6 +37,6 @@ class Section extends Model
      */
     public function parent()
     {
-        return $this->hasOne('App\Section', 'id', 'parent_id')->get();
+        return $this->hasOne('App\Section', 'id', 'parent_section_id')->get();
     }
 }

@@ -18,14 +18,14 @@ class SectionSeeder extends Seeder
                 'title' => 'Parent section',
                 'slug' => 'parent-section',
                 'description' => 'parent section description',
-                'parent_id' => null,
+                'parent_section_id' => null,
             ],
             [
                 'id' => 2,
                 'title' => 'Subsection to parent',
                 'slug' => 'subsection',
                 'description' => 'this is a subsection',
-                'parent_id' => 1,
+                'parent_section_id' => 1,
             ]
         ]);
     }

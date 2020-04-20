@@ -13,19 +13,24 @@ use Illuminate\Support\Collection;
 class SectionController extends BaseController
 {
     /**
-     * Gets all sections.
+     * Gets all sections, and each section's 'children' through manipulation of the Collection. This makes it appear as
+     * if the collection has subsections, but since a subsection IS a section, this is a work-around to avoid business
+     * logic on the front-end.
+     * @see Collection
      *
      * @return string JSON array with nested subsections.
      */
     public function index()
     {
-        $sectionList = Section::all();
+        $sectionList = Section::where('parent_section_id', null)->get();
         $sectionHierarchy = new Collection();
 
-        foreach($sectionList as $section) {
+        foreach ($sectionList as $section)
+        {
             $section->children = $section->subsections();
 
-            if ($section->parent_id == null) {
+            if ($section->parent_id == null)
+            {
                 $sectionHierarchy->push($section);
             }
         }
@@ -45,13 +50,28 @@ class SectionController extends BaseController
     }
 
     /**
-     * Gets all topics associated to a section_id.
+     * Gets all children (subsections) of a section by id.
      *
      * @param $id Section identifier.
-     * @return mixed JSON array.
+     * @return mixed
      */
-    public function getTopics($id)
+    public function subsections($id)
     {
-        return Topic::where('section_id', $id)->get()->toJson();
+        $section = Section::where('id', $id)->first();
+
+        return $section ? $section->subsections()->toJson() : null;
+    }
+
+    /**
+     * Gets parent section of a child (subsection) by id.
+     *
+     * @param $id Section identifier.
+     * @return mixed
+     */
+    public function parent($id)
+    {
+        $section = Section::where('id', $id)->first();
+
+        return $section->parent()->toJson();
     }
 }
