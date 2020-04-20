@@ -4,6 +4,7 @@ namespace App\Http\Controllers\API;
 
 use App\Section;
 use App\Topic;
+use Illuminate\Support\Collection;
 
 /**
  * Class SectionController
@@ -14,11 +15,22 @@ class SectionController extends BaseController
     /**
      * Gets all sections.
      *
-     * @return string JSON array.
+     * @return string JSON array with nested subsections.
      */
     public function index()
     {
-        return Section::all()->toJson();
+        $sectionList = Section::all();
+        $sectionHierarchy = new Collection();
+
+        foreach($sectionList as $section) {
+            $section->children = $section->subsections();
+
+            if ($section->parent_id == null) {
+                $sectionHierarchy->push($section);
+            }
+        }
+
+        return $sectionHierarchy->toJson();
     }
 
     /**
