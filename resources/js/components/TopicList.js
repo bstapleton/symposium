@@ -1,16 +1,22 @@
-import React, { Component } from 'react'
-import { Link } from 'react-router-dom'
+import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 
 class TopicList extends Component {
-    constructor () {
-        super();
+    constructor (props) {
+        super(props);
         this.state = {
             topics: [],
-            sectionUrl: null
+            section: {}
         }
     }
 
     componentDidMount () {
+        axios.get(`/api/sections/${this.props.match.params.sectionSlug}`).then(response => {
+            this.setState({
+                section: response.data
+            });
+        });
+
         axios.get('/api/topics').then(response => {
             this.setState({
                 topics: response.data
@@ -19,9 +25,12 @@ class TopicList extends Component {
     }
 
     render () {
-        const { topics } = this.state
-        const baseRoute = `/section/${this.state.sectionUrl}`;
+        const { topics } = this.state;
+        const { section } = this.state;
+        const baseRoute = `/section/${section.slug}/topics`;
         return (
+            <div>
+                <h1>{this.state.section.title}</h1>
             <ul>
                 {topics.map(topic => (
                     <li key={topic.id}>
@@ -29,6 +38,7 @@ class TopicList extends Component {
                     </li>
                 ))}
             </ul>
+            </div>
         )
     }
 }

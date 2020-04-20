@@ -27,8 +27,8 @@ Route::prefix('user')->group(function() {
 
 Route::prefix('sections')->group(function() {
     Route::get('/', 'API\SectionController@index');
-    Route::post('/', 'API\SectionController@create'); // TODO
-    Route::get('{id}', 'API\SectionController@get');
+    Route::post('/', 'API\SectionController@create'); // TODO - remember to disallow only-int titles or we gonna hurt later
+    Route::get('{uniqueIdentifier}', 'API\SectionController@get');
     Route::put('{id}', 'API\SectionController@update'); // TODO
     Route::delete('{id}', 'API\SectionController@delete'); // TODO - also consider how to handle cascading
     Route::get('{id}/topics', 'API\SectionController@getTopics'); // TODO

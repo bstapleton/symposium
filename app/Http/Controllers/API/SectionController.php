@@ -39,14 +39,18 @@ class SectionController extends BaseController
     }
 
     /**
-     * Gets one section by id.
+     * Gets one section by a unique identifier.
      *
-     * @param $id Section identifier.
+     * @param $uniqueIdentifier Section identifier, either id or slug.
      * @return mixed JSON object
      */
-    public function get($id)
+    public function get($uniqueIdentifier)
     {
-        return Section::where('id', $id)->first()->toJson();
+        if (is_int($uniqueIdentifier)) {
+            return Section::where('id', $uniqueIdentifier)->first()->toJson();
+        } else {
+            return Section::where('slug', $uniqueIdentifier)->first()->toJson();
+        }
     }
 
     /**
