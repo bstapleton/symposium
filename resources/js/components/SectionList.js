@@ -18,7 +18,7 @@ class SectionList extends Component {
 
     render () {
         const { sections } = this.state
-        const baseRoute = '/section';
+        const baseRoute = '/sections';
         return (
             <ul>
                 {sections.map(section => (
@@ -28,7 +28,7 @@ class SectionList extends Component {
                             <ul>
                                 {section.children.map(subsection => (
                                     <li key={subsection.id}>
-                                        <Link to={`${baseRoute}/${section.slug}/${subsection.slug}`}>{subsection.title}</Link>
+                                        <Link to={`${baseRoute}/${subsection.slug}`}>{subsection.title}</Link>
                                     </li>
                                 ))}
                             </ul>

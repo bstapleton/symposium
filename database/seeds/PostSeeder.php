@@ -14,16 +14,9 @@ class PostSeeder extends Seeder
     {
         DB::table('posts')->insert([
             [
-                'id' => 1,
-                'author_id' => 1,
-                'parent_post_id' => null,
-                'content' => 'this is some content for the topic',
-                'topic_id' => 1,
-            ],
-            [
                 'id' => 2,
                 'author_id' => 1,
-                'parent_post_id' => 1,
+                'parent_post_id' => null,
                 'content' => 'i totally agree',
                 'topic_id' => 1,
             ],

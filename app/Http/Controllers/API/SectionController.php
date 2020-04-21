@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\API;
 
 use App\Section;
-use App\Topic;
 use Illuminate\Support\Collection;
 
 /**
@@ -46,7 +45,7 @@ class SectionController extends BaseController
      */
     public function get($uniqueIdentifier)
     {
-        if (is_int($uniqueIdentifier)) {
+        if (ctype_digit(strval($uniqueIdentifier))) {
             return Section::where('id', $uniqueIdentifier)->first()->toJson();
         } else {
             return Section::where('slug', $uniqueIdentifier)->first()->toJson();

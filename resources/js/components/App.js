@@ -4,6 +4,7 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import Header from './Header'
 import SectionList from './SectionList';
 import TopicList from "./TopicList";
+import ReplyList from "./ReplyList";
 
 class App extends Component {
     render () {
@@ -13,7 +14,8 @@ class App extends Component {
                     <Header />
                     <Switch>
                         <Route exact path={'/'} component={SectionList} />
-                        <Route path={'/sections/:sectionSlug/topics'} component={TopicList} />
+                        <Route path={'/sections/:sectionSlug'} component={TopicList} />
+                        <Route path={'/topics/:id'} component={ReplyList} />
                     </Switch>
                 </div>
             </BrowserRouter>

@@ -20,7 +20,7 @@ class Post extends Model
      */
     public function replies()
     {
-        return $this->hasMany('App\Post', 'parent_id', 'id')->get();
+        return $this->hasMany('App\Post', 'parent_post_id', 'id')->get();
     }
 
     /**

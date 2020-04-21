@@ -31,7 +31,7 @@ Route::prefix('sections')->group(function() {
     Route::get('{uniqueIdentifier}', 'API\SectionController@get');
     Route::put('{id}', 'API\SectionController@update'); // TODO
     Route::delete('{id}', 'API\SectionController@delete'); // TODO - also consider how to handle cascading
-    Route::get('{id}/topics', 'API\SectionController@getTopics'); // TODO
+    Route::get('{id}/topics', 'API\SectionController@getTopics');
     Route::get('{id}/subsections', 'API\SectionController@subsections');
     Route::get('{id}/parent', 'API\SectionController@parent');
 });
@@ -42,7 +42,7 @@ Route::prefix('topics')->group(function() {
     Route::get('{id}', 'API\TopicController@get');
     Route::put('{id}', 'API\TopicController@update'); // TODO
     Route::delete('{id}/delete', 'API\TopicController@delete'); // TODO - also consider how to handle cascading
-    Route::get('{id}/posts', 'API\TopicController@getPosts'); // TODO
+    Route::get('{id}/posts', 'API\TopicController@getPosts');
     Route::get('{id}/section', 'API\TopicController@section');
 });
 

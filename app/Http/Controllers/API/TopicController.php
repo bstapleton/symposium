@@ -4,6 +4,7 @@ namespace App\Http\Controllers\API;
 
 use App\Topic;
 use App\Post;
+use Illuminate\Support\Collection;
 
 /**
  * Class TopicController
@@ -56,6 +57,20 @@ class TopicController extends BaseController
      */
     public function getPosts($id)
     {
-        return Post::where('topic_id', $id)->get()->toJson();
+        $posts = Post::where([['topic_id', $id], ['parent_post_id', null]])->get();
+
+        $postHierarchy = new Collection();
+
+        foreach ($posts as $post)
+        {
+            $post->children = $post->replies();
+
+            if ($post->parent_post_id == null)
+            {
+                $postHierarchy->push($post);
+            }
+        }
+
+        return $postHierarchy->toJson();
     }
 }

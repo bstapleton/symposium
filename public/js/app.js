@@ -69933,6 +69933,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Header__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Header */ "./resources/js/components/Header.js");
 /* harmony import */ var _SectionList__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./SectionList */ "./resources/js/components/SectionList.js");
 /* harmony import */ var _TopicList__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./TopicList */ "./resources/js/components/TopicList.js");
+/* harmony import */ var _ReplyList__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./ReplyList */ "./resources/js/components/ReplyList.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -69962,6 +69963,7 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 
 
+
 var App = /*#__PURE__*/function (_Component) {
   _inherits(App, _Component);
 
@@ -69981,8 +69983,11 @@ var App = /*#__PURE__*/function (_Component) {
         path: '/',
         component: _SectionList__WEBPACK_IMPORTED_MODULE_4__["default"]
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
-        path: '/sections/:sectionSlug/topics',
+        path: '/sections/:sectionSlug',
         component: _TopicList__WEBPACK_IMPORTED_MODULE_5__["default"]
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
+        path: '/topics/:id',
+        component: _ReplyList__WEBPACK_IMPORTED_MODULE_6__["default"]
       }))));
     }
   }]);
@@ -70021,6 +70026,112 @@ var Header = function Header() {
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (Header);
+
+/***/ }),
+
+/***/ "./resources/js/components/ReplyList.js":
+/*!**********************************************!*\
+  !*** ./resources/js/components/ReplyList.js ***!
+  \**********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../utils */ "./resources/js/utils.js");
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { return function () { var Super = _getPrototypeOf(Derived), result; if (_isNativeReflectConstruct()) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+
+
+
+
+var ReplyList = /*#__PURE__*/function (_Component) {
+  _inherits(ReplyList, _Component);
+
+  var _super = _createSuper(ReplyList);
+
+  function ReplyList(props) {
+    var _this;
+
+    _classCallCheck(this, ReplyList);
+
+    _this = _super.call(this, props);
+    _this.state = {
+      topic: {},
+      section: {},
+      posts: []
+    };
+    return _this;
+  }
+
+  _createClass(ReplyList, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      var _this2 = this;
+
+      Object(_utils__WEBPACK_IMPORTED_MODULE_2__["getTopicById"])(this.props.match.params.id).then(function (response) {
+        _this2.setState({
+          topic: response.data
+        });
+      }).then(function () {
+        Object(_utils__WEBPACK_IMPORTED_MODULE_2__["getSectionBySlug"])(_this2.state.topic.section_id).then(function (response) {
+          _this2.setState({
+            section: response.data
+          });
+        });
+      }).then(function () {
+        Object(_utils__WEBPACK_IMPORTED_MODULE_2__["getRepliesByTopicId"])(_this2.state.topic.id).then(function (response) {
+          _this2.setState({
+            posts: response.data
+          });
+        });
+      });
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var topic = this.state.topic;
+      var section = this.state.section;
+      var posts = this.state.posts;
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, section.title, " : ", topic.title), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, topic.content), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, posts.map(function (post) {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+          key: post.id
+        }, post.content, post.children !== null ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, post.children.map(function (reply) {
+          return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+            key: reply.id
+          }, reply.content);
+        })) : null);
+      })));
+    }
+  }]);
+
+  return ReplyList;
+}(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
+
+/* harmony default export */ __webpack_exports__["default"] = (ReplyList);
 
 /***/ }),
 
@@ -70095,7 +70206,7 @@ var SectionList = /*#__PURE__*/function (_Component) {
     key: "render",
     value: function render() {
       var sections = this.state.sections;
-      var baseRoute = '/section';
+      var baseRoute = '/sections';
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, sections.map(function (section) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
           key: section.id
@@ -70105,7 +70216,7 @@ var SectionList = /*#__PURE__*/function (_Component) {
           return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
             key: subsection.id
           }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
-            to: "".concat(baseRoute, "/").concat(section.slug, "/").concat(subsection.slug)
+            to: "".concat(baseRoute, "/").concat(subsection.slug)
           }, subsection.title));
         })) : null);
       }));
@@ -70198,8 +70309,8 @@ var TopicList = /*#__PURE__*/function (_Component) {
     value: function render() {
       var topics = this.state.topics;
       var section = this.state.section;
-      var baseRoute = "/section/".concat(section.slug, "/topics");
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, this.state.section.title), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, topics.map(function (topic) {
+      var baseRoute = "/topics";
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, section.title), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, topics.map(function (topic) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
           key: topic.id
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
@@ -70220,7 +70331,7 @@ var TopicList = /*#__PURE__*/function (_Component) {
 /*!*******************************!*\
   !*** ./resources/js/utils.js ***!
   \*******************************/
-/*! exports provided: getAllSections, getSectionBySlug, getTopicsBySectionId, handleError */
+/*! exports provided: getAllSections, getSectionBySlug, getTopicsBySectionId, getTopicById, getRepliesByTopicId, handleError */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -70228,6 +70339,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getAllSections", function() { return getAllSections; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getSectionBySlug", function() { return getSectionBySlug; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getTopicsBySectionId", function() { return getTopicsBySectionId; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getTopicById", function() { return getTopicById; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getRepliesByTopicId", function() { return getRepliesByTopicId; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "handleError", function() { return handleError; });
 var getAllSections = function getAllSections() {
   return new axios.get('/api/sections').then(function (response) {
@@ -70245,6 +70358,20 @@ var getSectionBySlug = function getSectionBySlug(slug) {
 };
 var getTopicsBySectionId = function getTopicsBySectionId(sectionId) {
   return new axios.get("/api/sections/".concat(sectionId, "/topics")).then(function (response) {
+    return response;
+  })["catch"](function (error) {
+    handleError(error);
+  });
+};
+var getTopicById = function getTopicById(id) {
+  return new axios.get("/api/topics/".concat(id)).then(function (response) {
+    return response;
+  })["catch"](function (error) {
+    handleError(error);
+  });
+};
+var getRepliesByTopicId = function getRepliesByTopicId(topicId) {
+  return new axios.get("/api/topics/".concat(topicId, "/posts")).then(function (response) {
     return response;
   })["catch"](function (error) {
     handleError(error);

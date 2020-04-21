@@ -28,10 +28,10 @@ class TopicList extends Component {
     render () {
         const { topics } = this.state;
         const { section } = this.state;
-        const baseRoute = `/section/${section.slug}/topics`;
+        const baseRoute = `/topics`;
         return (
             <div>
-                <h1>{this.state.section.title}</h1>
+                <h1>{section.title}</h1>
             <ul>
                 {topics.map(topic => (
                     <li key={topic.id}>

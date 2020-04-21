@@ -1,8 +1,7 @@
 export const getAllSections = () => {
     return new axios.get('/api/sections').then(response => {
         return response;
-    })
-    .catch(error => {
+    }).catch(error => {
         handleError(error);
     });
 }
@@ -10,8 +9,7 @@ export const getAllSections = () => {
 export const getSectionBySlug = (slug) => {
     return new axios.get(`/api/sections/${slug}`).then(response => {
         return response;
-    })
-    .catch(error => {
+    }).catch(error => {
         handleError(error);
     });
 }
@@ -19,10 +17,25 @@ export const getSectionBySlug = (slug) => {
 export const getTopicsBySectionId = (sectionId) => {
     return new axios.get(`/api/sections/${sectionId}/topics`).then(response => {
         return response;
-    })
-    .catch(error => {
+    }).catch(error => {
         handleError(error);
-    })
+    });
+}
+
+export const getTopicById = (id) => {
+    return new axios.get(`/api/topics/${id}`).then(response => {
+        return response;
+    }).catch(error => {
+        handleError(error);
+    });
+}
+
+export const getRepliesByTopicId = (topicId) => {
+    return new axios.get(`/api/topics/${topicId}/posts`).then(response => {
+        return response;
+    }).catch(error => {
+        handleError(error);
+    });
 }
 
 export const handleError = (error) => {

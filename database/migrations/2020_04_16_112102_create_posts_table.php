@@ -20,9 +20,8 @@ class CreatePostsTable extends Migration
             $table->integer('topic_id')->nullable();
             $table->integer('downvotes')->default(0);
             $table->integer('upvotes')->default(0);
-            $table->integer('hierarchical_level')->default(0); // To restrict excessive nesting - TODO: not sure if we need this...
             $table->longText('content');
-            $table->integer('comment_count')->default(0);
+            $table->integer('reply_count')->default(0);
             $table->boolean('is_reported')->default(false);
             $table->timestamps();
         });
