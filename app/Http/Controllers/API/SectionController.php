@@ -78,4 +78,17 @@ class SectionController extends BaseController
 
         return $section->parent()->toJson();
     }
+
+    /**
+     * Gets all topics belonging to a given section by id.
+     *
+     * @param $id Section identifier.
+     * @return mixed
+     */
+    public function getTopics($id)
+    {
+        $section = Section::where('id', $id)->first();
+
+        return $section->topics()->toJson();
+    }
 }
