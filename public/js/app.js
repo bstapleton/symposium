@@ -69934,6 +69934,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _SectionList__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./SectionList */ "./resources/js/components/SectionList.js");
 /* harmony import */ var _TopicList__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./TopicList */ "./resources/js/components/TopicList.js");
 /* harmony import */ var _ReplyList__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./ReplyList */ "./resources/js/components/ReplyList.js");
+/* harmony import */ var _CreateTopic__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./CreateTopic */ "./resources/js/components/CreateTopic.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -69964,6 +69965,7 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 
 
+
 var App = /*#__PURE__*/function (_Component) {
   _inherits(App, _Component);
 
@@ -69984,7 +69986,11 @@ var App = /*#__PURE__*/function (_Component) {
         component: _SectionList__WEBPACK_IMPORTED_MODULE_4__["default"]
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
         path: '/sections/:sectionSlug',
-        component: _TopicList__WEBPACK_IMPORTED_MODULE_5__["default"]
+        component: _TopicList__WEBPACK_IMPORTED_MODULE_5__["default"],
+        exact: true
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
+        path: '/sections/:sectionSlug/create-topic',
+        component: _CreateTopic__WEBPACK_IMPORTED_MODULE_7__["default"]
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
         path: '/topics/:id',
         component: _ReplyList__WEBPACK_IMPORTED_MODULE_6__["default"]
@@ -69996,6 +70002,150 @@ var App = /*#__PURE__*/function (_Component) {
 }(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
 
 react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(App, null), document.getElementById('app'));
+
+/***/ }),
+
+/***/ "./resources/js/components/CreateTopic.js":
+/*!************************************************!*\
+  !*** ./resources/js/components/CreateTopic.js ***!
+  \************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../utils */ "./resources/js/utils.js");
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { return function () { var Super = _getPrototypeOf(Derived), result; if (_isNativeReflectConstruct()) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+
+
+
+
+var CreateTopic = /*#__PURE__*/function (_Component) {
+  _inherits(CreateTopic, _Component);
+
+  var _super = _createSuper(CreateTopic);
+
+  function CreateTopic(props) {
+    var _this;
+
+    _classCallCheck(this, CreateTopic);
+
+    _this = _super.call(this, props);
+    _this.state = {
+      section: {},
+      title: '',
+      content: '',
+      errors: []
+    };
+    _this.handleFieldChange = _this.handleFieldChange.bind(_assertThisInitialized(_this));
+    _this.handleCreateNewTopic = _this.handleCreateNewTopic.bind(_assertThisInitialized(_this));
+    _this.hasErrorFor = _this.hasErrorFor.bind(_assertThisInitialized(_this));
+    _this.renderErrorFor = _this.renderErrorFor.bind(_assertThisInitialized(_this));
+    return _this;
+  }
+
+  _createClass(CreateTopic, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      var _this2 = this;
+
+      Object(_utils__WEBPACK_IMPORTED_MODULE_2__["getSectionBySlug"])(this.props.match.params.sectionSlug).then(function (response) {
+        _this2.setState({
+          section: response.data
+        });
+      });
+    }
+  }, {
+    key: "handleFieldChange",
+    value: function handleFieldChange(event) {
+      this.setState(_defineProperty({}, event.target.name, event.target.value));
+    }
+  }, {
+    key: "handleCreateNewTopic",
+    value: function handleCreateNewTopic(event) {
+      var _this3 = this;
+
+      event.preventDefault();
+      var history = this.props.history;
+      var topic = {
+        section_id: this.state.section.id,
+        title: this.state.title,
+        content: this.state.content
+      };
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('/api/topics', topic).then(function (response) {
+        history.push('/');
+      })["catch"](function (error) {
+        _this3.setState({
+          errors: error.response.data.errors
+        });
+      });
+    }
+  }, {
+    key: "hasErrorFor",
+    value: function hasErrorFor(field) {
+      return !!this.state.errors[field];
+    }
+  }, {
+    key: "renderErrorFor",
+    value: function renderErrorFor(field) {
+      if (this.hasErrorFor(field)) {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", {
+          className: 'invalid-feedback'
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("strong", null, this.state.errors[field][0]));
+      }
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", null, "Fill out the form"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("form", {
+        onSubmit: this.handleCreateNewTopic
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", {
+        type: 'text',
+        name: 'title',
+        id: 'title',
+        value: this.state.title,
+        onChange: this.handleFieldChange
+      }), this.renderErrorFor('title')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("textarea", {
+        name: 'content',
+        id: 'content',
+        value: this.state.content,
+        rows: '5',
+        onChange: this.handleFieldChange
+      }), this.renderErrorFor('content')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("button", null, "Create")));
+    }
+  }]);
+
+  return CreateTopic;
+}(react__WEBPACK_IMPORTED_MODULE_1__["Component"]);
+
+/* harmony default export */ __webpack_exports__["default"] = (CreateTopic);
 
 /***/ }),
 

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\API;
 
 use App\Topic;
 use App\Post;
+use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 
 /**
@@ -21,6 +22,24 @@ class TopicController extends BaseController
     public function index($sectionId = null)
     {
         return $sectionId ? Topic::where('section_id', $sectionId)->toJson() : Topic::all()->toJson();
+    }
+
+    public function create(Request $request)
+    {
+        $validatedData = $request->validate([
+            'section_id' => 'required',
+            'title' => 'required',
+            'content' => 'required',
+        ]);
+
+        $topic = Topic::create([
+            'section_id' => $validatedData['section_id'],
+            'title' => $validatedData['title'],
+            'content' => $validatedData['content'],
+            'author_id' => 1, // TODO assign actual author
+        ]);
+
+        return response()->json('Topic created');
     }
 
     /**

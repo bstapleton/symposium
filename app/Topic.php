@@ -13,6 +13,11 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class Topic extends Model
 {
     /**
+     * @var string[] Data that can be filled.
+     */
+    protected $fillable = ['section_id', 'title', 'content', 'author_id'];
+
+    /**
      * A Topic belongs to one Section.
      *
      * @return Collection
