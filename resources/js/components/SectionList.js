@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
+import { getAllSections } from "../utils";
 
 class SectionList extends Component {
     constructor () {
@@ -10,11 +11,9 @@ class SectionList extends Component {
     }
 
     componentDidMount () {
-        axios.get('/api/sections').then(response => {
-            this.setState({
-                sections: response.data
-            })
-        })
+        getAllSections().then((response) => {
+            this.setState({ sections: response.data })
+        });
     }
 
     render () {

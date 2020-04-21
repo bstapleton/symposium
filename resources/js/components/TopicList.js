@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import { getSectionBySlug, getTopicsBySectionId } from "../utils";
 
 class TopicList extends Component {
     constructor (props) {
@@ -11,15 +12,15 @@ class TopicList extends Component {
     }
 
     componentDidMount () {
-        axios.get(`/api/sections/${this.props.match.params.sectionSlug}`).then(response => {
+        getSectionBySlug(this.props.match.params.sectionSlug).then((response) => {
             this.setState({
                 section: response.data
             });
-        });
-
-        axios.get('/api/topics').then(response => {
-            this.setState({
-                topics: response.data
+        }).then(() => {
+            getTopicsBySectionId(this.state.section.id).then((response) => {
+                this.setState({
+                    topics: response.data
+                });
             });
         });
     }

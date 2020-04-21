@@ -70036,6 +70036,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../utils */ "./resources/js/utils.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -70057,6 +70058,7 @@ function _assertThisInitialized(self) { if (self === void 0) { throw new Referen
 function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
 
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
 
 
 
@@ -70083,7 +70085,7 @@ var SectionList = /*#__PURE__*/function (_Component) {
     value: function componentDidMount() {
       var _this2 = this;
 
-      axios.get('/api/sections').then(function (response) {
+      Object(_utils__WEBPACK_IMPORTED_MODULE_2__["getAllSections"])().then(function (response) {
         _this2.setState({
           sections: response.data
         });
@@ -70129,6 +70131,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../utils */ "./resources/js/utils.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -70150,6 +70153,7 @@ function _assertThisInitialized(self) { if (self === void 0) { throw new Referen
 function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
 
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
 
 
 
@@ -70177,14 +70181,15 @@ var TopicList = /*#__PURE__*/function (_Component) {
     value: function componentDidMount() {
       var _this2 = this;
 
-      axios.get("/api/sections/".concat(this.props.match.params.sectionSlug)).then(function (response) {
+      Object(_utils__WEBPACK_IMPORTED_MODULE_2__["getSectionBySlug"])(this.props.match.params.sectionSlug).then(function (response) {
         _this2.setState({
           section: response.data
         });
-      });
-      axios.get('/api/topics').then(function (response) {
-        _this2.setState({
-          topics: response.data
+      }).then(function () {
+        Object(_utils__WEBPACK_IMPORTED_MODULE_2__["getTopicsBySectionId"])(_this2.state.section.id).then(function (response) {
+          _this2.setState({
+            topics: response.data
+          });
         });
       });
     }
@@ -70208,6 +70213,49 @@ var TopicList = /*#__PURE__*/function (_Component) {
 }(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
 
 /* harmony default export */ __webpack_exports__["default"] = (TopicList);
+
+/***/ }),
+
+/***/ "./resources/js/utils.js":
+/*!*******************************!*\
+  !*** ./resources/js/utils.js ***!
+  \*******************************/
+/*! exports provided: getAllSections, getSectionBySlug, getTopicsBySectionId, handleError */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getAllSections", function() { return getAllSections; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getSectionBySlug", function() { return getSectionBySlug; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getTopicsBySectionId", function() { return getTopicsBySectionId; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "handleError", function() { return handleError; });
+var getAllSections = function getAllSections() {
+  return new axios.get('/api/sections').then(function (response) {
+    return response;
+  })["catch"](function (error) {
+    handleError(error);
+  });
+};
+var getSectionBySlug = function getSectionBySlug(slug) {
+  return new axios.get("/api/sections/".concat(slug)).then(function (response) {
+    return response;
+  })["catch"](function (error) {
+    handleError(error);
+  });
+};
+var getTopicsBySectionId = function getTopicsBySectionId(sectionId) {
+  return new axios.get("/api/sections/".concat(sectionId, "/topics")).then(function (response) {
+    return response;
+  })["catch"](function (error) {
+    handleError(error);
+  });
+};
+var handleError = function handleError(error) {
+  if (true) {
+    console.log(error); // TODO - handle this a little more gracefully for error display fro dev mode
+  } // TODO - how we want to handle error logging on prod?
+
+};
 
 /***/ }),
 
