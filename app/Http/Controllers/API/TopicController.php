@@ -57,7 +57,18 @@ class TopicController extends BaseController
      */
     public function get($id)
     {
-        return Topic::where('id', $id)->first()->toJson();
+        return Topic::find($id)->toJson();
+    }
+
+    public function destroy($id)
+    {
+        $topic = Topic::find($id);
+        $topic->is_hidden = true;
+        $topic->is_published = false;
+        $topic->hidden_at = now();
+        $topic->save();
+
+        return response()->json('Topic deleted!');
     }
 
     /**

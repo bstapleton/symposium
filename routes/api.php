@@ -41,14 +41,14 @@ Route::prefix('topics')->group(function() {
     Route::post('/', 'API\TopicController@create');
     Route::get('{id}', 'API\TopicController@get');
     Route::put('{id}', 'API\TopicController@update'); // TODO
-    Route::delete('{id}/delete', 'API\TopicController@delete'); // TODO - also consider how to handle cascading
+    Route::put('{id}/delete', 'API\TopicController@destroy');
     Route::get('{id}/posts', 'API\TopicController@getPosts');
     Route::get('{id}/section', 'API\TopicController@section');
 });
 
 Route::prefix('posts')->group(function() {
     Route::get('/', 'API\PostController@index');
-    Route::post('/', 'API\PostController@create'); // TODO
+    Route::post('/', 'API\PostController@create');
     Route::get('{id}', 'API\PostController@get');
     Route::put('{id}', 'API\PostController@update'); // TODO
     Route::delete('{id}', 'API\PostController@delete'); // TODO - no need to consider cascading

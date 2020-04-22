@@ -16,7 +16,7 @@ class Post extends Model
     /**
      * @var string[] Data that can be filled.
      */
-    protected $fillable = ['topic_id', 'content', 'author_id'];
+    protected $fillable = ['topic_id', 'content', 'author_id', 'is_reported', 'is_hidden'];
 
     /**
      * A Post has many replies.

@@ -14,7 +14,9 @@ class Section extends Model
      */
     public function topics()
     {
-        return $this->hasMany('App\Topic', 'section_id', 'id')->get();
+        return $this->hasMany('App\Topic', 'section_id', 'id')
+            ->where([['is_hidden', false], ['is_published', true]])
+            ->get();
     }
 
     /**

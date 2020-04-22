@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { getRepliesByTopicId, getSectionBySlug, getTopicById } from "../../../utils";
+import axios from "axios";
 
 class ViewTopic extends Component {
     constructor (props) {
@@ -8,7 +9,9 @@ class ViewTopic extends Component {
         this.state = {
             topic: {},
             section: {},
-            posts: []
+            posts: [],
+            deletionWarning: false,
+            errors: [] // TODO - show errors somewhere!
         }
     }
 
@@ -28,6 +31,26 @@ class ViewTopic extends Component {
                 });
             });
         });
+    }
+
+    handleDeletionWarning(event) {
+        this.setState({
+            deletionWarning: event.target.value,
+        })
+    }
+
+    handleTopicDeletion(event) {
+        event.preventDefault();
+
+        axios.put(`/api/topics/${event.target.value}/delete`)
+            .then(response => {
+                console.log('deleted'); // TODO - redirect with a message
+            })
+            .catch(error => {
+                this.setState({
+                    errors: error.response.data.errors
+                });
+            });
     }
 
     render () {
@@ -54,7 +77,17 @@ class ViewTopic extends Component {
                         </li>
                     ))}
                 </ul>
+                <button onClick={this.handleDeletionWarning.bind(this)} value={true}>Delete</button>
                 <Link to={`/topics/${topic.id}/create-post`}>Add to the discussion</Link>
+                {this.state.deletionWarning ?
+                    <div>
+                        Are you sure you want to delete this topic?
+                        <div>
+                            <button onClick={this.handleTopicDeletion} value={topic.id}>Yes, delete</button>
+                            <button onClick={this.handleDeletionWarning.bind(this)} value={false}>No, nevermind</button>
+                        </div>
+                    </div>
+                : null}
             </div>
         )
     }

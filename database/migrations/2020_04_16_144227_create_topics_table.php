@@ -22,6 +22,9 @@ class CreateTopicsTable extends Migration
             $table->integer('post_count')->default(0);
             $table->boolean('is_reported')->default(false);
             $table->boolean('is_sticky')->default(false);
+            $table->boolean('is_published')->default(1);
+            $table->boolean('is_hidden')->default(0);
+            $table->dateTime('hidden_at')->nullable();
             $table->boolean('is_announcement')->default(false);
             $table->integer('downvotes')->default(0);
             $table->integer('upvotes')->default(0);

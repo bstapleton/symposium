@@ -15,7 +15,7 @@ class Topic extends Model
     /**
      * @var string[] Data that can be filled.
      */
-    protected $fillable = ['section_id', 'title', 'content', 'author_id'];
+    protected $fillable = ['section_id', 'title', 'content', 'author_id', 'is_reported', 'is_hidden', 'is_sticky', 'is_announcement', 'is_published'];
 
     /**
      * A Topic belongs to one Section.

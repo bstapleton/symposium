@@ -23,6 +23,8 @@ class CreatePostsTable extends Migration
             $table->longText('content');
             $table->integer('reply_count')->default(0);
             $table->boolean('is_reported')->default(false);
+            $table->boolean('is_hidden')->default(0);
+            $table->dateTime('hidden_at')->nullable();
             $table->timestamps();
         });
     }
