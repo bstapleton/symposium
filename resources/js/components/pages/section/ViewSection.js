@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { getSectionBySlug, getTopicsBySectionId } from "../utils";
+import { getSectionBySlug, getTopicsBySectionId } from "../../../utils";
 
-class TopicList extends Component {
+class ViewSection extends Component {
     constructor (props) {
         super(props);
         this.state = {
@@ -32,16 +32,17 @@ class TopicList extends Component {
         return (
             <div>
                 <h1>{section.title}</h1>
-            <ul>
-                {topics.map(topic => (
-                    <li key={topic.id}>
-                        <Link to={`${baseRoute}/${topic.id}`}>{topic.title}</Link>
-                    </li>
-                ))}
-            </ul>
+                <ul>
+                    {topics.map(topic => (
+                        <li key={topic.id}>
+                            <Link to={`${baseRoute}/${topic.id}`}>{topic.title}</Link>
+                        </li>
+                    ))}
+                </ul>
+                <Link to={`/sections/${this.props.match.params.sectionSlug}/create-topic`}>Create new topic</Link>
             </div>
         )
     }
 }
 
-export default TopicList;
+export default ViewSection;

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\API;
 
 use App\Topic;
 use App\Post;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 
@@ -24,6 +25,12 @@ class TopicController extends BaseController
         return $sectionId ? Topic::where('section_id', $sectionId)->toJson() : Topic::all()->toJson();
     }
 
+    /**
+     * Create a topic.
+     *
+     * @param Request $request
+     * @return JsonResponse
+     */
     public function create(Request $request)
     {
         $validatedData = $request->validate([
@@ -39,7 +46,7 @@ class TopicController extends BaseController
             'author_id' => 1, // TODO assign actual author
         ]);
 
-        return response()->json('Topic created');
+        return response()->json($topic->id);
     }
 
     /**

@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import {getRepliesByTopicId, getSectionBySlug, getTopicById, getTopicsBySectionId} from "../utils";
+import { getRepliesByTopicId, getSectionBySlug, getTopicById } from "../../../utils";
 
-class ReplyList extends Component {
+class ViewTopic extends Component {
     constructor (props) {
         super(props);
         this.state = {
@@ -54,9 +54,10 @@ class ReplyList extends Component {
                         </li>
                     ))}
                 </ul>
+                <Link to={`/topics/${topic.id}/create-post`}>Add to the discussion</Link>
             </div>
         )
     }
 }
 
-export default ReplyList;
+export default ViewTopic;

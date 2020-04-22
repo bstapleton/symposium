@@ -14,6 +14,11 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 class Post extends Model
 {
     /**
+     * @var string[] Data that can be filled.
+     */
+    protected $fillable = ['topic_id', 'content', 'author_id'];
+
+    /**
      * A Post has many replies.
      *
      * @return Collection

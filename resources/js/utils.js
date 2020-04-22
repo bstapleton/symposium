@@ -40,7 +40,7 @@ export const getRepliesByTopicId = (topicId) => {
 
 export const handleError = (error) => {
     if (process.env.NODE_ENV !== 'production') {
-        console.log(error); // TODO - handle this a little more gracefully for error display fro dev mode
+        console.log(error); // TODO - handle this a little more gracefully for error display for dev mode
     }
     // TODO - how we want to handle error logging on prod?
 }

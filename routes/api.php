@@ -38,7 +38,7 @@ Route::prefix('sections')->group(function() {
 
 Route::prefix('topics')->group(function() {
     Route::get('/', 'API\TopicController@index');
-    Route::post('/', 'API\TopicController@create'); // TODO
+    Route::post('/', 'API\TopicController@create');
     Route::get('{id}', 'API\TopicController@get');
     Route::put('{id}', 'API\TopicController@update'); // TODO
     Route::delete('{id}/delete', 'API\TopicController@delete'); // TODO - also consider how to handle cascading

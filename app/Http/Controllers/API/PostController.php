@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\API;
 
 use App\Post;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 
 /**
  * Class PostController
@@ -29,6 +31,28 @@ class PostController extends BaseController
     public function get($id)
     {
         return Post::where('id', $id)->first()->toJson();
+    }
+
+    /**
+     * Create a post.
+     *
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function create(Request $request)
+    {
+        $validatedData = $request->validate([
+            'topic_id' => 'required',
+            'content' => 'required',
+        ]);
+
+        $topic = Post::create([
+            'topic_id' => $validatedData['topic_id'],
+            'content' => $validatedData['content'],
+            'author_id' => 1, // TODO assign actual author
+        ]);
+
+        return response()->json();
     }
 
     /**

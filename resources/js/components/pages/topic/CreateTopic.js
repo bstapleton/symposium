@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { Component } from 'react';
-import {getSectionBySlug} from "../utils";
+import {getSectionBySlug} from "../../../utils";
 
 class CreateTopic extends Component {
     constructor (props) {
@@ -45,7 +45,8 @@ class CreateTopic extends Component {
 
         axios.post('/api/topics', topic)
             .then(response => {
-                history.push('/');
+                console.log(response);
+                history.push(`/topics/${response.data}`);
             })
             .catch(error => {
                 this.setState({

@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
-import { getAllSections } from "../utils";
+import { getAllSections } from "../../utils";
 
-class SectionList extends Component {
+class Home extends Component {
     constructor () {
         super()
         this.state = {
@@ -40,4 +40,4 @@ class SectionList extends Component {
     }
 }
 
-export default SectionList;
+export default Home;

@@ -1,11 +1,12 @@
 import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
-import Header from './Header'
-import SectionList from './SectionList';
-import TopicList from "./TopicList";
-import ReplyList from "./ReplyList";
-import CreateTopic from "./CreateTopic";
+import Header from './layout/Header'
+import Home from './pages/Home';
+import ViewSection from "./pages/section/ViewSection";
+import ViewTopic from "./pages/topic/ViewTopic";
+import CreateTopic from "./pages/topic/CreateTopic";
+import CreatePost from "./pages/post/CreatePost";
 
 class App extends Component {
     render () {
@@ -14,10 +15,11 @@ class App extends Component {
                 <div>
                     <Header />
                     <Switch>
-                        <Route exact path={'/'} component={SectionList} />
-                        <Route path={'/sections/:sectionSlug'} component={TopicList} exact />
+                        <Route exact path={'/'} component={Home} />
+                        <Route exact path={'/sections/:sectionSlug'} component={ViewSection} />
                         <Route path={'/sections/:sectionSlug/create-topic'} component={CreateTopic} />
-                        <Route path={'/topics/:id'} component={ReplyList} />
+                        <Route exact path={'/topics/:id'} component={ViewTopic} />
+                        <Route path={'/topics/:id/create-post'} component={CreatePost} />
                     </Switch>
                 </div>
             </BrowserRouter>
