@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 
 /**
  * Class Post
+ * @property Collection|mixed children for overriding the returned values from the Post->replies() relationship.
  * @package App
  */
 class Post extends Model
