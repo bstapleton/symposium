@@ -57,9 +57,29 @@ class TopicController extends BaseController
      */
     public function get($id)
     {
-        return Topic::find($id)->toJson();
+        $topic = Topic::find($id);
+
+        if ($topic->is_hidden || !$topic->is_published) {
+            $modifiedTopic = new Topic([
+                'is_hidden' => $topic->is_hidden,
+                'is_published' => $topic->is_published,
+                'title' => $topic->title,
+                'section_id' => $topic->section_id
+            ]);
+            $modifiedTopic->id = $id;
+
+            return $modifiedTopic->toJson();
+        } else {
+            return Topic::find($id)->toJson();
+        }
     }
 
+    /**
+     * Soft deletes a topic, hiding it from the front-end and API responses.
+     *
+     * @param $id Topic identifier.
+     * @return JsonResponse
+     */
     public function destroy($id)
     {
         $topic = Topic::find($id);
@@ -95,19 +115,56 @@ class TopicController extends BaseController
     public function getPosts($id)
     {
         $posts = Post::where([['topic_id', $id], ['parent_post_id', null]])->get();
-
         $postHierarchy = new Collection();
 
         foreach ($posts as $post)
         {
-            $post->children = $post->replies();
-
-            if ($post->parent_post_id == null)
-            {
+            if ($post->is_hidden || !$post->is_published) {
+                $modifiedPost = new Post([
+                    'is_hidden' => $post->is_hidden,
+                    'is_published' => $post->is_published
+                ]);
+                $modifiedPost->id = $post->id;
+                $this->getPostChildren($modifiedPost);
+                $postHierarchy->push($modifiedPost);
+            } else {
+                $this->getPostChildren($post);
                 $postHierarchy->push($post);
             }
         }
 
         return $postHierarchy->toJson();
+    }
+
+    /**
+     * Takes a post and returns its replies in one of two ways:
+     * 1. the child has been 'deleted' so only show basic info.
+     * 2. the child is published and not 'deleted' so show full details.
+     *
+     * @param Post $post
+     * @return Post
+     */
+    private function getPostChildren(Post $post)
+    {
+        $children = $post->replies();
+        $childrenCollection = new Collection();
+
+        foreach ($children as $child)
+        {
+            if ($child->is_hidden || !$child->is_published) {
+                $modifiedChild = new Post([
+                    'is_hidden' => $child->is_hidden,
+                    'is_published' => $child->is_published
+                ]);
+                $modifiedChild->id = $child->id;
+                $childrenCollection->push($modifiedChild);
+            } else {
+                $childrenCollection->push($child);
+            }
+        }
+
+        $post->children = $childrenCollection;
+
+        return $post;
     }
 }

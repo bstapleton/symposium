@@ -70011,6 +70011,90 @@ react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render( /*#__PURE__*/react__WEB
 
 /***/ }),
 
+/***/ "./resources/js/components/DeletionWarning.js":
+/*!****************************************************!*\
+  !*** ./resources/js/components/DeletionWarning.js ***!
+  \****************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_1__);
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { return function () { var Super = _getPrototypeOf(Derived), result; if (_isNativeReflectConstruct()) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+
+
+
+var DeletionWarning = /*#__PURE__*/function (_Component) {
+  _inherits(DeletionWarning, _Component);
+
+  var _super = _createSuper(DeletionWarning);
+
+  function DeletionWarning() {
+    _classCallCheck(this, DeletionWarning);
+
+    return _super.apply(this, arguments);
+  }
+
+  _createClass(DeletionWarning, [{
+    key: "dismissWarning",
+    value: function dismissWarning(event) {
+      this.props.visibilityMethod(false, this.props.type, event);
+    }
+  }, {
+    key: "deleteEntity",
+    value: function deleteEntity(event) {
+      this.props.deletionMethod(this.props.id, event);
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, this.props.type === 'section' ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Select which section to move all posts to") : null, "Are you sure you want to delete this ", this.props.type, "?", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        onClick: this.deleteEntity.bind(this)
+      }, "Yes, delete"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        onClick: this.dismissWarning.bind(this),
+        value: false
+      }, "No, nevermind")));
+    }
+  }]);
+
+  return DeletionWarning;
+}(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
+
+DeletionWarning.propTypes = {
+  type: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.oneOf(['section', 'topic', 'post', 'reply']),
+  id: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.number.isRequired,
+  deletionMethod: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func.isRequired,
+  visibilityMethod: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func.isRequired
+};
+/* harmony default export */ __webpack_exports__["default"] = (DeletionWarning);
+
+/***/ }),
+
 /***/ "./resources/js/components/ErrorBoundary.js":
 /*!**************************************************!*\
   !*** ./resources/js/components/ErrorBoundary.js ***!
@@ -70620,6 +70704,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../utils */ "./resources/js/utils.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _DeletionWarning__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../DeletionWarning */ "./resources/js/components/DeletionWarning.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -70647,6 +70732,7 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 
 
+
 var ViewTopic = /*#__PURE__*/function (_Component) {
   _inherits(ViewTopic, _Component);
 
@@ -70663,9 +70749,11 @@ var ViewTopic = /*#__PURE__*/function (_Component) {
       section: {},
       posts: [],
       deletionWarning: false,
+      deletionType: 'topic',
       errors: [] // TODO - show errors somewhere!
 
     };
+    _this.handleDeletionWarning = _this.handleDeletionWarning.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -70694,19 +70782,23 @@ var ViewTopic = /*#__PURE__*/function (_Component) {
     }
   }, {
     key: "handleDeletionWarning",
-    value: function handleDeletionWarning(event) {
+    value: function handleDeletionWarning(bool, type, event) {
+      event.preventDefault();
       this.setState({
-        deletionWarning: event.target.value
+        deletionWarning: bool,
+        deletionType: type
       });
     }
   }, {
     key: "handleTopicDeletion",
-    value: function handleTopicDeletion(event) {
+    value: function handleTopicDeletion(id, event) {
       var _this3 = this;
 
       event.preventDefault();
-      axios__WEBPACK_IMPORTED_MODULE_3___default.a.put("/api/topics/".concat(event.target.value, "/delete")).then(function (response) {
+      axios__WEBPACK_IMPORTED_MODULE_3___default.a.put("/api/topics/".concat(id, "/delete")).then(function (response) {
         console.log('deleted'); // TODO - redirect with a message
+
+        location.reload();
       })["catch"](function (error) {
         _this3.setState({
           errors: error.response.data.errors
@@ -70714,31 +70806,69 @@ var ViewTopic = /*#__PURE__*/function (_Component) {
       });
     }
   }, {
+    key: "handlePostDeletion",
+    value: function handlePostDeletion(id, event) {
+      var _this4 = this;
+
+      event.preventDefault();
+      axios__WEBPACK_IMPORTED_MODULE_3___default.a.put("/api/posts/".concat(id, "/delete")).then(function (response) {
+        console.log('post deleted'); // TODO reload with message
+
+        location.reload();
+      })["catch"](function (error) {
+        _this4.setState({
+          errors: error.response.data.errors
+        });
+      });
+    }
+  }, {
     key: "render",
     value: function render() {
+      var _this5 = this;
+
       var topic = this.state.topic;
       var section = this.state.section;
       var posts = this.state.posts;
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, section.title, " : ", topic.title), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, topic.content), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, posts.map(function (post) {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, section.title, " : ", topic.title), topic.is_hidden || !topic.is_published ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: 'is-hidden'
+      }, "This topic's content was deleted.") : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, topic.content), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        onClick: this.handleDeletionWarning.bind(this, true, 'topic')
+      }, "Delete"), " ", this.state.deletionWarning === true && this.state.deletionType === 'topic' ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_DeletionWarning__WEBPACK_IMPORTED_MODULE_4__["default"], {
+        type: 'topic',
+        deletionMethod: this.handleTopicDeletion,
+        visibilityMethod: this.handleDeletionWarning,
+        id: topic.id
+      }) : null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, posts.map(function (post) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
           key: post.id
-        }, post.content, post.children !== null ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, post.children.map(function (reply) {
+        }, post.is_hidden || !post.is_published ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: 'is-hidden'
+        }, "This post was deleted.") : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, post.content, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+          onClick: _this5.handleDeletionWarning.bind(_this5, true, 'post'),
+          value: post.id
+        }, "Delete post"), _this5.state.deletionWarning === true && _this5.state.deletionType === 'post' ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_DeletionWarning__WEBPACK_IMPORTED_MODULE_4__["default"], {
+          type: 'post',
+          deletionMethod: _this5.handlePostDeletion,
+          visibilityMethod: _this5.handleDeletionWarning,
+          id: post.id
+        }) : null), post.children !== null ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, post.children.map(function (reply) {
           return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
             key: reply.id
-          }, reply.content);
+          }, reply.is_hidden || !reply.is_published ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+            className: 'is-hidden'
+          }, "This reply was deleted.") : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, reply.content, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+            onClick: _this5.handleDeletionWarning.bind(_this5, true, 'reply'),
+            value: reply.id
+          }, "Delete reply"), _this5.state.deletionWarning === true && _this5.state.deletionType === 'reply' ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_DeletionWarning__WEBPACK_IMPORTED_MODULE_4__["default"], {
+            type: 'reply',
+            deletionMethod: _this5.handlePostDeletion,
+            visibilityMethod: _this5.handleDeletionWarning,
+            id: reply.id
+          }) : null));
         })) : null);
-      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-        onClick: this.handleDeletionWarning.bind(this),
-        value: true
-      }, "Delete"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
         to: "/topics/".concat(topic.id, "/create-post")
-      }, "Add to the discussion"), this.state.deletionWarning ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Are you sure you want to delete this topic?", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-        onClick: this.handleTopicDeletion,
-        value: topic.id
-      }, "Yes, delete"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-        onClick: this.handleDeletionWarning.bind(this),
-        value: false
-      }, "No, nevermind"))) : null);
+      }, "Add to the discussion"));
     }
   }]);
 

@@ -56,6 +56,23 @@ class PostController extends BaseController
     }
 
     /**
+     * Soft deletes a post by hiding it from the front-end and API responses.
+     *
+     * @param $id Post identifier.
+     * @return JsonResponse
+     */
+    public function destroy($id)
+    {
+        $post = Post::find($id);
+        $post->is_hidden = true;
+        $post->is_published = false;
+        $post->hidden_at = now();
+        $post->save();
+
+        return response()->json('Post deleted!');
+    }
+
+    /**
      * Gets all replies to a specific post.
      * If you only want a list of all children to a specific post use this route.
      * If you want a list of all messages on a topic use @see TopicController::getPosts().

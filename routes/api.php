@@ -51,7 +51,8 @@ Route::prefix('posts')->group(function() {
     Route::post('/', 'API\PostController@create');
     Route::get('{id}', 'API\PostController@get');
     Route::put('{id}', 'API\PostController@update'); // TODO
-    Route::delete('{id}', 'API\PostController@delete'); // TODO - no need to consider cascading
+    Route::put('{id}/delete', 'API\PostController@destroy');
+    Route::put('{id}', 'API\PostController@unpublish'); // TODO
     Route::get('{id}/replies', 'API\PostController@getReplies');
 });
 

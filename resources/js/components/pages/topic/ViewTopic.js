@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { getRepliesByTopicId, getSectionBySlug, getTopicById } from "../../../utils";
 import axios from "axios";
+import DeletionWarning from "../../DeletionWarning";
 
 class ViewTopic extends Component {
     constructor (props) {
@@ -11,8 +12,11 @@ class ViewTopic extends Component {
             section: {},
             posts: [],
             deletionWarning: false,
+            deletionType: 'topic',
             errors: [] // TODO - show errors somewhere!
         }
+
+        this.handleDeletionWarning = this.handleDeletionWarning.bind(this);
     }
 
     componentDidMount () {
@@ -33,18 +37,36 @@ class ViewTopic extends Component {
         });
     }
 
-    handleDeletionWarning(event) {
+    handleDeletionWarning(bool, type, event) {
+        event.preventDefault();
         this.setState({
-            deletionWarning: event.target.value,
+            deletionWarning: bool,
+            deletionType: type
         })
     }
 
-    handleTopicDeletion(event) {
+    handleTopicDeletion(id, event) {
         event.preventDefault();
 
-        axios.put(`/api/topics/${event.target.value}/delete`)
+        axios.put(`/api/topics/${id}/delete`)
             .then(response => {
                 console.log('deleted'); // TODO - redirect with a message
+                location.reload();
+            })
+            .catch(error => {
+                this.setState({
+                    errors: error.response.data.errors
+                });
+            });
+    }
+
+    handlePostDeletion(id, event) {
+        event.preventDefault();
+
+        axios.put(`/api/posts/${id}/delete`)
+            .then(response => {
+                console.log('post deleted'); // TODO reload with message
+                location.reload();
             })
             .catch(error => {
                 this.setState({
@@ -60,16 +82,72 @@ class ViewTopic extends Component {
         return (
             <div>
                 <h1>{section.title} : {topic.title}</h1>
-                <p>{topic.content}</p>
+                {topic.is_hidden || !topic.is_published ?
+                    <div className={'is-hidden'}>
+                        This topic's content was deleted.
+                    </div>
+                    :
+                    <div>
+                        <p>{topic.content}</p>
+                        <button onClick={this.handleDeletionWarning.bind(this, true, 'topic')}>Delete</button> {/* TODO - only show for mods/admin */}
+                        {this.state.deletionWarning === true && this.state.deletionType === 'topic' ?
+                            <DeletionWarning
+                                type={'topic'}
+                                deletionMethod={this.handleTopicDeletion}
+                                visibilityMethod={this.handleDeletionWarning}
+                                id={topic.id}
+                            />
+                        : null}
+                    </div>
+                }
                 <ul>
                     {posts.map(post => (
                         <li key={post.id}>
-                            {post.content}
+                            {post.is_hidden || !post.is_published ?
+                                <div className={'is-hidden'}>
+                                    This post was deleted.
+                                </div>
+                                :
+                                <div>
+                                    {post.content}
+                                    <button onClick={this.handleDeletionWarning.bind(this, true, 'post')}
+                                            value={post.id}>Delete post
+                                    </button>
+                                    {this.state.deletionWarning === true && this.state.deletionType === 'post' ?
+                                        <DeletionWarning
+                                            type={'post'}
+                                            deletionMethod={this.handlePostDeletion}
+                                            visibilityMethod={this.handleDeletionWarning}
+                                            id={post.id}
+                                        />
+                                    : null}
+                                </div>
+                            }
                             {post.children !== null ?
                                 <ul>
                                     {post.children.map(reply => (
                                         <li key={reply.id}>
-                                            {reply.content}
+                                            {reply.is_hidden || !reply.is_published ?
+                                                <div className={'is-hidden'}>
+                                                    This reply was deleted.
+                                                </div>
+                                                :
+                                                <div>
+                                                    {reply.content}
+                                                    <button
+                                                        onClick={this.handleDeletionWarning.bind(this, true, 'reply')}
+                                                        value={reply.id}>Delete reply
+                                                    </button>
+                                                    {this.state.deletionWarning === true && this.state.deletionType === 'reply' ?
+                                                        <DeletionWarning
+                                                            type={'reply'}
+                                                            deletionMethod={this.handlePostDeletion}
+                                                            visibilityMethod={this.handleDeletionWarning}
+                                                            id={reply.id}
+                                                        />
+                                                    : null}
+                                                </div>
+                                            }
                                         </li>
                                     ))}
                                 </ul>
@@ -77,17 +155,16 @@ class ViewTopic extends Component {
                         </li>
                     ))}
                 </ul>
-                <button onClick={this.handleDeletionWarning.bind(this)} value={true}>Delete</button>
                 <Link to={`/topics/${topic.id}/create-post`}>Add to the discussion</Link>
-                {this.state.deletionWarning ?
-                    <div>
-                        Are you sure you want to delete this topic?
-                        <div>
-                            <button onClick={this.handleTopicDeletion} value={topic.id}>Yes, delete</button>
-                            <button onClick={this.handleDeletionWarning.bind(this)} value={false}>No, nevermind</button>
-                        </div>
-                    </div>
-                : null}
+                {/*{this.state.deletionWarning ?*/}
+                {/*    <div>*/}
+                {/*        Are you sure you want to delete this topic?*/}
+                {/*        <div>*/}
+                {/*            <button onClick={this.handleTopicDeletion} value={topic.id}>Yes, delete</button>*/}
+                {/*            <button onClick={this.handleTopicDeletionWarning.bind(this)} value={false}>No, nevermind</button>*/}
+                {/*        </div>*/}
+                {/*    </div>*/}
+                {/*: null}*/}
             </div>
         )
     }
