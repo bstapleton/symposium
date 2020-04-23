@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { getRepliesByTopicId, getSectionBySlug, getTopicById } from "../../../utils";
 import axios from "axios";
 import DeletionWarning from "../../DeletionWarning";
+import TextBox from "../../TextBox";
 
 class ViewTopic extends Component {
     constructor (props) {
@@ -156,15 +157,6 @@ class ViewTopic extends Component {
                     ))}
                 </ul>
                 <Link to={`/topics/${topic.id}/create-post`}>Add to the discussion</Link>
-                {/*{this.state.deletionWarning ?*/}
-                {/*    <div>*/}
-                {/*        Are you sure you want to delete this topic?*/}
-                {/*        <div>*/}
-                {/*            <button onClick={this.handleTopicDeletion} value={topic.id}>Yes, delete</button>*/}
-                {/*            <button onClick={this.handleTopicDeletionWarning.bind(this)} value={false}>No, nevermind</button>*/}
-                {/*        </div>*/}
-                {/*    </div>*/}
-                {/*: null}*/}
             </div>
         )
     }

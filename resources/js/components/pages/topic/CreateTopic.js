@@ -1,21 +1,17 @@
-import axios from 'axios';
 import React, { Component } from 'react';
-import {getSectionBySlug} from "../../../utils";
+import { getSectionBySlug } from "../../../utils";
+import CreateTopicForm from "../../forms/CreateTopicForm";
 
 class CreateTopic extends Component {
     constructor (props) {
         super(props);
         this.state = {
-            section: {},
-            title: '',
-            content: '',
-            errors: []
+            section: {
+                id: 0
+            },
         }
 
-        this.handleFieldChange = this.handleFieldChange.bind(this);
-        this.handleCreateNewTopic = this.handleCreateNewTopic.bind(this);
-        this.hasErrorFor = this.hasErrorFor.bind(this);
-        this.renderErrorFor = this.renderErrorFor.bind(this);
+        this.redirectOnSuccess = this.redirectOnSuccess.bind(this);
     }
 
     componentDidMount() {
@@ -26,76 +22,20 @@ class CreateTopic extends Component {
         });
     }
 
-    handleFieldChange(event) {
-        this.setState({
-            [event.target.name]: event.target.value
-        });
-    }
-
-    handleCreateNewTopic(event) {
-        event.preventDefault();
-
+    redirectOnSuccess(url) {
         const { history } = this.props;
 
-        const topic = {
-            section_id: this.state.section.id,
-            title: this.state.title,
-            content: this.state.content
-        };
-
-        axios.post('/api/topics', topic)
-            .then(response => {
-                console.log(response);
-                history.push(`/topics/${response.data}`);
-            })
-            .catch(error => {
-                this.setState({
-                    errors: error.response.data.errors
-                });
-            });
-    }
-
-    hasErrorFor(field) {
-        return !!this.state.errors[field];
-    }
-
-    renderErrorFor(field) {
-        if (this.hasErrorFor(field)) {
-            return(
-                <span className={'invalid-feedback'}>
-                    <strong>{this.state.errors[field][0]}</strong>
-                </span>
-            )
-        }
+        history.push(url);
     }
 
     render() {
         return(
             <div>
                 <p>Fill out the form</p>
-                <form onSubmit={this.handleCreateNewTopic}>
-                    <div>
-                        <input
-                            type={'text'}
-                            name={'title'}
-                            id={'title'}
-                            value={this.state.title}
-                            onChange={this.handleFieldChange}
-                        />
-                        {this.renderErrorFor('title')}
-                    </div>
-                    <div>
-                        <textarea
-                            name={'content'}
-                            id={'content'}
-                            value={this.state.content}
-                            rows={'5'}
-                            onChange={this.handleFieldChange}
-                        />
-                        {this.renderErrorFor('content')}
-                    </div>
-                    <button>Create</button>
-                </form>
+                <CreateTopicForm
+                    sectionId={this.state.section.id}
+                    successMethod={this.redirectOnSuccess}
+                />
             </div>
         );
     }
