@@ -8,6 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class Section extends Model
 {
     /**
+     * @var string[] Data that can be filled.
+     */
+    protected $fillable = ['title', 'slug', 'icon_url', 'description', 'parent_section_id'];
+
+    /**
      * A Section has many Topics.
      *
      * @return Collection

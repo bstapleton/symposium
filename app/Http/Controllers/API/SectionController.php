@@ -3,7 +3,10 @@
 namespace App\Http\Controllers\API;
 
 use App\Section;
+use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
+use Cocur\Slugify\Slugify;
+use phpDocumentor\Reflection\Types\Integer;
 
 /**
  * Class SectionController
@@ -50,6 +53,25 @@ class SectionController extends BaseController
         } else {
             return Section::where('slug', $uniqueIdentifier)->first()->toJson();
         }
+    }
+
+    public function create(Request $request)
+    {
+        $validatedData = $request->validate([
+            'title' => 'required',
+        ]);
+
+        $slugify = new Slugify();
+
+        $section = Section::create([
+            'title' => $validatedData['title'],
+            'slug' => $slugify->slugify($validatedData['title']),
+            'description' => $request['description'],
+            'parent_section_id' => intval($request['parent_section_id']),
+            'icon_url' => $request['icon_url'] !== '' ? '/images/icons/' . $request['icon_url'] . '.svg' : null,
+        ]);
+
+        return response()->json($section->slug);
     }
 
     /**
