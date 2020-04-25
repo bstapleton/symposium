@@ -18,8 +18,3 @@
         src: $src;
     }
 }
-
-@include font-face($brand-default-font-light, fonts/BlissLight);
-@include font-face($brand-default-font, fonts/BlissRegular);
-@include font-face($brand-default-font-medium, fonts/BlissMedium);
-@include font-face($brand-default-font-bold, fonts/BlissBold);

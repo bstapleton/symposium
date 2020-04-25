@@ -1,10 +1,10 @@
 :root {
-    font-family: $brand-default-font, $webSafe;
+    font-family: 'Roboto', sans-serif;
     font-size: $defaultFontSize;
 }
 
 body {
-    font-family: $brand-default-font, $webSafe;
+    font-family: 'Roboto', sans-serif;
     font-size: $defaultFontSize;
 }
 
@@ -21,7 +21,7 @@ h1,
 h2,
 h3,
 h4 {
-    font-family: $brand-default-font-medium;
+    font-family: 'Lato', sans-serif;
     font-weight: 300;
     color: $primary;
 
@@ -55,7 +55,7 @@ h4 {
 
 h1.page-title {
     color: $primary;
-    font-family: $brand-default-font-light;
+    font-family: 'Lato', sans-serif;
     font-weight: 200;
     text-transform: uppercase;
     letter-spacing: $defaultUnit * 0.75;
@@ -119,10 +119,10 @@ a {
     }
 
     &:hover {
-        color: $grey-900;
+        color: $grey-100;
 
         .icon svg {
-            fill: $grey-900;
+            fill: $grey-100;
         }
     }
 }

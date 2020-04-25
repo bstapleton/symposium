@@ -1,6 +1,6 @@
-$primary: #84c446;
-$secondary: #84c446;
-$tertiary: #84c446;
+$primary: #be95c4;
+$secondary: #e0b1cb;
+$tertiary: #5e548e;
 
 @import '../../variables';
 @import '../../mixins/box-sizing';
@@ -18,11 +18,11 @@ $tertiary: #84c446;
 @import '../../mixins/text';
 @import '../../mixins/opacity';
 
-@import '../../main';
+@import '../../app';
 
 body {
-    background-color: $white;
-    color: $grey-900;
+    background-color: #231942;
+    color: $grey-100;
 }
 
 .site-header {

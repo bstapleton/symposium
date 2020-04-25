@@ -8,8 +8,20 @@ import CreateSection from './pages/section/CreateSection';
 import ViewTopic from "./pages/topic/ViewTopic";
 import CreateTopic from "./pages/topic/CreateTopic";
 import CreatePost from "./pages/post/CreatePost";
+import WebFont from 'webfontloader';
 
 class App extends Component {
+    constructor(props) {
+        super(props);
+        require('../../sass/themes/dark/dark.scss');
+
+        WebFont.load({
+            google: {
+                families: ['Roboto:400,700,400i', 'Lato:300'],
+            }
+        });
+    }
+
     render () {
         return (
             <BrowserRouter>

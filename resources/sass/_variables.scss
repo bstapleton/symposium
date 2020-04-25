@@ -1,19 +1,190 @@
-// Body
-$body-bg: #f8fafc;
+// Default unit of measurement for layout and components
+$defaultUnit: 8px;
+$defaultFontSize: 1em;
 
-// Typography
-$font-family-sans-serif: 'Nunito', sans-serif;
-$font-size-base: 0.9rem;
-$line-height-base: 1.6;
+// Mobile menu width
+$menuWidth: $defaultUnit * 30;
+$sidebarWidth: $defaultUnit * 40;
 
-// Colors
-$blue: #3490dc;
-$indigo: #6574cd;
-$purple: #9561e2;
-$pink: #f66d9b;
-$red: #e3342f;
-$orange: #f6993f;
-$yellow: #ffed4a;
-$green: #38c172;
-$teal: #4dc0b5;
-$cyan: #6cb2eb;
+// Responsive grid variables
+$breakpoint-xs: 0;
+$breakpoint-sm: 768px;
+$breakpoint-md: 992px;
+$breakpoint-lg: 1200px;
+$breakpoint-xl: 1500px;
+
+$grid-breakpoints: (
+  xs: 0,
+  sm: 768px,
+  md: 992px,
+  lg: 1200px,
+  xl: 1500px
+) !default;
+
+$container-max-widths: (
+  sm: 736px,
+  md: 944px,
+  lg: 1168px,
+  xl: 1440px
+) !default;
+
+// Vendor prefix values
+$prefix: "";
+$animation-prefix-list: "webkit", "moz", "ms", "o", "";
+
+// z-index layers
+$layer1: 10;
+$layer2: 20;
+$layer3: 30;
+$layer4: 40;
+$layer5: 50;
+
+// Shadow settings
+$shadow-key-umbra-opacity: 0.20 !default;
+$shadow-key-penumbra-opacity: 0.14 !default;
+$shadow-ambient-shadow-opacity: 0.12 !default;
+
+$font-size: 1rem !default;
+
+// stylelint-disable
+$white:    #fff !default;
+$grey-100: #f8f9fa !default;
+$grey-200: #e9ecef !default;
+$grey-300: #dee2e6 !default;
+$grey-400: #ced4da !default;
+$grey-500: #adb5bd !default;
+$grey-600: #6c757d !default;
+$grey-700: #495057 !default;
+$grey-800: #343a40 !default;
+$grey-900: #212529 !default;
+$black:    #000 !default;
+
+$greys: () !default;
+$greys: map-merge((
+    "100": $grey-100,
+    "200": $grey-200,
+    "300": $grey-300,
+    "400": $grey-400,
+    "500": $grey-500,
+    "600": $grey-600,
+    "700": $grey-700,
+    "800": $grey-800,
+    "900": $grey-900
+), $greys);
+
+$blue:      #3b517c !default;
+$indigo:    #3f00ff !default;
+$purple:    #6f42c1 !default;
+$pink:      #e83e8c !default;
+$red:       #dc3545 !default;
+$orange:    #fd7e14 !default;
+$yellow:    #ffc107 !default;
+$green:     #28a745 !default;
+$teal:      #20c997 !default;
+$cyan:      #17a2b8 !default;
+
+$success:   $green;
+$warning:   $yellow;
+$danger:    $red;
+$info:      $blue;
+
+$colors: () !default;
+$colors: map-merge((
+    "primary":      $primary,
+    "secondary":    $secondary,
+    "tertiary":     $tertiary,
+    "blue":         $blue,
+    "indigo":       $indigo,
+    "purple":       $purple,
+    "pink":         $pink,
+    "red":          $red,
+    "orange":       $orange,
+    "yellow":       $yellow,
+    "green":        $green,
+    "teal":         $teal,
+    "cyan":         $cyan,
+    "white":        $white,
+    "black":        $black
+), $colors);
+
+$themeColors: () !default;
+$themeColors: map-merge((
+    "primary":      $primary,
+    "secondary":    $secondary,
+    "tertiary":     $tertiary,
+    "success":      $success,
+    "warning":      $warning,
+    "danger":       $danger,
+    "info":         $info
+), $themeColors);
+
+$scales: () !default;
+$scales: map-merge((
+    "xxs": 0.5,
+    "xs": 0.65,
+    "small": 0.8,
+    "default": 1,
+    "large": 1.5,
+    "xl": 2,
+    "xxl": 3
+), $scales);
+
+$dimensions: (
+    "top",
+    "right",
+    "bottom",
+    "left",
+    "all"
+) !default;
+
+$borderStyles: (
+    "solid",
+    "dashed",
+    "dotted"
+) !default;
+
+$alignments: (
+    "left",
+    "center",
+    "right"
+);
+
+$textWeights: (
+    300,
+    400,
+    700
+);
+
+$textStyles: (
+    "italic",
+    "normal",
+    "oblique"
+);
+
+$line-height-base: 1.5 !default;
+
+$spacers: (
+    "default": 0,
+    "xxs": 1px,
+    "xs": ($defaultUnit * .25),
+    "small": ($defaultUnit * .5),
+    "large": $defaultUnit,
+    "xl": ($defaultUnit * 1.5),
+    "xxl": ($defaultUnit * 3)
+);
+
+$flexDirections: (
+    "row",
+    "row-reverse",
+    "column",
+    "column-reverse"
+);
+
+$orderedListItemStyles: (
+    "decimal",
+    "decimal-leading-zero",
+    "lower-roman",
+    "upper-roman",
+    "lower-alpha",
+    "upper-alpha"
+);

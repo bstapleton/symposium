@@ -66,17 +66,17 @@ $cases: "upper", "lower";
         @each $weight in $textWeights {
             @if $weight == 300 {
                 .#{$breakpoint}\:text-weight\:light {
-                    font-family: $brand-default-font-light, $webSafe;
+                    font-family: 'Lato', sans-serif;
                     font-weight: lighter;
                 }
             } @else if $weight == 400 {
                 .#{$breakpoint}\:text-weight\:normal {
-                    font-family: $brand-default-font-medium, $webSafe;
+                    font-family: 'Roboto', sans-serif;
                     font-weight: normal;
                 }
             } @else {
                 .#{$breakpoint}\:text-weight\:bold {
-                    font-family: $brand-default-font-bold, $webSafe;
+                    font-family: 'Roboto', sans-serif;
                     font-weight: bold;
                 }
             }
@@ -86,17 +86,17 @@ $cases: "upper", "lower";
         @each $weight in $textWeights {
             @if $weight == 300 {
                 .text-weight\:light {
-                    font-family: $brand-default-font-light, $webSafe;
+                    font-family: 'Lato', sans-serif;
                     font-weight: lighter;
                 }
             } @else if $weight == 400 {
                 .text-weight\:normal {
-                    font-family: $brand-default-font-medium, $webSafe;
+                    font-family: 'Roboto', sans-serif;
                     font-weight: normal;
                 }
             } @else {
                 .text-weight\:bold {
-                    font-family: $brand-default-font-bold, $webSafe;
+                    font-family: 'Roboto', sans-serif;
                     font-weight: bold;
                 }
             }

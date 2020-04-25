@@ -1,8 +1,78 @@
-// Fonts
-@import url('https://fonts.googleapis.com/css?family=Nunito');
+$primary: #be95c4;
+$secondary: #e0b1cb;
+$tertiary: #5e548e;
 
-// Variables
 @import 'variables';
+@import 'mixins/box-sizing';
+@import 'mixins/flex';
+@import 'mixins/font';
+@import 'mixins/gradient';
+@import 'mixins/grid';
+@import 'mixins/shadow';
+@import 'mixins/string';
+@import 'mixins/margin';
+@import 'mixins/padding';
+@import 'mixins/border';
+@import 'mixins/animation';
+@import 'mixins/background';
+@import 'mixins/text';
+@import 'mixins/opacity';
 
-// Bootstrap
-@import '~bootstrap/scss/bootstrap';
+@import 'utilities/global';
+@import 'utilities/positioning';
+@import 'utilities/display';
+@import 'utilities/shadows';
+
+@include margin;
+@include padding;
+@include text-scale;
+@include text-color;
+@include text-case;
+@include text-align;
+@include text-weight;
+@include text-style;
+@include line-height;
+@include letter-spacing;
+@include border-radius;
+@include border-color;
+@include border-width;
+@include border-style;
+@include bg;
+@include opacity;
+@include flex-container;
+@include flex-direction;
+@include flex-grow;
+@include flex-shrink;
+@include flex-basis;
+
+@each $breakpoint, $minimum in $grid-breakpoints {
+    @media (min-width: #{$minimum}) {
+        @include margin(#{$breakpoint});
+        @include padding(#{$breakpoint});
+        @include text-scale(#{$breakpoint});
+        @include text-color(#{$breakpoint});
+        @include text-align(#{$breakpoint});
+        @include text-weight(#{$breakpoint});
+        @include line-height(#{$breakpoint});
+        @include letter-spacing(#{$breakpoint});
+        @include border-radius(#{$breakpoint});
+        @include border-color(#{$breakpoint});
+        @include border-width(#{$breakpoint});
+        @include border-style(#{$breakpoint});
+        @include flex-container(#{$breakpoint});
+        @include flex-direction(#{$breakpoint});
+        @include flex-basis(#{$breakpoint});
+    }
+}
+
+@import 'layout/flex-grid';
+@import 'layout/mobile-menu';
+@import 'layout/brand-bar';
+@import 'layout/primary-navigation';
+@import 'layout/site-footer';
+@import 'layout/sidebar';
+@import 'layout/dashboard';
+@import 'layout/login';
+@import 'layout/simple';
+
+@import 'components/all';

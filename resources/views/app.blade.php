@@ -7,7 +7,10 @@
         <title>Symposium</title>
 
         <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300&family=Roboto:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+
+        <!-- Styles -->
+{{--        <link href="{{ asset('css/app.css') }}" rel="stylesheet">--}}
     </head>
     <body>
         <div class="flex-center position-ref full-height">
