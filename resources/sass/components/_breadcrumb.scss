@@ -3,10 +3,10 @@
     list-style: none;
     margin-bottom: 1.5rem;
     padding: 0;
+    display: flex;
 }
 
 .breadcrumb {
-    float: left;
     background: none;
 
     &:not(:last-child) {

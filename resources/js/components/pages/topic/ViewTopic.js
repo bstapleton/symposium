@@ -81,72 +81,98 @@ class ViewTopic extends Component {
         const { section } = this.state;
         const { posts } = this.state;
         return (
-            <div>
-                <h1>{section.title} : {topic.title}</h1>
+            <div className={'wrapper margin--center'}>
+                <ul className={'breadcrumbs'}>
+                    <li className={'breadcrumb'}><Link to={'/'} className={'breadcrumb__link'}>Home</Link></li>
+                    <li className={'breadcrumb'}><Link to={`/sections/${section.slug}`} className={'breadcrumb__link'}>{section.title}</Link></li>
+                    <li className={'breadcrumb'}>{topic.title}</li>
+                </ul>
                 {topic.is_hidden || !topic.is_published ?
-                    <div className={'is-hidden'}>
+                    <div className={'card card--noHeader card--noFooter card--warning'}>
                         This topic's content was deleted.
                     </div>
                     :
-                    <div>
-                        <p>{topic.content}</p>
-                        <button onClick={this.handleDeletionWarning.bind(this, true, 'topic')}>Delete</button> {/* TODO - only show for mods/admin */}
-                        {this.state.deletionWarning === true && this.state.deletionType === 'topic' ?
-                            <DeletionWarning
-                                type={'topic'}
-                                deletionMethod={this.handleTopicDeletion}
-                                visibilityMethod={this.handleDeletionWarning}
-                                id={topic.id}
-                            />
-                        : null}
+                    <div className={'card card--default'}>
+                        <header className={'card__header'}>
+                            <h1 className={'card__heading'}>
+                                {topic.title}
+                            </h1>
+                        </header>
+                        <div className={'card__content'}>
+                            <p>{topic.content}</p>
+                        </div>
+                        <footer className={'card__footer'}>
+                            <button className={'button button--danger'} onClick={this.handleDeletionWarning.bind(this, true, 'topic')}>Delete Topic</button> {/* TODO - only show for mods/admin */}
+                            {this.state.deletionWarning === true && this.state.deletionType === 'topic' ?
+                                <DeletionWarning
+                                    type={'topic'}
+                                    deletionMethod={this.handleTopicDeletion}
+                                    visibilityMethod={this.handleDeletionWarning}
+                                    id={topic.id}
+                                />
+                            : null}
+                        </footer>
                     </div>
                 }
-                <ul>
+                <ul className={'replies'}>
                     {posts.map(post => (
                         <li key={post.id}>
+                            <a name={post.id} />
                             {post.is_hidden || !post.is_published ?
-                                <div className={'is-hidden'}>
-                                    This post was deleted.
+                                <div className={'card card--noHeader card--noFooter card--warning'}>
+                                    <div className={'card__content'}>
+                                        This post was deleted.
+                                    </div>
                                 </div>
                                 :
-                                <div>
-                                    {post.content}
-                                    <button onClick={this.handleDeletionWarning.bind(this, true, 'post')}
-                                            value={post.id}>Delete post
-                                    </button>
-                                    {this.state.deletionWarning === true && this.state.deletionType === 'post' ?
-                                        <DeletionWarning
-                                            type={'post'}
-                                            deletionMethod={this.handlePostDeletion}
-                                            visibilityMethod={this.handleDeletionWarning}
-                                            id={post.id}
-                                        />
-                                    : null}
+                                <div className={'card card--noHeader card--default'}>
+                                    <div className={'card__content'}>
+                                        {post.content}
+                                    </div>
+                                    <footer className={'card__footer'}>
+                                        <button className={'button button--danger'} onClick={this.handleDeletionWarning.bind(this, true, 'post')} value={post.id}>
+                                            Delete post
+                                        </button>
+                                        {this.state.deletionWarning === true && this.state.deletionType === 'post' ?
+                                            <DeletionWarning
+                                                type={'post'}
+                                                deletionMethod={this.handlePostDeletion}
+                                                visibilityMethod={this.handleDeletionWarning}
+                                                id={post.id}
+                                            />
+                                        : null}
+                                    </footer>
                                 </div>
                             }
                             {post.children !== null ?
-                                <ul>
+                                <ul className={'replies'}>
                                     {post.children.map(reply => (
                                         <li key={reply.id}>
                                             {reply.is_hidden || !reply.is_published ?
-                                                <div className={'is-hidden'}>
-                                                    This reply was deleted.
+                                                <div className={'card card--noHeader card--noFooter card--warning'}>
+                                                    <div className={'card__content'}>
+                                                        This reply was deleted.
+                                                    </div>
                                                 </div>
                                                 :
-                                                <div>
-                                                    {reply.content}
-                                                    <button
-                                                        onClick={this.handleDeletionWarning.bind(this, true, 'reply')}
-                                                        value={reply.id}>Delete reply
-                                                    </button>
-                                                    {this.state.deletionWarning === true && this.state.deletionType === 'reply' ?
-                                                        <DeletionWarning
-                                                            type={'reply'}
-                                                            deletionMethod={this.handlePostDeletion}
-                                                            visibilityMethod={this.handleDeletionWarning}
-                                                            id={reply.id}
-                                                        />
-                                                    : null}
+                                                <div className={'card card--noHeader card--default'}>
+                                                    <div className={'card__content'}>
+                                                        {reply.content}
+                                                    </div>
+                                                    <footer className={'card__footer'}>
+                                                        <button className={'button button--danger'}
+                                                            onClick={this.handleDeletionWarning.bind(this, true, 'reply')}
+                                                            value={reply.id}>Delete reply
+                                                        </button>
+                                                        {this.state.deletionWarning === true && this.state.deletionType === 'reply' ?
+                                                            <DeletionWarning
+                                                                type={'reply'}
+                                                                deletionMethod={this.handlePostDeletion}
+                                                                visibilityMethod={this.handleDeletionWarning}
+                                                                id={reply.id}
+                                                            />
+                                                        : null}
+                                                    </footer>
                                                 </div>
                                             }
                                         </li>

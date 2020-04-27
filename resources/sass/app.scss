@@ -1,6 +1,7 @@
-$primary: #be95c4;
-$secondary: #e0b1cb;
-$tertiary: #5e548e;
+$primary: #bdf1af;
+$secondary: #659059;
+$tertiary: #e08b5a;
+$background: #153935;
 
 @import 'variables';
 @import 'mixins/box-sizing';
@@ -76,3 +77,23 @@ $tertiary: #5e548e;
 @import 'layout/simple';
 
 @import 'components/all';
+
+body {
+    background-color: $background;
+    @if (lightness($background) > 50) {
+        color: $grey-900;
+    }
+    @else {
+        color: $grey-100;
+    }
+}
+
+.site-header {
+    li a {
+        color: $grey-900;
+
+        &:hover {
+            background-color: $primary;
+        }
+    }
+}

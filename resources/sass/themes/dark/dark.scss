@@ -1,36 +1,6 @@
-$primary: #be95c4;
-$secondary: #e0b1cb;
-$tertiary: #5e548e;
-
-@import '../../variables';
-@import '../../mixins/box-sizing';
-@import '../../mixins/flex';
-@import '../../mixins/font';
-@import '../../mixins/gradient';
-@import '../../mixins/grid';
-@import '../../mixins/shadow';
-@import '../../mixins/string';
-@import '../../mixins/margin';
-@import '../../mixins/padding';
-@import '../../mixins/border';
-@import '../../mixins/animation';
-@import '../../mixins/background';
-@import '../../mixins/text';
-@import '../../mixins/opacity';
+$primary: #ff7844;
+$secondary: #a64942;
+$tertiary: #53354a;
+$background: #1b1f3a;
 
 @import '../../app';
-
-body {
-    background-color: #231942;
-    color: $grey-100;
-}
-
-.site-header {
-    li a {
-        color: $grey-900;
-
-        &:hover {
-            background-color: $primary;
-        }
-    }
-}

@@ -21,8 +21,8 @@ class DeletionWarning extends Component {
                 : null}
                 Are you sure you want to delete this {this.props.type}?
                 <div>
-                    <button onClick={this.deleteEntity.bind(this)}>Yes, delete</button>
-                    <button onClick={this.dismissWarning.bind(this)} value={false}>No, nevermind</button>
+                    <button className={'button button--danger'} onClick={this.deleteEntity.bind(this)}>Yes, delete</button>
+                    <button className={'button button--primary'} onClick={this.dismissWarning.bind(this)} value={false}>No, nevermind</button>
                 </div>
             </div>
         )

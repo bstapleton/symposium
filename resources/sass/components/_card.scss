@@ -1,3 +1,5 @@
+$cardRadius: $defaultUnit;
+
 .card {
     margin-bottom: $defaultUnit * 3;
     display: flex;
@@ -10,26 +12,35 @@
 
 .card__header,
 .card__content {
-    background: $grey-100;
+    @if (lightness($background) > 50) {
+        background: scale-color($background, $lightness: -10%);
+    }
+    @else {
+        background: scale-color($background, $lightness: 10%);
+    }
+    background: map-get($themeColors, cards);
 }
 
 .card__header {
-    border-radius: $defaultUnit $defaultUnit 0 0;
+    border-radius: $cardRadius $cardRadius 0 0;
     padding: ($defaultUnit * 1.5) ($defaultUnit * 3);
-    border: 1px solid $grey-200;
+    @if (lightness($background) > 50) {
+        border: 1px solid $grey-300;
+    }
+    @else {
+        border: 1px solid $grey-800;
+    }
     margin: initial !important;
 }
 
 .card__heading {
     border: none;
-    font-size: $defaultUnit * 2.5;
-    text-transform: uppercase;
     font-family: 'Lato', sans-serif;
     font-weight: 300;
     margin: 0;
     line-height: $defaultUnit * 4;
     display: inline-block;
-    color: $grey-900;
+    color: $primary;
 }
 
 .card__heading__icon {
@@ -38,9 +49,20 @@
 
 .card__content {
     padding: ($defaultUnit * 2) ($defaultUnit * 3);
-    border-left: 1px solid $grey-200;
-    border-right: 1px solid $grey-200;
+    @if (lightness($background) > 50) {
+        border-left: 1px solid $grey-300;
+        border-right: 1px solid $grey-300;
+    }
+    @else {
+        border-left: 1px solid $grey-800;
+        border-right: 1px solid $grey-800;
+    }
+
     flex: 1 1 auto;
+
+    p:only-child {
+        margin: 0;
+    }
 
     p:last-child {
         margin-bottom: 0;
@@ -52,9 +74,15 @@
 }
 
 .card__footer {
-    background: darken($grey-100, 5%);
-    border-radius: 0 0 $defaultUnit $defaultUnit;
-    border: 1px solid $grey-200;
+    border-radius: 0 0 $cardRadius $cardRadius;
+    @if (lightness($background) > 50) {
+        border: 1px solid $grey-300;
+        background: scale-color($background, $lightness: -15%);
+    }
+    @else {
+        border: 1px solid $grey-800;
+        background: scale-color($background, $lightness: 15%);
+    }
     padding: ($defaultUnit * 1.5) ($defaultUnit * 3);
 
     .chip {
@@ -65,14 +93,25 @@
 
 .card--noHeader {
     .card__content {
-        padding-top: $defaultUnit * 3;
+        @if (lightness($background) > 50) {
+            border-top: 1px solid $grey-300;
+        }
+        @else {
+            border-top: 1px solid $grey-800;
+        }
+        border-radius: $cardRadius $cardRadius 0 0;
     }
 }
 
 .card--noFooter {
     .card__content {
-        border-bottom: 1px solid $grey-200;
-        border-radius: 0 0 $defaultUnit $defaultUnit;
+        @if (lightness($background) > 50) {
+            border-bottom: 1px solid $grey-300;
+        }
+        @else {
+            border-bottom: 1px solid $grey-800;
+        }
+        border-radius: 0 0 $cardRadius $cardRadius;
     }
 }
 
@@ -108,6 +147,7 @@
 .card--neutral2,
 .card--warning,
 .card--danger {
+    border-radius: $cardRadius;
     .card__header,
     .card__content,
     .card__footer {

@@ -1,11 +1,22 @@
-$buttonHeight: $defaultUnit * 6;
+$buttonHeight: $defaultUnit * 5;
 $buttonMinWidth: $defaultUnit * 8;
 
 @mixin button {
     @each $color, $value in $themeColors {
         &--#{$color} {
-            color: $white;
             position: relative;
+            @if (lightness($background) > 50) {
+                border-color: $grey-300;
+            }
+            @else {
+                border-color: $grey-800;
+            }
+            @if (lightness($value) > 70) {
+                color: $grey-800;
+            }
+            @else {
+                color: $grey-300;
+            }
             background-color: $value;
             transition: 0.2s box-shadow ease-out, 0.1s background-color ease-in;
 
@@ -14,9 +25,11 @@ $buttonMinWidth: $defaultUnit * 8;
             &.enabled {
                 @if (lightness($value) > 50) {
                     background-color: scale-color($value, $lightness: -20%);
+                    color: $grey-800;
                 }
                 @else {
                     background-color: scale-color($value, $lightness: 20%);
+                    color: $grey-300;
                 }
             }
 
@@ -27,6 +40,7 @@ $buttonMinWidth: $defaultUnit * 8;
             &:active,
             &.enabled {
                 box-shadow: 0 0 0 5px $value;
+                border-color: transparent;
             }
         }
     }
@@ -45,6 +59,7 @@ $buttonMinWidth: $defaultUnit * 8;
     text-transform: uppercase;
     border-radius: $buttonHeight / 2;
     align-items: center;
+    cursor: pointer;
 
     &:hover,
     &:active,

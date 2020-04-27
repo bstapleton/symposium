@@ -115,7 +115,7 @@ $themeColors: map-merge((
     "success":      $success,
     "warning":      $warning,
     "danger":       $danger,
-    "info":         $info
+    "info":         $info,
 ), $themeColors);
 
 $scales: () !default;
