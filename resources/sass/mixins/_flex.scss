@@ -23,6 +23,7 @@
     @if $breakpoint {
         @each $direction in $flexDirections {
             .#{$breakpoint}\:flex-#{$direction} {
+                @include flex;
                 flex-direction: #{$direction};
             }
         }
@@ -30,6 +31,7 @@
     @else {
         @each $direction in $flexDirections {
             .flex-#{$direction} {
+                @include flex;
                 flex-direction: #{$direction};
             }
         }

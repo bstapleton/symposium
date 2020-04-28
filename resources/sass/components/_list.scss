@@ -65,12 +65,7 @@
 }
 
 .list__link {
-    padding: $defaultUnit;
-
-    &:hover,
-    &.current {
-        border-left: ($defaultUnit * 0.5) solid $primary;
-        padding-left: $defaultUnit * 0.5;
-        transition: 0.1s border ease-in-out;
-    }
+    padding: ($defaultUnit * 1.5) ($defaultUnit * 2);
+    text-decoration: none;
+    display: block;
 }

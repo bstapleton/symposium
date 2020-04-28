@@ -26,7 +26,7 @@ class App extends Component {
         return (
             <BrowserRouter>
                 <div>
-                    {/*<Header />*/}
+                    <Header />
                     <Switch>
                         <Route exact path={'/'} component={Home} />
                         <Route exact path={'/sections/:sectionSlug'} component={ViewSection} />

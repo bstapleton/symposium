@@ -68,7 +68,7 @@ $background: #153935;
 
 @import 'layout/flex-grid';
 @import 'layout/mobile-menu';
-@import 'layout/brand-bar';
+@import 'layout/site-header';
 @import 'layout/primary-navigation';
 @import 'layout/site-footer';
 @import 'layout/sidebar';
@@ -96,4 +96,9 @@ body {
             background-color: $primary;
         }
     }
+}
+
+.logo {
+    width: 160px;
+    height: 160px;
 }

@@ -2,11 +2,22 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 
 const Header = () => (
-    <nav className='navbar navbar-expand-md navbar-light navbar-laravel'>
-        <div className='container'>
-            <Link className='navbar-brand' to='/'>Home</Link>
-        </div>
-    </nav>
+    <div className={'wrapper margin--center'}>
+        <header role={'masthead'} className={'flex-row site-masthead'}>
+            <img src={'/images/logo.svg'} className={'logo'} />
+            <h1 className={'text-case:upper site-name letter-spacing:large flex-grow'}>Symposium</h1>
+            <nav className={'primary-navigation'}>
+                <ul className={'list--inline'}>
+                    <li className={'list__item--inline'}>
+                        <Link className='list__link' to='/login'>Login</Link>
+                    </li>
+                    <li className={'list__item--inline'}>
+                        <Link className='list__link' to='/login'>Register</Link>
+                    </li>
+                </ul>
+            </nav>
+        </header>
+    </div>
 )
 
 export default Header

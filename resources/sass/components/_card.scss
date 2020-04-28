@@ -18,7 +18,6 @@ $cardRadius: $defaultUnit;
     @else {
         background: scale-color($background, $lightness: 10%);
     }
-    background: map-get($themeColors, cards);
 }
 
 .card__header {
