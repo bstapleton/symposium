@@ -71632,10 +71632,9 @@ var Home = /*#__PURE__*/function (_Component) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
 /* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../utils */ "./resources/js/utils.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
@@ -71715,7 +71714,7 @@ var CreatePost = /*#__PURE__*/function (_Component) {
         topic_id: this.state.topic.id,
         content: this.state.content
       };
-      axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('/api/posts', post).then(function (response) {
+      axios.post('/api/posts', post).then(function (response) {
         history.push("/topics/".concat(post.topic_id));
       })["catch"](function (error) {
         _this3.setState({
@@ -71732,28 +71731,30 @@ var CreatePost = /*#__PURE__*/function (_Component) {
     key: "renderErrorFor",
     value: function renderErrorFor(field) {
       if (this.hasErrorFor(field)) {
-        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
           className: 'invalid-feedback'
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("strong", null, this.state.errors[field][0]));
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("strong", null, this.state.errors[field][0]));
       }
     }
   }, {
     key: "render",
     value: function render() {
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", null, "You are replying to:"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("pre", null, this.state.topic.content)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", null, "Fill out the form"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("form", {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, this.state.topic.editable ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
         onSubmit: this.handleCreateNewPost
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("textarea", {
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "You are replying to:"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("pre", null, this.state.topic.content)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Fill out the form"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("textarea", {
         name: 'content',
         id: 'content',
         value: this.state.content,
         rows: '5',
         onChange: this.handleFieldChange
-      }), this.renderErrorFor('content')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("button", null, "Create")));
+      }), this.renderErrorFor('content')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", null, "Create")) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "No more posts can be added to this topic as it was last modified more than a year ago. ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+        to: "/topics/".concat(this.state.topic.id)
+      }, "Click here to go back"), "."));
     }
   }]);
 
   return CreatePost;
-}(react__WEBPACK_IMPORTED_MODULE_1__["Component"]);
+}(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
 
 /* harmony default export */ __webpack_exports__["default"] = (CreatePost);
 
@@ -72105,6 +72106,7 @@ var ViewTopic = /*#__PURE__*/function (_Component) {
       posts: [],
       deletionWarning: false,
       deletionType: 'topic',
+      editable: true,
       errors: [] // TODO - show errors somewhere!
 
     };
@@ -72272,9 +72274,9 @@ var ViewTopic = /*#__PURE__*/function (_Component) {
             id: reply.id
           }) : null)));
         })) : null);
-      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+      })), topic.editable ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
         to: "/topics/".concat(topic.id, "/create-post")
-      }, "Add to the discussion"));
+      }, "Add to the discussion") : null);
     }
   }]);
 
@@ -72312,17 +72314,23 @@ var Icons = [{
 /*!*******************************!*\
   !*** ./resources/js/utils.js ***!
   \*******************************/
-/*! exports provided: getAllSections, getSectionBySlug, getTopicsBySectionId, getTopicById, getRepliesByTopicId, handleError */
+/*! exports provided: canTopicBeEdited, getAllSections, getSectionBySlug, getTopicsBySectionId, getTopicById, getRepliesByTopicId, handleError */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "canTopicBeEdited", function() { return canTopicBeEdited; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getAllSections", function() { return getAllSections; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getSectionBySlug", function() { return getSectionBySlug; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getTopicsBySectionId", function() { return getTopicsBySectionId; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getTopicById", function() { return getTopicById; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getRepliesByTopicId", function() { return getRepliesByTopicId; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "handleError", function() { return handleError; });
+var canTopicBeEdited = function canTopicBeEdited(date) {
+  var year = 1000 * 60 * 60 * 24 * 365;
+  var oneYearAgo = Date.now() - year;
+  return Date.parse(date) > oneYearAgo;
+};
 var getAllSections = function getAllSections() {
   return new axios.get('/api/sections').then(function (response) {
     return response;
@@ -72346,6 +72354,7 @@ var getTopicsBySectionId = function getTopicsBySectionId(sectionId) {
 };
 var getTopicById = function getTopicById(id) {
   return new axios.get("/api/topics/".concat(id)).then(function (response) {
+    response.data.editable = canTopicBeEdited(response.data.updated_at);
     return response;
   })["catch"](function (error) {
     handleError(error);

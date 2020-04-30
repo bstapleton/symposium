@@ -1,3 +1,10 @@
+export const canTopicBeEdited = (date) => {
+    const year = 1000 * 60 * 60 * 24 * 365;
+    const oneYearAgo = Date.now() - year;
+
+    return Date.parse(date) > oneYearAgo;
+}
+
 export const getAllSections = () => {
     return new axios.get('/api/sections').then(response => {
         return response;
@@ -24,6 +31,7 @@ export const getTopicsBySectionId = (sectionId) => {
 
 export const getTopicById = (id) => {
     return new axios.get(`/api/topics/${id}`).then(response => {
+        response.data.editable = canTopicBeEdited(response.data.updated_at);
         return response;
     }).catch(error => {
         handleError(error);

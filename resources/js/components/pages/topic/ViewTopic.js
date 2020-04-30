@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { getRepliesByTopicId, getSectionBySlug, getTopicById } from "../../../utils";
+import { canTopicBeEdited, getRepliesByTopicId, getSectionBySlug, getTopicById } from "../../../utils";
 import axios from "axios";
 import DeletionWarning from "../../DeletionWarning";
 import TextBox from "../../TextBox";
@@ -14,6 +14,7 @@ class ViewTopic extends Component {
             posts: [],
             deletionWarning: false,
             deletionType: 'topic',
+            editable: true,
             errors: [] // TODO - show errors somewhere!
         }
 
@@ -182,7 +183,9 @@ class ViewTopic extends Component {
                         </li>
                     ))}
                 </ul>
-                <Link to={`/topics/${topic.id}/create-post`}>Add to the discussion</Link>
+                {topic.editable ?
+                    <Link to={`/topics/${topic.id}/create-post`}>Add to the discussion</Link>
+                : null}
             </div>
         )
     }

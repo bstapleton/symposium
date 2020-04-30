@@ -1,5 +1,5 @@
-import axios from 'axios';
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import { getTopicById } from "../../../utils";
 
 class CreatePost extends Component {
@@ -69,24 +69,28 @@ class CreatePost extends Component {
     render() {
         return(
             <div>
-                <p>You are replying to:</p>
-                <div>
-                    <pre>{this.state.topic.content}</pre>
-                </div>
-                <p>Fill out the form</p>
-                <form onSubmit={this.handleCreateNewPost}>
-                    <div>
-                        <textarea
-                            name={'content'}
-                            id={'content'}
-                            value={this.state.content}
-                            rows={'5'}
-                            onChange={this.handleFieldChange}
-                        />
-                        {this.renderErrorFor('content')}
-                    </div>
-                    <button>Create</button>
-                </form>
+                {this.state.topic.editable ?
+                    <form onSubmit={this.handleCreateNewPost}>
+                        <p>You are replying to:</p>
+                        <div>
+                            <pre>{this.state.topic.content}</pre>
+                        </div>
+                        <p>Fill out the form</p>
+                        <div>
+                            <textarea
+                                name={'content'}
+                                id={'content'}
+                                value={this.state.content}
+                                rows={'5'}
+                                onChange={this.handleFieldChange}
+                            />
+                            {this.renderErrorFor('content')}
+                        </div>
+                        <button>Create</button>
+                    </form>
+                :
+                    <div>No more posts can be added to this topic as it was last modified more than a year ago. <Link to={`/topics/${this.state.topic.id}`}>Click here to go back</Link>.</div>
+                }
             </div>
         );
     }

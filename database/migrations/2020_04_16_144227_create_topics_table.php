@@ -24,6 +24,7 @@ class CreateTopicsTable extends Migration
             $table->boolean('is_sticky')->default(false);
             $table->boolean('is_published')->default(1);
             $table->boolean('is_hidden')->default(0);
+            $table->boolean('is_locked')->default(0);
             $table->dateTime('hidden_at')->nullable();
             $table->boolean('is_announcement')->default(false);
             $table->integer('downvotes')->default(0);
