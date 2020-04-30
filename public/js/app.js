@@ -71937,9 +71937,12 @@ var ViewSection = /*#__PURE__*/function (_Component) {
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
           to: "".concat(baseRoute, "/").concat(topic.id)
         }, topic.title));
-      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+      })), !section.is_locked ?
+      /*#__PURE__*/
+      // TODO - check against user role_id to show as well
+      react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
         to: "/sections/".concat(this.props.match.params.sectionSlug, "/create-topic")
-      }, "Create new topic"));
+      }, "Create new topic") : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "This section is locked from new posts except by administrators."));
     }
   }]);
 
@@ -71963,6 +71966,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../utils */ "./resources/js/utils.js");
 /* harmony import */ var _forms_CreateTopicForm__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../forms/CreateTopicForm */ "./resources/js/components/forms/CreateTopicForm.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -71984,6 +71988,7 @@ function _assertThisInitialized(self) { if (self === void 0) { throw new Referen
 function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
 
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
 
 
 
@@ -72029,10 +72034,16 @@ var CreateTopic = /*#__PURE__*/function (_Component) {
   }, {
     key: "render",
     value: function render() {
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Fill out the form"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_forms_CreateTopicForm__WEBPACK_IMPORTED_MODULE_2__["default"], {
-        sectionId: this.state.section.id,
+      var section = this.state.section;
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, !section.is_locked ?
+      /*#__PURE__*/
+      // TODO - check against user role_id to show as well
+      react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Fill out the form"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_forms_CreateTopicForm__WEBPACK_IMPORTED_MODULE_2__["default"], {
+        sectionId: section.id,
         successMethod: this.redirectOnSuccess
-      }));
+      })) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "This section is locked from new posts except by administrators. ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Link"], {
+        to: "/sections/".concat(section.slug)
+      }, "Click here to go back"), "."));
     }
   }]);
 
@@ -72333,6 +72344,9 @@ var canTopicBeEdited = function canTopicBeEdited(date) {
 };
 var getAllSections = function getAllSections() {
   return new axios.get('/api/sections').then(function (response) {
+    response.data.sort(function (a, b) {
+      return parseInt(a.order) - parseInt(b.order);
+    });
     return response;
   })["catch"](function (error) {
     handleError(error);

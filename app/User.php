@@ -46,4 +46,9 @@ class User extends Authenticatable
     {
         return $this->hasMany('App\Post', 'author_id', 'id')->where('topic_id', '!=', null);
     }
+
+    public function role()
+    {
+        return $this->belongsTo('App\Role', 'id', 'role_id');
+    }
 }

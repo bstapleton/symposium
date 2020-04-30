@@ -22,6 +22,8 @@ class CreateSectionsTable extends Migration
             $table->integer('parent_section_id')->nullable();
             $table->integer('topic_count')->default(0);
             $table->integer('reply_count')->default(0);
+            $table->integer('order')->default(999);
+            $table->boolean('is_locked')->default(0);
             $table->timestamps();
         });
     }

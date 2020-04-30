@@ -7,6 +7,7 @@ export const canTopicBeEdited = (date) => {
 
 export const getAllSections = () => {
     return new axios.get('/api/sections').then(response => {
+        response.data.sort((a, b) => parseInt(a.order) - parseInt(b.order));
         return response;
     }).catch(error => {
         handleError(error);

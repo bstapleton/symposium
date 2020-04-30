@@ -19,6 +19,8 @@ class SectionSeeder extends Seeder
                 'slug' => 'parent-section',
                 'description' => 'parent section description',
                 'parent_section_id' => null,
+                'order' => 2,
+                'is_locked' => 0,
             ],
             [
                 'id' => 2,
@@ -26,6 +28,17 @@ class SectionSeeder extends Seeder
                 'slug' => 'subsection',
                 'description' => 'this is a subsection',
                 'parent_section_id' => 1,
+                'order' => 1,
+                'is_locked' => 0,
+            ],
+            [
+                'id' => 3,
+                'title' => 'Announcements',
+                'slug' => 'announcements',
+                'description' => 'Site-wide announcements and stuff',
+                'parent_section_id' => null,
+                'order' => 1,
+                'is_locked' => 1,
             ]
         ]);
     }

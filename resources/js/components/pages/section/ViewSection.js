@@ -39,7 +39,11 @@ class ViewSection extends Component {
                         </li>
                     ))}
                 </ul>
-                <Link to={`/sections/${this.props.match.params.sectionSlug}/create-topic`}>Create new topic</Link>
+                {!section.is_locked ? // TODO - check against user role_id to show as well
+                    <Link to={`/sections/${this.props.match.params.sectionSlug}/create-topic`}>Create new topic</Link>
+                :
+                    <div>This section is locked from new posts except by administrators.</div>
+                }
             </div>
         )
     }
