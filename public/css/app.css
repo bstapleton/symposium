@@ -659,7 +659,7 @@ h3,
 h4 {
   font-family: "Lato", sans-serif;
   font-weight: 300;
-  color: #bdf1af;
+  color: #e08b5a;
   margin: 0;
 }
 
@@ -2341,6 +2341,34 @@ article {
 
 .flex-basis\:90 {
   flex-basis: 90%;
+}
+
+.fill\:primary {
+  fill: #bdf1af;
+}
+
+.fill\:secondary {
+  fill: #659059;
+}
+
+.fill\:tertiary {
+  fill: #e08b5a;
+}
+
+.fill\:success {
+  fill: #28a745;
+}
+
+.fill\:warning {
+  fill: #ffc107;
+}
+
+.fill\:danger {
+  fill: #dc3545;
+}
+
+.fill\:info {
+  fill: #3b517c;
 }
 
 @media (min-width: 0) {
@@ -9557,7 +9585,7 @@ article {
   margin: 0;
   line-height: 32px;
   display: inline-block;
-  color: #bdf1af;
+  text-shadow: -1px -1px 1px rgba(0, 0, 0, 0.5);
 }
 
 .card__heading__icon {

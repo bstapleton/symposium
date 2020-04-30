@@ -1,0 +1,7 @@
+@mixin fill {
+    @each $color, $value in $themeColors {
+        .fill\:#{$color} {
+            fill: $value;
+        }
+    }
+}

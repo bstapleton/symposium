@@ -18,6 +18,7 @@ $background: #153935;
 @import 'mixins/background';
 @import 'mixins/text';
 @import 'mixins/opacity';
+@import 'mixins/svg';
 
 @import 'utilities/global';
 @import 'utilities/positioning';
@@ -45,6 +46,7 @@ $background: #153935;
 @include flex-grow;
 @include flex-shrink;
 @include flex-basis;
+@include fill;
 
 @each $breakpoint, $minimum in $grid-breakpoints {
     @media (min-width: #{$minimum}) {

@@ -39,7 +39,7 @@ $cardRadius: $defaultUnit;
     margin: 0;
     line-height: $defaultUnit * 4;
     display: inline-block;
-    color: $primary;
+    text-shadow: -1px -1px 1px rgba(0,0,0,0.5);
 }
 
 .card__heading__icon {

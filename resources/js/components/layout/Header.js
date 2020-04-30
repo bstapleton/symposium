@@ -1,10 +1,11 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import Logo from '../Logo';
 
 const Header = () => (
     <div className={'wrapper margin--center'}>
         <header role={'masthead'} className={'flex-row site-masthead'}>
-            <img src={'/images/logo.svg'} className={'logo'} />
+            <Logo />
             <h1 className={'text-case:upper site-name letter-spacing:large flex-grow'}>Symposium</h1>
             <nav className={'primary-navigation'}>
                 <ul className={'list--inline'}>
