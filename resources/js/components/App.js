@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom'
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import Header from './layout/Header'
 import Home from './pages/Home';
+import Login from './pages/Login';
 import ViewSection from "./pages/section/ViewSection";
 import CreateSection from './pages/section/CreateSection';
 import ViewTopic from "./pages/topic/ViewTopic";
@@ -29,6 +30,7 @@ class App extends Component {
                     <Header />
                     <Switch>
                         <Route exact path={'/'} component={Home} />
+                        <Route exact path={'/login'} component={Login} />
                         <Route exact path={'/sections/:sectionSlug'} component={ViewSection} />
                         <Route exact path={'/create-section'} component={CreateSection} />
                         <Route path={'/sections/:sectionSlug/create-topic'} component={CreateTopic} />

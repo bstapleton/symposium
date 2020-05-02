@@ -31,8 +31,6 @@ class CreateTopicForm extends Component {
     handleCreateNewTopic(event) {
         event.preventDefault();
 
-
-
         const topic = {
             section_id: this.props.sectionId,
             title: this.state.title,
