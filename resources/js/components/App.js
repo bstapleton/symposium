@@ -4,6 +4,7 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import Header from './layout/Header'
 import Home from './pages/Home';
 import Login from './pages/Login';
+import Register from './pages/Register';
 import ViewSection from "./pages/section/ViewSection";
 import CreateSection from './pages/section/CreateSection';
 import ViewTopic from "./pages/topic/ViewTopic";
@@ -14,6 +15,7 @@ import WebFont from 'webfontloader';
 class App extends Component {
     constructor(props) {
         super(props);
+        
         require('../../sass/themes/dark/dark.scss');
 
         WebFont.load({
@@ -31,6 +33,7 @@ class App extends Component {
                     <Switch>
                         <Route exact path={'/'} component={Home} />
                         <Route exact path={'/login'} component={Login} />
+                        <Route exact path={'/register'} component={Register} />
                         <Route exact path={'/sections/:sectionSlug'} component={ViewSection} />
                         <Route exact path={'/create-section'} component={CreateSection} />
                         <Route path={'/sections/:sectionSlug/create-topic'} component={CreateTopic} />

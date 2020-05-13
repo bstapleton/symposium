@@ -24,10 +24,11 @@ class Textarea extends Component {
     render() {
         return (
             <div>
+                <label htmlFor={this.props.name}>{this.props.label}</label>
                 <textarea
                     name={this.props.name}
                     id={this.props.name}
-                    value={this.state.existingValue}
+                    value={this.state.existingValue ?? ''}
                     onChange={this.onChange.bind(this)}
                     rows={this.props.rows ?? 5}
                 />
@@ -44,6 +45,7 @@ class Textarea extends Component {
 
 Textarea.propTypes = {
     name: PropTypes.string.isRequired,
+    label: PropTypes.string.isRequired,
     isRequired: PropTypes.bool,
     existingValue: PropTypes.string,
     onChangeMethod: PropTypes.func,

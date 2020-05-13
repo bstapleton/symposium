@@ -4,13 +4,16 @@ import PropTypes from 'prop-types';
 import EmailBox from "../EmailBox";
 import PasswordBox from "../PasswordBox";
 import Notification from '../Notification';
+import TextBox from '../TextBox';
 
-class LoginForm extends Component {
+class RegisterForm extends Component {
     constructor (props) {
         super(props);
         this.state = {
             email: '',
             password: '',
+            password_confirm: '',
+            name: '',
             errors: []
         }
 
@@ -34,8 +37,9 @@ class LoginForm extends Component {
         let errors = [];
 
         let formData = new FormData();
-        formData.append("email", this.state.email);
-        formData.append("password", this.state.password);
+        formData.append('email', this.state.email);
+        formData.append('password', this.state.password);
+        formData.append('name', this.state.name);
 
         if (this.state.email === '') {
             errors.push('Email cannnot be blank');
@@ -45,7 +49,19 @@ class LoginForm extends Component {
             errors.push('Password cannnot be blank');
         }
 
-        axios.post('/api/user/login', formData)
+        if (this.state.name === '') {
+            errors.push('Display name cannot be blank');
+        }
+
+        if (this.state.password_confirm !== this.state.password) {
+            errors.push('Passwords do not match');
+        }
+
+        axios.post('/api/user/register', formData)
+            .then(response => {
+                console.log(response);
+                return response;
+            })
             .then(json => {
                 if (json.data.success) {
                     let userData = {
@@ -64,7 +80,7 @@ class LoginForm extends Component {
                     };
 
                     // save app state with user date in local storage
-                    localStorage["appState"] = JSON.stringify(appState); // TODO - this is not global; a successful login is not reflected in other components, e.g. Header with its user links.
+                    localStorage["appState"] = JSON.stringify(appState);
 
                     this.setState({
                         isLoggedIn: appState.isLoggedIn,
@@ -73,7 +89,7 @@ class LoginForm extends Component {
 
                     this.props.successMethod('/');
                 } else {
-                    this.setState({ errors: errors.length > 0 ? errors : 'The email or password is incorrect, please try again.' });
+                    this.setState({ errors: errors.length > 0 ? errors : 'There was a problem D:' });
                 }
             })
             .catch(error => {
@@ -98,22 +114,37 @@ class LoginForm extends Component {
                     existingValue={this.state.email}
                     onChangeMethod={this.handleFieldChange}
                 />
+                <TextBox
+                    name={'name'}
+                    label={'Display name'}
+                    isRequired={true}
+                    existingValue={this.state.name}
+                    onChangeMethod={this.handleFieldChange}
+                />
                 <PasswordBox
                     name={'password'}
                     label={'Password'}
                     isRequired={true}
-                    existingValue={this.state.password}
+                    existingValue={null}
                     onChangeMethod={this.handleFieldChange}
                 />
-                <button>Login</button>
+                <PasswordBox
+                    name={'password_confirm'}
+                    label={'Password confirmation'}
+                    isRequired={true}
+                    existingValue={null}
+                    onChangeMethod={this.handleFieldChange}
+                    match={'password'}
+                />
+                <button>Register</button>
             </form>
         );
     }
 }
 
-LoginForm.propTypes = {
+RegisterForm.propTypes = {
     successMethod: PropTypes.func.isRequired,
     failMethod: PropTypes.func.isRequired,
 }
 
-export default LoginForm;
+export default RegisterForm;

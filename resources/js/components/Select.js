@@ -24,11 +24,12 @@ class Select extends Component {
     render() {
         return (
             <div>
+                <label htmlFor={this.props.name}>{this.props.label}</label>
                 <select
                     name={this.props.name}
                     id={this.props.name}
                     onChange={this.onChange.bind(this)}
-                    defaultValue={this.state.existingValue}
+                    defaultValue={this.state.existingValue ?? ''}
                 >
                     <option value={this.props.defaultOption.value}>{this.props.defaultOption.text}</option>
                     {this.props.options.map(option =>
@@ -48,6 +49,7 @@ class Select extends Component {
 
 Select.propTypes = {
     name: PropTypes.string.isRequired,
+    label: PropTypes.string.isRequired,
     isRequired: PropTypes.bool,
     existingValue: PropTypes.string,
     options: PropTypes.array.isRequired,

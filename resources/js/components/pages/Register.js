@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import LoginForm from "../forms/LoginForm";
+import RegisterForm from "../forms/RegisterForm";
 
-class Login extends Component {
+class Register extends Component {
     constructor (props) {
         super(props);
         this.state = {
@@ -32,7 +32,7 @@ class Login extends Component {
                         {this.state.error}
                     </div>
                 : null}
-                <LoginForm
+                <RegisterForm
                     successMethod={this.redirectOnSuccess}
                     failMethod={this.handleFailure}
                 />
@@ -41,4 +41,4 @@ class Login extends Component {
     }
 }
 
-export default Login;
+export default Register;

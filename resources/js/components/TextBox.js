@@ -24,11 +24,12 @@ class TextBox extends Component {
     render() {
         return (
             <div>
+                <label htmlFor={this.props.name}>{this.props.label}</label>
                 <input
                     type={'text'}
                     name={this.props.name}
                     id={this.props.name}
-                    value={this.state.existingValue}
+                    value={this.state.existingValue ?? ''}
                     onChange={this.onChange.bind(this)}
                 />
                 {this.state.error !== null ?
@@ -44,6 +45,7 @@ class TextBox extends Component {
 
 TextBox.propTypes = {
     name: PropTypes.string.isRequired,
+    label: PropTypes.string.isRequired,
     isRequired: PropTypes.bool,
     existingValue: PropTypes.string,
     onChangeMethod: PropTypes.func,

@@ -18,17 +18,29 @@ class PasswordBox extends Component {
             errorInfo: this.props.isRequired && event.target.value === '' ? 'This is a required field' : null
         });
 
+        if (this.props.match && this.props.match !== '') {
+            let expectedValue = document.getElementById(this.props.match).value;
+            
+            if (event.target.value !== expectedValue) {
+                this.setState({
+                    error: 'No match',
+                    errorInfo: 'Passwords do not match.'
+                });
+            }
+        }
+
         this.props.onChangeMethod(event);
     }
 
     render() {
         return (
             <div>
+                <label htmlFor={this.props.name}>{this.props.label}</label>
                 <input
                     type={'password'}
                     name={this.props.name}
                     id={this.props.name}
-                    value={this.state.existingValue}
+                    value={this.state.existingValue ?? ''}
                     onChange={this.onChange.bind(this)}
                 />
                 {this.state.error !== null ?
@@ -44,9 +56,11 @@ class PasswordBox extends Component {
 
 PasswordBox.propTypes = {
     name: PropTypes.string.isRequired,
+    label: PropTypes.string.isRequired,
     isRequired: PropTypes.bool,
     existingValue: PropTypes.string,
     onChangeMethod: PropTypes.func,
+    match: PropTypes.string,
 }
 
 export default PasswordBox;

@@ -18,13 +18,31 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::post('login', 'API\AuthController@login');
-Route::post('register', 'API\AuthController@register');
-
-Route::prefix('admin')->group(function() {
-    Route::post('login', 'API/AuthController@adminLogin');
-    Route::post('register', 'API/AuthController@adminRegister');
+Route::group(['middleware' => ['jwt.auth', 'api-header']], function () {
+    Route::get('users/list', function(){
+        $users = App\User::all();
+        
+        $response = ['success'=>true, 'data'=>$users];
+        return response()->json($response, 201);
+    });
 });
+// Route::post('login', 'API\AuthController@login');
+// Route::post('register', 'API\AuthController@register');
+
+Route::group(['middleware' => 'api-header'], function () {
+  
+    // The registration and login requests doesn't come with tokens 
+    // as users at that point have not been authenticated yet
+    // Therefore the jwtMiddleware will be exclusive of them
+
+    Route::post('user/login', 'API\UserController@login');
+    Route::post('user/register', 'API\UserController@register');
+});
+
+// Route::prefix('admin')->group(function() {
+//     Route::post('login', 'API/AuthController@adminLogin');
+//     Route::post('register', 'API/AuthController@adminRegister');
+// });
 
 Route::prefix('sections')->group(function() {
     Route::get('/', 'API\SectionController@index');
