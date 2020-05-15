@@ -12,7 +12,7 @@ class RegisterForm extends Component {
         this.state = {
             email: '',
             password: '',
-            password_confirm: '',
+            password_confirmation: '',
             name: '',
             errors: []
         }
@@ -38,8 +38,9 @@ class RegisterForm extends Component {
 
         let formData = new FormData();
         formData.append('email', this.state.email);
-        formData.append('password', this.state.password);
         formData.append('name', this.state.name);
+        formData.append('password', this.state.password);
+        formData.append('password_confirmation', this.state.password_confirmation);
 
         if (this.state.email === '') {
             errors.push('Email cannnot be blank');
@@ -57,37 +58,12 @@ class RegisterForm extends Component {
             errors.push('Passwords do not match');
         }
 
-        axios.post('/api/user/register', formData)
+        axios.post('/api/register', formData)
             .then(response => {
-                console.log(response);
-                return response;
-            })
-            .then(json => {
-                if (json.data.success) {
-                    let userData = {
-                        name: json.data.data.name,
-                        id: json.data.data.id,
-                        role_id: json.data.data.role_id,
-                        rank_id: json.data.data.rank_id,
-                        email: json.data.data.email,
-                        auth_token: json.data.data.auth_token,
-                        timestamp: new Date().toString()
-                    };
+                if (response.data.token) {
+                    localStorage['symposiumToken'] = response.data.token;
 
-                    let appState = {
-                        isLoggedIn: true,
-                        user: userData
-                    };
-
-                    // save app state with user date in local storage
-                    localStorage["appState"] = JSON.stringify(appState);
-
-                    this.setState({
-                        isLoggedIn: appState.isLoggedIn,
-                        user: appState.user
-                    });
-
-                    this.props.successMethod('/');
+                    this.props.successMethod('/'); // TODO - send email confirmation before allowing log-in
                 } else {
                     this.setState({ errors: errors.length > 0 ? errors : 'There was a problem D:' });
                 }
@@ -129,7 +105,7 @@ class RegisterForm extends Component {
                     onChangeMethod={this.handleFieldChange}
                 />
                 <PasswordBox
-                    name={'password_confirm'}
+                    name={'password_confirmation'}
                     label={'Password confirmation'}
                     isRequired={true}
                     existingValue={null}

@@ -53,3 +53,19 @@ export const handleError = (error) => {
     }
     // TODO - how we want to handle error logging on prod?
 }
+
+export const getCurrentUser = () => {
+    let token = localStorage.getItem('symposiumToken');
+
+    let config = {
+        headers: {
+            'Authorization': `Bearer ${token}`
+        }
+    }
+
+    return new axios.get('/api/user', config).then(response => {
+        return response;
+    }).catch(error => {
+        handleError(error);
+    });
+}

@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
-import { BrowserRouter, Route, Switch } from 'react-router-dom'
+import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom'
 import Header from './layout/Header'
 import Home from './pages/Home';
 import Login from './pages/Login';
@@ -11,10 +11,16 @@ import ViewTopic from "./pages/topic/ViewTopic";
 import CreateTopic from "./pages/topic/CreateTopic";
 import CreatePost from "./pages/post/CreatePost";
 import WebFont from 'webfontloader';
+import { getCurrentUser } from '../utils';
 
 class App extends Component {
     constructor(props) {
         super(props);
+        this.state = {
+            isAuthenticated: false,
+            isModerator: false,
+            isAdmin: false,
+        }
         
         require('../../sass/themes/dark/dark.scss');
 
@@ -25,11 +31,31 @@ class App extends Component {
         });
     }
 
+    componentDidMount() {
+        if (localStorage.getItem('symposiumToken')) {
+            getCurrentUser().then((response) => {
+                if (response.data.status === 'Token is Expired') {
+                    return <Redirect to='/' /> // TODO - probably doesn't work, like the others
+                } else {
+                    this.setState({ isAuthenticated: true });
+
+                    if (response.data.user.rank_id >= 2) {
+                        this.setState({ isModerator: true });
+                    }
+        
+                    if (response.data.user.rank_id === 3) {
+                        this.setState({ isAdmin: true });
+                    }
+                }
+            });
+        }
+    }
+
     render () {
         return (
             <BrowserRouter>
                 <div>
-                    <Header />
+                    <Header isAuthenticated={this.state.isAuthenticated} />
                     <Switch>
                         <Route exact path={'/'} component={Home} />
                         <Route exact path={'/login'} component={Login} />

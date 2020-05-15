@@ -70602,6 +70602,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _pages_post_CreatePost__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./pages/post/CreatePost */ "./resources/js/components/pages/post/CreatePost.js");
 /* harmony import */ var webfontloader__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! webfontloader */ "./node_modules/webfontloader/webfontloader.js");
 /* harmony import */ var webfontloader__WEBPACK_IMPORTED_MODULE_12___default = /*#__PURE__*/__webpack_require__.n(webfontloader__WEBPACK_IMPORTED_MODULE_12__);
+/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../utils */ "./resources/js/utils.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -70638,6 +70639,7 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 
 
+
 var App = /*#__PURE__*/function (_Component) {
   _inherits(App, _Component);
 
@@ -70649,6 +70651,11 @@ var App = /*#__PURE__*/function (_Component) {
     _classCallCheck(this, App);
 
     _this = _super.call(this, props);
+    _this.state = {
+      isAuthenticated: false,
+      isModerator: false,
+      isAdmin: false
+    };
 
     __webpack_require__(/*! ../../sass/themes/dark/dark.scss */ "./resources/sass/themes/dark/dark.scss");
 
@@ -70661,9 +70668,42 @@ var App = /*#__PURE__*/function (_Component) {
   }
 
   _createClass(App, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      var _this2 = this;
+
+      if (localStorage.getItem('symposiumToken')) {
+        Object(_utils__WEBPACK_IMPORTED_MODULE_13__["getCurrentUser"])().then(function (response) {
+          if (response.data.status === 'Token is Expired') {
+            return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Redirect"], {
+              to: "/"
+            }); // TODO - probably doesn't work, like the others
+          } else {
+            _this2.setState({
+              isAuthenticated: true
+            });
+
+            if (response.data.user.rank_id >= 2) {
+              _this2.setState({
+                isModerator: true
+              });
+            }
+
+            if (response.data.user.rank_id === 3) {
+              _this2.setState({
+                isAdmin: true
+              });
+            }
+          }
+        });
+      }
+    }
+  }, {
     key: "render",
     value: function render() {
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["BrowserRouter"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_layout_Header__WEBPACK_IMPORTED_MODULE_3__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Switch"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["BrowserRouter"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_layout_Header__WEBPACK_IMPORTED_MODULE_3__["default"], {
+        isAuthenticated: this.state.isAuthenticated
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Switch"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
         exact: true,
         path: '/',
         component: _pages_Home__WEBPACK_IMPORTED_MODULE_4__["default"]
@@ -71890,28 +71930,10 @@ var LoginForm = /*#__PURE__*/function (_Component) {
         errors.push('Password cannnot be blank');
       }
 
-      axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('/api/user/login', formData).then(function (json) {
-        if (json.data.success) {
-          var userData = {
-            name: json.data.data.name,
-            id: json.data.data.id,
-            role_id: json.data.data.role_id,
-            rank_id: json.data.data.rank_id,
-            email: json.data.data.email,
-            auth_token: json.data.data.auth_token,
-            timestamp: new Date().toString()
-          };
-          var appState = {
-            isLoggedIn: true,
-            user: userData
-          }; // save app state with user date in local storage
-
-          localStorage["appState"] = JSON.stringify(appState); // TODO - this is not global; a successful login is not reflected in other components, e.g. Header with its user links.
-
-          _this2.setState({
-            isLoggedIn: appState.isLoggedIn,
-            user: appState.user
-          });
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('/api/login', formData).then(function (response) {
+        if (response.data.token) {
+          // save app state with user date in local storage
+          localStorage['symposiumToken'] = response.data.token; // TODO - this is not global; a successful login is not reflected in other components, e.g. Header with its user links.
 
           _this2.props.successMethod('/');
         } else {
@@ -72026,7 +72048,7 @@ var RegisterForm = /*#__PURE__*/function (_Component) {
     _this.state = {
       email: '',
       password: '',
-      password_confirm: '',
+      password_confirmation: '',
       name: '',
       errors: []
     };
@@ -72055,8 +72077,9 @@ var RegisterForm = /*#__PURE__*/function (_Component) {
       var errors = [];
       var formData = new FormData();
       formData.append('email', this.state.email);
-      formData.append('password', this.state.password);
       formData.append('name', this.state.name);
+      formData.append('password', this.state.password);
+      formData.append('password_confirmation', this.state.password_confirmation);
 
       if (this.state.email === '') {
         errors.push('Email cannnot be blank');
@@ -72074,33 +72097,12 @@ var RegisterForm = /*#__PURE__*/function (_Component) {
         errors.push('Passwords do not match');
       }
 
-      axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('/api/user/register', formData).then(function (response) {
-        console.log(response);
-        return response;
-      }).then(function (json) {
-        if (json.data.success) {
-          var userData = {
-            name: json.data.data.name,
-            id: json.data.data.id,
-            role_id: json.data.data.role_id,
-            rank_id: json.data.data.rank_id,
-            email: json.data.data.email,
-            auth_token: json.data.data.auth_token,
-            timestamp: new Date().toString()
-          };
-          var appState = {
-            isLoggedIn: true,
-            user: userData
-          }; // save app state with user date in local storage
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('/api/register', formData).then(function (response) {
+        if (response.data.token) {
+          localStorage['symposiumToken'] = response.data.token;
 
-          localStorage["appState"] = JSON.stringify(appState);
+          _this2.props.successMethod('/'); // TODO - send email confirmation before allowing log-in
 
-          _this2.setState({
-            isLoggedIn: appState.isLoggedIn,
-            user: appState.user
-          });
-
-          _this2.props.successMethod('/');
         } else {
           _this2.setState({
             errors: errors.length > 0 ? errors : 'There was a problem D:'
@@ -72140,7 +72142,7 @@ var RegisterForm = /*#__PURE__*/function (_Component) {
         existingValue: null,
         onChangeMethod: this.handleFieldChange
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_PasswordBox__WEBPACK_IMPORTED_MODULE_4__["default"], {
-        name: 'password_confirm',
+        name: 'password_confirmation',
         label: 'Password confirmation',
         isRequired: true,
         existingValue: null,
@@ -72209,29 +72211,18 @@ var Header = /*#__PURE__*/function (_Component) {
   var _super = _createSuper(Header);
 
   function Header(props) {
-    var _this;
-
     _classCallCheck(this, Header);
 
-    _this = _super.call(this, props);
-    _this.state = {
-      user: JSON.parse(localStorage.getItem('appState'))
-    };
-    return _this;
+    return _super.call(this, props);
   }
 
   _createClass(Header, [{
     key: "logout",
     value: function logout(event) {
       event.preventDefault();
-      var appState = {
-        user: {}
-      };
-      localStorage['appState'] = JSON.stringify(appState);
-      this.setState(appState);
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Redirect"], {
-        to: "/"
-      }); // TODO - fix redirection. Currently doesn't return.
+      var history = this.props.history;
+      localStorage.removeItem('symposiumToken');
+      history.push('/'); // TODO - fix redirection. Currently doesn't return.
     }
   }, {
     key: "render",
@@ -72245,19 +72236,7 @@ var Header = /*#__PURE__*/function (_Component) {
         className: 'text-case:upper site-name letter-spacing:large flex-grow'
       }, "Symposium"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("nav", {
         className: 'primary-navigation'
-      }, !this.state.user.isLoggedIn ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
-        className: 'list--inline'
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
-        className: 'list__item--inline'
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
-        className: "list__link",
-        to: "/login"
-      }, "Login")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
-        className: 'list__item--inline'
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
-        className: "list__link",
-        to: "/register"
-      }, "Register"))) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
+      }, this.props.isAuthenticated === true ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
         className: 'list--inline'
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
         className: 'list__item--inline'
@@ -72270,7 +72249,19 @@ var Header = /*#__PURE__*/function (_Component) {
         className: "list__link",
         href: "#",
         onClick: this.logout.bind(this)
-      }, "Log out"))))));
+      }, "Log out"))) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
+        className: 'list--inline'
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+        className: 'list__item--inline'
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
+        className: "list__link",
+        to: "/login"
+      }, "Login")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+        className: 'list__item--inline'
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
+        className: "list__link",
+        to: "/register"
+      }, "Register"))))));
     }
   }]);
 
@@ -72278,7 +72269,7 @@ var Header = /*#__PURE__*/function (_Component) {
 }(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
 
 Header.propTypes = {
-  user: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.object
+  isAuthenticated: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.bool.isRequired
 };
 /* harmony default export */ __webpack_exports__["default"] = (Header);
 
@@ -72438,6 +72429,7 @@ var Login = /*#__PURE__*/function (_Component) {
   _createClass(Login, [{
     key: "redirectOnSuccess",
     value: function redirectOnSuccess(url) {
+      // TODO - handle global state for successfully logged in - currently none of the header links dynamically update
       var history = this.props.history;
       history.push(url);
     }
@@ -73263,7 +73255,7 @@ var Icons = [{
 /*!*******************************!*\
   !*** ./resources/js/utils.js ***!
   \*******************************/
-/*! exports provided: canTopicBeEdited, getAllSections, getSectionBySlug, getTopicsBySectionId, getTopicById, getRepliesByTopicId, handleError */
+/*! exports provided: canTopicBeEdited, getAllSections, getSectionBySlug, getTopicsBySectionId, getTopicById, getRepliesByTopicId, handleError, getCurrentUser */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -73275,6 +73267,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getTopicById", function() { return getTopicById; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getRepliesByTopicId", function() { return getRepliesByTopicId; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "handleError", function() { return handleError; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getCurrentUser", function() { return getCurrentUser; });
 var canTopicBeEdited = function canTopicBeEdited(date) {
   var year = 1000 * 60 * 60 * 24 * 365;
   var oneYearAgo = Date.now() - year;
@@ -73324,6 +73317,19 @@ var handleError = function handleError(error) {
     console.log(error); // TODO - handle this a little more gracefully for error display for dev mode
   } // TODO - how we want to handle error logging on prod?
 
+};
+var getCurrentUser = function getCurrentUser() {
+  var token = localStorage.getItem('symposiumToken');
+  var config = {
+    headers: {
+      'Authorization': "Bearer ".concat(token)
+    }
+  };
+  return new axios.get('/api/user', config).then(function (response) {
+    return response;
+  })["catch"](function (error) {
+    handleError(error);
+  });
 };
 
 /***/ }),

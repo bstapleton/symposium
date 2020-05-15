@@ -25,7 +25,6 @@ class CreateUsersTable extends Migration
             $table->integer('rank_id')->default(0);
             $table->integer('role_id')->default(0);
             $table->rememberToken();
-            $table->longText('auth_token')->nullable();
             $table->timestamps();
         });
     }

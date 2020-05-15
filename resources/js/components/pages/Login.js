@@ -13,6 +13,7 @@ class Login extends Component {
     }
 
     redirectOnSuccess(url) {
+        // TODO - handle global state for successfully logged in - currently none of the header links dynamically update
         const { history } = this.props;
 
         history.push(url);

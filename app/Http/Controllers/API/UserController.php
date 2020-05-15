@@ -2,96 +2,89 @@
 
 namespace App\Http\Controllers\API;
 
-use Illuminate\Http\Request;
 use App\User;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
 use JWTAuth;
-use JWTAuthException;
+use Tymon\JWTAuth\Exceptions\JWTException;
 
 class UserController extends BaseController
 {
-    private function getToken($email, $password)
+    /**
+     * Does the action of logging a user in
+     */
+    public function authenticate(Request $request)
     {
-        $token = null;
+        $credentials = $request->only('email', 'password');
 
         try
         {
-            if (!$token = JWTAuth::attempt(['email'=>$email, 'password'=>$password]))
+            if (! $token = JWTAuth::attempt($credentials))
             {
-                return response()->json([
-                    'response' => 'error',
-                    'message' => 'Password or email is invalid',
-                    'token'=>$token
-                ]);
+                return response()->json(['error' => 'invalid_credentials'], 400);
             }
         }
-        catch (JWTAuthException $e)
+        catch (JWTException $e)
         {
-            return response()->json([
-                'response' => 'error',
-                'message' => 'Token creation failed',
-            ]);
+            return response()->json(['error' => 'could_not_create_token'], 500);
         }
 
-        return $token;
+        return response()->json(compact('token'));
     }
 
-    public function login(Request $request)
-    {
-        $user = \App\User::where('email', $request->email)->get()->first();
-
-        if ($user && \Hash::check($request->password, $user->password)) // The passwords match...
-        {
-            $token = self::getToken($request->email, $request->password);
-            $user->auth_token = $token;
-            $user->save();
-            $response = ['success'=>true, 'data'=>['id'=>$user->id,'auth_token'=>$user->auth_token,'name'=>$user->name, 'email'=>$user->email]];           
-        }
-        else 
-        {
-          $response = ['success'=>false, 'data'=>'Record doesnt exists'];
-        }
-
-        return response()->json($response, 200);
-    }
-
+    /**
+     * Does the action of registering a new user
+     */
     public function register(Request $request)
-    { 
-        $payload = [
-            'password'=>\Hash::make($request->password),
-            'email'=>$request->email,
-            'name'=>$request->name,
-            'auth_token'=> ''
-        ];
-                  
-        $user = new \App\User($payload);
-        
+    {
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|string|max:72|unique:users',
+            'email' => 'required|string|email|max:255|unique:users',
+            'password' => 'required|string|min:6|confirmed',
+        ]);
+
+        if($validator->fails())
+        {
+            return response()->json($validator->errors()->toJson(), 400);
+        }
+
+        $user = User::create([
+            'name' => $request->get('name'),
+            'email' => $request->get('email'),
+            'password' => Hash::make($request->get('password')),
+        ]);
+
+        $token = JWTAuth::fromUser($user);
+
+        return response()->json(compact('user','token'),201);
+    }
+
+    /**
+     * Gets relevant data for the current user based on their bearer token, set at login
+     */
+    public function getAuthenticatedUser()
+    {
         try
         {
-            if ($user->save())
+            if (! $user = JWTAuth::parseToken()->authenticate())
             {
-                $token = self::getToken($request->email, $request->password); // generate user token
-                
-                if (!is_string($token))  return response()->json(['success'=>false,'data'=>'Token generation failed'], 201);
-                
-                $user = \App\User::where('email', $request->email)->get()->first();
-                
-                $user->auth_token = $token; // update user token
-                
-                $user->save();
-                
-                $response = ['success'=>true, 'data'=>['name'=>$user->name,'id'=>$user->id,'email'=>$request->email,'auth_token'=>$token]];        
-            }
-            else
-            {
-                $response = ['success'=>false, 'data'=>'Couldnt register user'];
+                return response()->json(['user_not_found'], 404);
             }
         }
-        catch (\Illuminate\Database\QueryException $e)
+        catch (Tymon\JWTAuth\Exceptions\TokenExpiredException $e)
         {
-            $response = ['success'=>false, 'data'=>'A user with that display name or email address already exists'];
-            return response()->json($response, 500);
+            return response()->json(['token_expired'], $e->getStatusCode());
         }
-        
-        return response()->json($response, 201);
+        catch (Tymon\JWTAuth\Exceptions\TokenInvalidException $e)
+        {
+            return response()->json(['token_invalid'], $e->getStatusCode());
+        }
+        catch (Tymon\JWTAuth\Exceptions\JWTException $e)
+        {
+            return response()->json(['token_absent'], $e->getStatusCode());
+        }
+
+        return response()->json(compact('user'));
     }
 }
