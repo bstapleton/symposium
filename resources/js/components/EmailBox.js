@@ -1,5 +1,6 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+// TODO: convert to functional component
+import React, { Component } from "react";
+import PropTypes from "prop-types";
 
 class EmailBox extends Component {
     constructor(props) {
@@ -7,15 +8,21 @@ class EmailBox extends Component {
         this.state = {
             error: null,
             errorInfo: null,
-            existingValue: this.props.existingValue,
-        }
+            existingValue: this.props.existingValue
+        };
     }
 
     onChange(event) {
         this.setState({
             existingValue: event.target.value,
-            error: this.props.isRequired && event.target.value === '' ? 'Required field!' : null,
-            errorInfo: this.props.isRequired && event.target.value === '' ? 'This is a required field' : null
+            error:
+                this.props.isRequired && event.target.value === ""
+                    ? "Required field!"
+                    : null,
+            errorInfo:
+                this.props.isRequired && event.target.value === ""
+                    ? "This is a required field"
+                    : null
         });
 
         this.props.onChangeMethod(event);
@@ -26,20 +33,20 @@ class EmailBox extends Component {
             <div>
                 <label htmlFor={this.props.name}>{this.props.label}</label>
                 <input
-                    type={'email'}
+                    type={"email"}
                     name={this.props.name}
                     id={this.props.name}
-                    value={this.state.existingValue ?? ''}
+                    value={this.state.existingValue ?? ""}
                     onChange={this.onChange.bind(this)}
                 />
-                {this.state.error !== null ?
+                {this.state.error !== null ? (
                     <div>
                         <strong>Error: {this.state.error}</strong>
                         <p>{this.state.errorInfo}</p>
                     </div>
-                : null}
+                ) : null}
             </div>
-        )
+        );
     }
 }
 
@@ -48,7 +55,7 @@ EmailBox.propTypes = {
     label: PropTypes.string.isRequired,
     isRequired: PropTypes.bool,
     existingValue: PropTypes.string,
-    onChangeMethod: PropTypes.func,
-}
+    onChangeMethod: PropTypes.func
+};
 
 export default EmailBox;

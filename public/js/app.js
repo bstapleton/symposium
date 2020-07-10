@@ -70869,6 +70869,7 @@ function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Re
 
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
+// TODO: convert to functional component
 
 
 
@@ -70896,8 +70897,8 @@ var EmailBox = /*#__PURE__*/function (_Component) {
     value: function onChange(event) {
       this.setState({
         existingValue: event.target.value,
-        error: this.props.isRequired && event.target.value === '' ? 'Required field!' : null,
-        errorInfo: this.props.isRequired && event.target.value === '' ? 'This is a required field' : null
+        error: this.props.isRequired && event.target.value === "" ? "Required field!" : null,
+        errorInfo: this.props.isRequired && event.target.value === "" ? "This is a required field" : null
       });
       this.props.onChangeMethod(event);
     }
@@ -70909,10 +70910,10 @@ var EmailBox = /*#__PURE__*/function (_Component) {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
         htmlFor: this.props.name
       }, this.props.label), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-        type: 'email',
+        type: "email",
         name: this.props.name,
         id: this.props.name,
-        value: (_this$state$existingV = this.state.existingValue) !== null && _this$state$existingV !== void 0 ? _this$state$existingV : '',
+        value: (_this$state$existingV = this.state.existingValue) !== null && _this$state$existingV !== void 0 ? _this$state$existingV : "",
         onChange: this.onChange.bind(this)
       }), this.state.error !== null ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("strong", null, "Error: ", this.state.error), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, this.state.errorInfo)) : null);
     }
@@ -71116,11 +71117,11 @@ var Notification = /*#__PURE__*/function (_Component) {
     value: function render() {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "notification notification--".concat(this.props.type)
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, this.props.title !== '' ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("strong", null, this.props.title)) : null, Array.isArray(this.props.content) && this.props.content.length > 1 ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, this.props.content.map(function (message, i) {
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null), " ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, this.props.title !== "" ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("strong", null, this.props.title)) : null, Array.isArray(this.props.content) && this.props.content.length > 0 ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, this.props.content.map(function (message, i) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
           key: i
         }, message);
-      })) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, this.props.content)));
+      })) : null));
     }
   }]);
 
@@ -71129,7 +71130,7 @@ var Notification = /*#__PURE__*/function (_Component) {
 
 Notification.propTypes = {
   title: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.string,
-  type: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.oneOf(['success', 'warning', 'error', 'info']),
+  type: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.oneOf(["success", "warning", "error", "info"]),
   content: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.oneOfType([prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.string, prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.array])
 };
 /* harmony default export */ __webpack_exports__["default"] = (Notification);
@@ -71198,17 +71199,17 @@ var PasswordBox = /*#__PURE__*/function (_Component) {
     value: function onChange(event) {
       this.setState({
         existingValue: event.target.value,
-        error: this.props.isRequired && event.target.value === '' ? 'Required field!' : null,
-        errorInfo: this.props.isRequired && event.target.value === '' ? 'This is a required field' : null
+        error: this.props.isRequired && event.target.value === "" ? "Required field!" : null,
+        errorInfo: this.props.isRequired && event.target.value === "" ? "This is a required field" : null
       });
 
-      if (this.props.match && this.props.match !== '') {
+      if (this.props.match && this.props.match !== "") {
         var expectedValue = document.getElementById(this.props.match).value;
 
         if (event.target.value !== expectedValue) {
           this.setState({
-            error: 'No match',
-            errorInfo: 'Passwords do not match.'
+            error: "No match",
+            errorInfo: "Passwords do not match."
           });
         }
       }
@@ -71223,10 +71224,10 @@ var PasswordBox = /*#__PURE__*/function (_Component) {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
         htmlFor: this.props.name
       }, this.props.label), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-        type: 'password',
+        type: "password",
         name: this.props.name,
         id: this.props.name,
-        value: (_this$state$existingV = this.state.existingValue) !== null && _this$state$existingV !== void 0 ? _this$state$existingV : '',
+        value: (_this$state$existingV = this.state.existingValue) !== null && _this$state$existingV !== void 0 ? _this$state$existingV : "",
         onChange: this.onChange.bind(this)
       }), this.state.error !== null ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("strong", null, "Error: ", this.state.error), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, this.state.errorInfo)) : null);
     }
@@ -71834,159 +71835,6 @@ CreateTopicForm.propTypes = {
 
 /***/ }),
 
-/***/ "./resources/js/components/forms/LoginForm.js":
-/*!****************************************************!*\
-  !*** ./resources/js/components/forms/LoginForm.js ***!
-  \****************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
-/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _EmailBox__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../EmailBox */ "./resources/js/components/EmailBox.js");
-/* harmony import */ var _PasswordBox__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../PasswordBox */ "./resources/js/components/PasswordBox.js");
-/* harmony import */ var _Notification__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../Notification */ "./resources/js/components/Notification.js");
-function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
-
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-
-function _createSuper(Derived) { return function () { var Super = _getPrototypeOf(Derived), result; if (_isNativeReflectConstruct()) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
-
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
-
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
-
-
-
-
-
-
-
-var LoginForm = /*#__PURE__*/function (_Component) {
-  _inherits(LoginForm, _Component);
-
-  var _super = _createSuper(LoginForm);
-
-  function LoginForm(props) {
-    var _this;
-
-    _classCallCheck(this, LoginForm);
-
-    _this = _super.call(this, props);
-    _this.state = {
-      email: '',
-      password: '',
-      errors: []
-    };
-    _this.handleFieldChange = _this.handleFieldChange.bind(_assertThisInitialized(_this));
-    _this.handleLogin = _this.handleLogin.bind(_assertThisInitialized(_this));
-    _this.handleRedirection = _this.handleRedirection.bind(_assertThisInitialized(_this));
-    return _this;
-  }
-
-  _createClass(LoginForm, [{
-    key: "handleFieldChange",
-    value: function handleFieldChange(event) {
-      this.setState(_defineProperty({}, event.target.name, event.target.value));
-    }
-  }, {
-    key: "handleRedirection",
-    value: function handleRedirection(url) {
-      this.props.handleRedirection(url);
-    }
-  }, {
-    key: "handleLogin",
-    value: function handleLogin(event) {
-      var _this2 = this;
-
-      event.preventDefault();
-      var errors = [];
-      var formData = new FormData();
-      formData.append("email", this.state.email);
-      formData.append("password", this.state.password);
-
-      if (this.state.email === '') {
-        errors.push('Email cannnot be blank');
-      }
-
-      if (this.state.password === '') {
-        errors.push('Password cannnot be blank');
-      }
-
-      axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('/api/login', formData).then(function (response) {
-        if (response.data.token) {
-          // save app state with user date in local storage
-          localStorage['symposiumToken'] = response.data.token; // TODO - this is not global; a successful login is not reflected in other components, e.g. Header with its user links.
-
-          _this2.props.successMethod('/');
-        } else {
-          _this2.setState({
-            errors: errors.length > 0 ? errors : 'The email or password is incorrect, please try again.'
-          });
-        }
-      })["catch"](function (error) {
-        _this2.setState({
-          errors: [error]
-        });
-      });
-    }
-  }, {
-    key: "render",
-    value: function render() {
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("form", {
-        onSubmit: this.handleLogin
-      }, this.state.errors.length > 0 ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Notification__WEBPACK_IMPORTED_MODULE_5__["default"], {
-        title: "Login failed",
-        type: "error",
-        content: this.state.errors
-      }) : null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_EmailBox__WEBPACK_IMPORTED_MODULE_3__["default"], {
-        name: 'email',
-        label: 'Email address',
-        isRequired: true,
-        existingValue: this.state.email,
-        onChangeMethod: this.handleFieldChange
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_PasswordBox__WEBPACK_IMPORTED_MODULE_4__["default"], {
-        name: 'password',
-        label: 'Password',
-        isRequired: true,
-        existingValue: this.state.password,
-        onChangeMethod: this.handleFieldChange
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("button", null, "Login"));
-    }
-  }]);
-
-  return LoginForm;
-}(react__WEBPACK_IMPORTED_MODULE_1__["Component"]);
-
-LoginForm.propTypes = {
-  successMethod: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.func.isRequired,
-  failMethod: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.func.isRequired
-};
-/* harmony default export */ __webpack_exports__["default"] = (LoginForm);
-
-/***/ }),
-
 /***/ "./resources/js/components/forms/RegisterForm.js":
 /*!*******************************************************!*\
   !*** ./resources/js/components/forms/RegisterForm.js ***!
@@ -72376,82 +72224,147 @@ var Home = function Home() {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _components_forms_LoginForm__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components/forms/LoginForm */ "./resources/js/components/forms/LoginForm.js");
-function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+/* harmony import */ var _components_EmailBox__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components/EmailBox */ "./resources/js/components/EmailBox.js");
+/* harmony import */ var _components_PasswordBox__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/PasswordBox */ "./resources/js/components/PasswordBox.js");
+/* harmony import */ var _components_Notification__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../components/Notification */ "./resources/js/components/Notification.js");
+var _this = undefined;
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
 
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
 
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter); }
 
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
 
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
-function _createSuper(Derived) { return function () { var Super = _getPrototypeOf(Derived), result; if (_isNativeReflectConstruct()) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
 
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(n); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
 
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
 
-function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
 
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+function _readOnlyError(name) { throw new Error("\"" + name + "\" is read-only"); }
 
 
 
 
-var Login = /*#__PURE__*/function (_Component) {
-  _inherits(Login, _Component);
 
-  var _super = _createSuper(Login);
 
-  function Login(props) {
-    var _this;
+var Login = function Login() {
+  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])([]),
+      _useState2 = _slicedToArray(_useState, 2),
+      errors = _useState2[0],
+      setErrors = _useState2[1];
 
-    _classCallCheck(this, Login);
+  var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(""),
+      _useState4 = _slicedToArray(_useState3, 2),
+      email = _useState4[0],
+      setEmail = _useState4[1];
 
-    _this = _super.call(this, props);
-    _this.state = {
-      error: ''
-    };
-    _this.redirectOnSuccess = _this.redirectOnSuccess.bind(_assertThisInitialized(_this));
-    _this.handleFailure = _this.handleFailure.bind(_assertThisInitialized(_this));
-    return _this;
+  var _useState5 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(""),
+      _useState6 = _slicedToArray(_useState5, 2),
+      password = _useState6[0],
+      setPassword = _useState6[1];
+
+  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
+    console.log(errors.length, email, password);
+  });
+
+  function redirectOnSuccess(url) {
+    // TODO - handle global state for successfully logged in - currently none of the header links dynamically update
+    var history = this.props.history;
+    history.push(url);
   }
 
-  _createClass(Login, [{
-    key: "redirectOnSuccess",
-    value: function redirectOnSuccess(url) {
-      // TODO - handle global state for successfully logged in - currently none of the header links dynamically update
-      var history = this.props.history;
-      history.push(url);
-    }
-  }, {
-    key: "handleFailure",
-    value: function handleFailure(status) {
-      this.setState({
-        error: status === 401 ? 'The email or password you entered was not correct.' : 'Something went wrong.' // TODO - make an error array for status code responses
+  function handleFailure(status) {
+    errors = (_readOnlyError("errors"), status === 401 ? "The email or password you entered was not correct." : "Something went wrong."); // TODO - make an error array for status code responses
+  }
 
+  function handleFieldChange(event) {
+    setEmail(function (email) {
+      return event.target.value;
+    });
+    console.log(email); // this.setState({
+    //     [event.target.name]: event.target.value
+    // });
+  }
+
+  function handleLogin(event) {
+    var _this2 = this;
+
+    event.preventDefault();
+    var formData = new FormData();
+    formData.append("email", email);
+    formData.append("password", password);
+
+    if (email === "") {
+      setErrors(function (errors) {
+        return [].concat(_toConsumableArray(errors), ["Email cannot be blank"]);
       });
     }
-  }, {
-    key: "render",
-    value: function render() {
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: 'wrapper margin--center'
-      }, this.state.error !== '' ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: 'notification notification--error'
-      }, this.state.error) : null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_forms_LoginForm__WEBPACK_IMPORTED_MODULE_1__["default"], {
-        successMethod: this.redirectOnSuccess,
-        failMethod: this.handleFailure
-      }));
-    }
-  }]);
 
-  return Login;
-}(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
+    if (password === "") {
+      setErrors(function (errors) {
+        return [].concat(_toConsumableArray(errors), ["Password cannot be blank"]);
+      });
+    }
+
+    console.log(errors);
+    axios.post("/login", formData).then(function (response) {
+      if (response.data.token) {
+        // save app state with user date in local storage
+        localStorage["symposiumToken"] = response.data.token; // TODO - this is not global; a successful login is not reflected in other components, e.g. Header with its user links.
+
+        _this2.props.successMethod("/");
+      } else {
+        errors = (_readOnlyError("errors"), errors.length > 0 ? errors : "The email or password is incorrect, please try again.");
+      }
+    })["catch"](function (error) {
+      console.log(error);
+    });
+  }
+
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "wrapper margin--center"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
+    onSubmit: handleLogin.bind(_this)
+  }, errors.length > 0 ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Notification__WEBPACK_IMPORTED_MODULE_3__["default"], {
+    title: "Login failed",
+    type: "error",
+    content: errors
+  }) : null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_EmailBox__WEBPACK_IMPORTED_MODULE_1__["default"], {
+    name: "test",
+    label: "test label",
+    onChangeMethod: function onChangeMethod(e) {
+      return setEmail(e.target.value);
+    }
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+    htmlFor: "email"
+  }, "Email address"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+    type: "email",
+    name: "email",
+    id: "email",
+    value: email,
+    onChange: function onChange(e) {
+      return setEmail(e.target.value);
+    }
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_PasswordBox__WEBPACK_IMPORTED_MODULE_2__["default"], {
+    name: "password",
+    label: "Password",
+    isRequired: true,
+    existingValue: "",
+    onChangeMethod: handleFieldChange.bind(_this)
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+    type: "submit",
+    value: "Login"
+  })));
+};
 
 /* harmony default export */ __webpack_exports__["default"] = (Login);
 
