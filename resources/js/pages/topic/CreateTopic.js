@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { getSectionBySlug } from "../../../utils";
-import CreateTopicForm from "../../forms/CreateTopicForm";
+import { getSectionBySlug } from "../../utils";
+import CreateTopicForm from "../../components/forms/CreateTopicForm";
 import {Link} from "react-router-dom";
 
 class CreateTopic extends Component {

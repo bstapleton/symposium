@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { canTopicBeEdited, getRepliesByTopicId, getSectionBySlug, getTopicById } from "../../../utils";
+import { canTopicBeEdited, getRepliesByTopicId, getSectionBySlug, getTopicById } from "../../utils";
 import axios from "axios";
-import DeletionWarning from "../../DeletionWarning";
-import TextBox from "../../TextBox";
+import DeletionWarning from "../../Components/DeletionWarning";
+import TextBox from "../../components/TextBox";
 
 class ViewTopic extends Component {
     constructor (props) {

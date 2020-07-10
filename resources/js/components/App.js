@@ -1,17 +1,20 @@
 import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
 import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom'
+import axios from 'axios';
 import Header from './layout/Header'
-import Home from './pages/Home';
-import Login from './pages/Login';
-import Register from './pages/Register';
-import ViewSection from "./pages/section/ViewSection";
-import CreateSection from './pages/section/CreateSection';
-import ViewTopic from "./pages/topic/ViewTopic";
-import CreateTopic from "./pages/topic/CreateTopic";
-import CreatePost from "./pages/post/CreatePost";
+import Home from '../pages/Home';
+import Login from '../pages/Login';
+import Register from '../pages/Register';
+import ViewSection from "../pages/section/ViewSection";
+import CreateSection from '../pages/section/CreateSection';
+import ViewTopic from "../pages/topic/ViewTopic";
+import CreateTopic from "../pages/topic/CreateTopic";
+import CreatePost from "../pages/post/CreatePost";
 import WebFont from 'webfontloader';
 import { getCurrentUser } from '../utils';
+
+axios.defaults.baseURL = 'http://localhost:3000/api';
 
 class App extends Component {
     constructor(props) {

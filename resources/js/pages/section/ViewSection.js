@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { getSectionBySlug, getTopicsBySectionId } from "../../../utils";
+import { getSectionBySlug, getTopicsBySectionId } from "../../utils";
 
 class ViewSection extends Component {
     constructor (props) {

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { getTopicById } from "../../../utils";
+import { getTopicById } from "../../utils";
 
 class CreatePost extends Component {
     constructor (props) {

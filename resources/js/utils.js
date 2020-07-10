@@ -6,7 +6,7 @@ export const canTopicBeEdited = (date) => {
 }
 
 export const getAllSections = () => {
-    return new axios.get('/api/sections').then(response => {
+    return new axios.get('/sections').then(response => {
         response.data.sort((a, b) => parseInt(a.order) - parseInt(b.order));
         return response;
     }).catch(error => {
@@ -15,7 +15,7 @@ export const getAllSections = () => {
 }
 
 export const getSectionBySlug = (slug) => {
-    return new axios.get(`/api/sections/${slug}`).then(response => {
+    return new axios.get(`/sections/${slug}`).then(response => {
         return response;
     }).catch(error => {
         handleError(error);
@@ -23,7 +23,7 @@ export const getSectionBySlug = (slug) => {
 }
 
 export const getTopicsBySectionId = (sectionId) => {
-    return new axios.get(`/api/sections/${sectionId}/topics`).then(response => {
+    return new axios.get(`/sections/${sectionId}/topics`).then(response => {
         return response;
     }).catch(error => {
         handleError(error);
@@ -31,7 +31,7 @@ export const getTopicsBySectionId = (sectionId) => {
 }
 
 export const getTopicById = (id) => {
-    return new axios.get(`/api/topics/${id}`).then(response => {
+    return new axios.get(`/topics/${id}`).then(response => {
         response.data.editable = canTopicBeEdited(response.data.updated_at);
         return response;
     }).catch(error => {
@@ -40,7 +40,7 @@ export const getTopicById = (id) => {
 }
 
 export const getRepliesByTopicId = (topicId) => {
-    return new axios.get(`/api/topics/${topicId}/posts`).then(response => {
+    return new axios.get(`/topics/${topicId}/posts`).then(response => {
         return response;
     }).catch(error => {
         handleError(error);
@@ -63,7 +63,7 @@ export const getCurrentUser = () => {
         }
     }
 
-    return new axios.get('/api/user', config).then(response => {
+    return new axios.get('/user', config).then(response => {
         return response;
     }).catch(error => {
         handleError(error);

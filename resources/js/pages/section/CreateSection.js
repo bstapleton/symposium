@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import CreateSectionForm from "../../forms/CreateSectionForm";
-import { getAllSections } from "../../../utils";
+import CreateSectionForm from "../../components/forms/CreateSectionForm";
+import { getAllSections } from "../../utils";
 
 class CreateSection extends Component {
     constructor (props) {
