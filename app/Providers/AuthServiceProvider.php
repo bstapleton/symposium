@@ -33,6 +33,6 @@ class AuthServiceProvider extends ServiceProvider
             'edit-sections' => 'can edit existing sections',
             'delete-sections' => 'can delete sections',
         ]);
-        Passport::routes();
+//        Passport::routes(); TODO: fix whatever this used to do
     }
 }
