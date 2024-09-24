@@ -14,7 +14,7 @@ import CreatePost from "../pages/post/CreatePost";
 import WebFont from 'webfontloader';
 import { getCurrentUser } from '../utils';
 
-axios.defaults.baseURL = 'http://localhost:3000/api';
+axios.defaults.baseURL = 'http://localhost:8080/api';
 
 class App extends Component {
     constructor(props) {
@@ -24,7 +24,7 @@ class App extends Component {
             isModerator: false,
             isAdmin: false,
         }
-        
+
         require('../../sass/themes/dark/dark.scss');
 
         WebFont.load({
@@ -45,7 +45,7 @@ class App extends Component {
                     if (response.data.user.rank_id >= 2) {
                         this.setState({ isModerator: true });
                     }
-        
+
                     if (response.data.user.rank_id === 3) {
                         this.setState({ isAdmin: true });
                     }
